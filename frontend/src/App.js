@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PlaylistDetail from './components/PlaylistDetail';
+import Player from './components/Player';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
+
+// Player Context for global state
+const PlayerContext = createContext();
 
 function HomePage() {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  
+  const { selectSong } = useContext(PlayerContext);
 
   useEffect(() => {
     fetchPlaylists();
@@ -135,14 +141,47 @@ function HomePage() {
   );
 }
 
+function PlaylistDetailWithContext() {
+  const { selectSong } = useContext(PlayerContext);
+  return <PlaylistDetail selectSong={selectSong} />;
+}
+
 function App() {
+  const [selectedSong, setSelectedSong] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const selectSong = (song) => {
+    setSelectedSong(song);
+    setIsPlaying(true);
+  };
+
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const playerContextValue = {
+    selectedSong,
+    isPlaying,
+    selectSong,
+    handlePlayPause
+  };
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/playlist/:id" element={<PlaylistDetail />} />
-      </Routes>
-    </Router>
+    <PlayerContext.Provider value={playerContextValue}>
+      <Router>
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/playlist/:id" element={<PlaylistDetailWithContext />} />
+          </Routes>
+          <Player 
+            selectedSong={selectedSong} 
+            onPlayPause={handlePlayPause}
+            isPlaying={isPlaying}
+          />
+        </div>
+      </Router>
+    </PlayerContext.Provider>
   );
 }
 

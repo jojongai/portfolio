@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './PlaylistDetail.css';
+import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
-function PlaylistDetail() {
+function PlaylistDetail({ selectSong }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [playlist, setPlaylist] = useState(null);
@@ -36,9 +36,17 @@ function PlaylistDetail() {
 
   if (loading) {
     return (
-      <div className="playlist-detail">
-        <div className="playlist-header">
-          <div className="loading">Loading playlist...</div>
+      <div className="app">
+        <div className="sidebar">
+          <div className="sidebar-logo">
+            <h1>Jojo Ngai</h1>
+            <p>Portfolio</p>
+          </div>
+        </div>
+        <div className="playlist-detail">
+          <div className="playlist-header">
+            <div className="loading">Loading playlist...</div>
+          </div>
         </div>
       </div>
     );
@@ -46,16 +54,53 @@ function PlaylistDetail() {
 
   if (error || !playlist) {
     return (
-      <div className="playlist-detail">
-        <div className="playlist-header">
-          <div className="error">{error || 'Playlist not found'}</div>
+      <div className="app">
+        <div className="sidebar">
+          <div className="sidebar-logo">
+            <h1>Jojo Ngai</h1>
+            <p>Portfolio</p>
+          </div>
+        </div>
+        <div className="playlist-detail">
+          <div className="playlist-header">
+            <div className="error">{error || 'Playlist not found'}</div>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="playlist-detail">
+    <div className="app">
+      <div className="sidebar">
+        <div className="sidebar-logo">
+          <h1>Jojo Ngai</h1>
+          <p>Portfolio</p>
+        </div>
+        <nav className="sidebar-nav">
+          <button onClick={() => navigate('/')} className="nav-item">
+            <span className="nav-icon">🏠</span>
+            Home
+          </button>
+          <a href="#" className="nav-item">
+            <span className="nav-icon">🔍</span>
+            Search
+          </a>
+          <a href="#" className="nav-item">
+            <span className="nav-icon">📚</span>
+            Your Library
+          </a>
+          <a href="#" className="nav-item">
+            <span className="nav-icon">➕</span>
+            Create Playlist
+          </a>
+          <a href="#" className="nav-item">
+            <span className="nav-icon">❤️</span>
+            Liked Songs
+          </a>
+        </nav>
+      </div>
+      <div className="playlist-detail">
       <div className="playlist-header">
         <div className="playlist-info">
           <div className="playlist-image-large">
@@ -73,9 +118,6 @@ function PlaylistDetail() {
         </div>
         <div className="playlist-actions">
           <button className="play-button-large">▶</button>
-          <button className="back-button" onClick={() => navigate('/')}>
-            ← Back to Home
-          </button>
         </div>
       </div>
 
@@ -88,7 +130,11 @@ function PlaylistDetail() {
         </div>
         
         {playlist.songs.map((song, index) => (
-          <div key={song.id} className="song-row">
+          <div 
+            key={song.id} 
+            className="song-row"
+            onClick={() => selectSong && selectSong(song)}
+          >
             <div className="song-number">{index + 1}</div>
             <div className="song-info">
               <div className="song-title-text">{song.title}</div>
@@ -98,6 +144,7 @@ function PlaylistDetail() {
             <div className="song-duration-text">{formatDuration(song.duration)}</div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

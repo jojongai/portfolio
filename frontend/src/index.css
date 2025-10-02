@@ -25,13 +25,20 @@ code {
   min-height: 100vh;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 90px; /* Space for player bar */
+}
+
 .sidebar {
   width: 240px;
   background-color: #000000;
-  padding: 24px 0;
+  padding: 24px 0 0 0;
   position: fixed;
   height: 100vh;
-  overflow-y: auto;
+  overflowing: auto;
   z-index: 1000;
 }
 
@@ -54,18 +61,24 @@ code {
 }
 
 .sidebar-nav {
-  padding: 0 24px;
+  padding: 0;
+  margin: 0 12px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  padding: 8px 0;
   color: #b3b3b3;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 2px 0;
+  width: 100%;
+  background: none;
+  border: none;
 }
 
 .nav-item:hover {
@@ -74,6 +87,12 @@ code {
 
 .nav-item.active {
   color: #1db954;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item.active:hover {
+  color: #1db954;
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .nav-icon {
