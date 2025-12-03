@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../Sidebar';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
 
 function PlaylistDetail({ selectSong }) {
-  const { id } = useParams();
+  const { playlistId } = useParams();
   const navigate = useNavigate();
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -14,12 +15,12 @@ function PlaylistDetail({ selectSong }) {
 
   useEffect(() => {
     fetchPlaylist();
-  }, [id]);
+  }, [playlistId]);
 
   const fetchPlaylist = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/playlists/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/playlists/${playlistId}`);
       setPlaylist(response.data);
       setError(null);
     } catch (err) {
@@ -37,12 +38,7 @@ function PlaylistDetail({ selectSong }) {
   if (loading) {
     return (
       <div className="app">
-        <div className="sidebar">
-          <div className="sidebar-logo">
-            <h1>Jojo Ngai</h1>
-            <p>Portfolio</p>
-          </div>
-        </div>
+        <Sidebar />
         <div className="playlist-detail">
           <div className="playlist-header">
             <div className="loading">Loading playlist...</div>
@@ -55,12 +51,7 @@ function PlaylistDetail({ selectSong }) {
   if (error || !playlist) {
     return (
       <div className="app">
-        <div className="sidebar">
-          <div className="sidebar-logo">
-            <h1>Jojo Ngai</h1>
-            <p>Portfolio</p>
-          </div>
-        </div>
+        <Sidebar />
         <div className="playlist-detail">
           <div className="playlist-header">
             <div className="error">{error || 'Playlist not found'}</div>
@@ -72,34 +63,7 @@ function PlaylistDetail({ selectSong }) {
 
   return (
     <div className="app">
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <h1>Jojo Ngai</h1>
-          <p>Portfolio</p>
-        </div>
-        <nav className="sidebar-nav">
-          <button onClick={() => navigate('/')} className="nav-item">
-            <span className="nav-icon">🏠</span>
-            Home
-          </button>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">🔍</span>
-            Search
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">📚</span>
-            Your Library
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">➕</span>
-            Create Playlist
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">❤️</span>
-            Liked Songs
-          </a>
-        </nav>
-      </div>
+      <Sidebar />
       <div className="playlist-detail">
       <div className="playlist-header">
         <div className="playlist-info">
@@ -133,7 +97,7 @@ function PlaylistDetail({ selectSong }) {
           <div 
             key={song.id} 
             className="song-row"
-            onClick={() => selectSong && selectSong(song)}
+            onClick={() => navigate(`/playlist/${playlistId}/song/${song.id}`)}
           >
             <div className="song-number">{index + 1}</div>
             <div className="song-info">

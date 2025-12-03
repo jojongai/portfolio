@@ -15,58 +15,81 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // In-memory data store (replace with database in production)
+// Using fixed UUIDs so IDs don't change on server restart
 let playlists = [
   {
-    id: uuidv4(),
+    id: "work-experience-playlist-id",
     title: "Work Experience",
     description: "My professional journey through different companies",
     imageUrl: "💼",
     songs: [
       {
-        id: uuidv4(),
+        id: "techcorp-song-id",
         title: "Software Engineer at TechCorp",
         artist: "2022 - 2024",
         duration: "2 years",
-        description: "Led development of microservices architecture using Node.js and React"
+        description: "Led development of microservices architecture using Node.js and React",
+        mp3Path: "/audio/every_summertime.mp3", // Path to MP3 file in public/audio folder
+        accomplishments: [
+          "Architected and implemented a scalable microservices system serving 1M+ daily active users",
+          "Reduced API response time by 40% through database optimization and caching strategies",
+          "Mentored a team of 3 junior developers, improving code quality and deployment frequency",
+          "Led migration from monolithic architecture to microservices, reducing deployment time by 60%",
+          "Implemented CI/CD pipelines that increased deployment frequency from weekly to daily"
+        ]
       },
       {
-        id: uuidv4(),
+        id: "startupxyz-song-id",
         title: "Junior Developer at StartupXYZ",
         artist: "2021 - 2022",
         duration: "1 year",
-        description: "Built full-stack web applications and learned agile development practices"
+        description: "Built full-stack web applications and learned agile development practices",
+        mp3Path: "/audio/startupxyz-experience.mp3", // Path to MP3 file in public/audio folder
+        accomplishments: [
+          "Developed 5+ production features using React and Node.js",
+          "Participated in daily standups and sprint planning sessions",
+          "Fixed 50+ bugs and improved application performance",
+          "Collaborated with designers to implement pixel-perfect UI components"
+        ]
       },
       {
-        id: uuidv4(),
+        id: "bigtech-song-id",
         title: "Intern at BigTech Inc",
         artist: "2020 - 2021",
         duration: "6 months",
-        description: "Gained experience in Python, data analysis, and team collaboration"
+        description: "Gained experience in Python, data analysis, and team collaboration",
+        mp3Path: "/audio/bigtech-intern-experience.mp3", // Path to MP3 file in public/audio folder
+        accomplishments: [
+          "Analyzed large datasets using Python and pandas",
+          "Created data visualizations and reports for stakeholders",
+          "Participated in code reviews and learned best practices",
+          "Contributed to internal tools and documentation"
+        ]
       }
     ]
   },
   {
-    id: uuidv4(),
+    id: "personal-projects-playlist-id",
     title: "Personal Projects",
     description: "Side projects and creative coding experiments",
     imageUrl: "🚀",
     songs: [
       {
-        id: uuidv4(),
+        id: "portfolio-website-song-id",
         title: "Portfolio Website",
         artist: "React, Node.js",
         duration: "2 weeks",
         description: "A Spotify-inspired portfolio website with modern design"
       },
       {
-        id: uuidv4(),
+        id: "task-management-song-id",
         title: "Task Management App",
         artist: "Vue.js, Express",
         duration: "1 month",
         description: "Full-stack application for team collaboration and project tracking"
       },
       {
-        id: uuidv4(),
+        id: "weather-dashboard-song-id",
         title: "Weather Dashboard",
         artist: "JavaScript, APIs",
         duration: "1 week",
@@ -75,27 +98,27 @@ let playlists = [
     ]
   },
   {
-    id: uuidv4(),
+    id: "skills-technologies-playlist-id",
     title: "Skills & Technologies",
     description: "My technical skills and learning journey",
     imageUrl: "⚡",
     songs: [
       {
-        id: uuidv4(),
+        id: "frontend-dev-song-id",
         title: "Frontend Development",
         artist: "React, Vue.js, TypeScript",
         duration: "3+ years",
         description: "Building responsive and interactive user interfaces"
       },
       {
-        id: uuidv4(),
+        id: "backend-dev-song-id",
         title: "Backend Development",
         artist: "Node.js, Python, Java",
         duration: "2+ years",
         description: "Server-side development and API design"
       },
       {
-        id: uuidv4(),
+        id: "database-mgmt-song-id",
         title: "Database Management",
         artist: "MongoDB, PostgreSQL",
         duration: "2+ years",
@@ -111,10 +134,20 @@ app.get('/api/playlists', (req, res) => {
 });
 
 app.get('/api/playlists/:id', (req, res) => {
+  console.log('[Backend] Fetching playlist:', req.params.id);
   const playlist = playlists.find(p => p.id === req.params.id);
   if (!playlist) {
+    console.log('[Backend] Playlist not found');
     return res.status(404).json({ message: 'Playlist not found' });
   }
+  console.log('[Backend] Playlist found:', playlist.title);
+  console.log('[Backend] Songs in playlist:', playlist.songs.map(s => ({
+    id: s.id,
+    title: s.title,
+    hasMp3: !!s.mp3Path,
+    mp3Path: s.mp3Path
+  })));
+  console.log('[Backend] Full first song object:', JSON.stringify(playlist.songs[0], null, 2));
   res.json(playlist);
 });
 

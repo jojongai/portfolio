@@ -1,7 +1,9 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from './components/Sidebar';
 import PlaylistDetail from './components/PlaylistDetail';
+import SongDetail from './components/SongDetail';
 import Player from './components/Player';
 import './index.css';
 
@@ -43,12 +45,7 @@ function HomePage() {
   if (loading) {
     return (
       <div className="app">
-        <div className="sidebar">
-          <div className="sidebar-logo">
-            <h1>Jojo Ngai</h1>
-            <p>Portfolio</p>
-          </div>
-        </div>
+        <Sidebar />
         <div className="main-content">
           <div className="loading">Loading playlists...</div>
         </div>
@@ -59,12 +56,7 @@ function HomePage() {
   if (error) {
     return (
       <div className="app">
-        <div className="sidebar">
-          <div className="sidebar-logo">
-            <h1>Jojo Ngai</h1>
-            <p>Portfolio</p>
-          </div>
-        </div>
+        <Sidebar />
         <div className="main-content">
           <div className="error">{error}</div>
         </div>
@@ -74,34 +66,7 @@ function HomePage() {
 
   return (
     <div className="app">
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <h1>Jojo Ngai</h1>
-          <p>Portfolio</p>
-        </div>
-        <nav className="sidebar-nav">
-          <a href="#" className="nav-item active">
-            <span className="nav-icon">🏠</span>
-            Home
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">🔍</span>
-            Search
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">📚</span>
-            Your Library
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">➕</span>
-            Create Playlist
-          </a>
-          <a href="#" className="nav-item">
-            <span className="nav-icon">❤️</span>
-            Liked Songs
-          </a>
-        </nav>
-      </div>
+      <Sidebar />
 
       <div className="main-content">
         <div className="top-bar">
@@ -146,6 +111,11 @@ function PlaylistDetailWithContext() {
   return <PlaylistDetail selectSong={selectSong} />;
 }
 
+function SongDetailWithContext() {
+  const { selectSong } = useContext(PlayerContext);
+  return <SongDetail selectSong={selectSong} />;
+}
+
 function App() {
   const [selectedSong, setSelectedSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -172,7 +142,8 @@ function App() {
         <div className="app-container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/playlist/:id" element={<PlaylistDetailWithContext />} />
+            <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
+            <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
           </Routes>
           <Player 
             selectedSong={selectedSong} 
