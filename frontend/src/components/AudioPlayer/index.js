@@ -6,6 +6,10 @@ function AudioPlayer({ audioSrc, title, artist }) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
+  const [isShuffled, setIsShuffled] = useState(false);
+  const [repeatMode, setRepeatMode] = useState(0); // 0: off, 1: all, 2: one
+  const [isLiked, setIsLiked] = useState(false);
+  const [isHoveringProgress, setIsHoveringProgress] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -14,7 +18,24 @@ function AudioPlayer({ audioSrc, title, artist }) {
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
-    const handleEnded = () => setIsPlaying(false);
+    const handleEnded = () => {
+      if (repeatMode === 2) {
+        // Repeat one - loop the current track
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+          console.error('[AudioPlayer] Loop play error:', err);
+        });
+      } else if (repeatMode === 1) {
+        // Repeat all - would need playlist context, for now just restart
+        audio.currentTime = 0;
+        audio.play().catch(err => {
+          console.error('[AudioPlayer] Repeat play error:', err);
+        });
+      } else {
+        // No repeat - just stop
+        setIsPlaying(false);
+      }
+    };
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
@@ -25,12 +46,14 @@ function AudioPlayer({ audioSrc, title, artist }) {
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, []);
+  }, [repeatMode]);
 
   useEffect(() => {
     console.log('[AudioPlayer] Audio source:', audioSrc);
     if (audioRef.current) {
       audioRef.current.load();
+      setIsPlaying(false);
+      setCurrentTime(0);
     }
   }, [audioSrc]);
 
@@ -67,6 +90,30 @@ function AudioPlayer({ audioSrc, title, artist }) {
     setVolume(newVolume);
   };
 
+  const toggleShuffle = () => {
+    setIsShuffled(!isShuffled);
+  };
+
+  const toggleRepeat = () => {
+    setRepeatMode((prev) => (prev + 1) % 3);
+  };
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
+  const getVolumeIcon = () => {
+    if (volume === 0) return '🔇';
+    if (volume < 0.5) return '🔉';
+    return '🔊';
+  };
+
+  const getRepeatIcon = () => {
+    if (repeatMode === 0) return '🔁';
+    if (repeatMode === 1) return '🔁'; // Repeat all
+    return '🔂'; // Repeat one
+  };
+
   const formatTime = (seconds) => {
     if (!seconds || isNaN(seconds)) return '0:00';
     const mins = Math.floor(seconds / 60);
@@ -85,25 +132,88 @@ function AudioPlayer({ audioSrc, title, artist }) {
 
   return (
     <div className="audio-player-container">
-      <div className="audio-player-header">
-        <div className="audio-info">
-          <h4 className="audio-title">{title}</h4>
-          {artist && <p className="audio-artist">{artist}</p>}
+      <div className="audio-player-left">
+        <div className="album-art">
+          <div className="album-image">
+            🎵
+          </div>
         </div>
+        <div className="audio-info">
+          <button 
+            className="audio-title-link"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            {title || 'No song selected'}
+          </button>
+          {artist && (
+            <button 
+              className="audio-artist-link"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              {artist}
+            </button>
+          )}
+        </div>
+        <button 
+          className={`like-btn ${isLiked ? 'liked' : ''}`}
+          onClick={toggleLike}
+          aria-label={isLiked ? 'Unlike' : 'Like'}
+        >
+          {isLiked ? '❤️' : '🤍'}
+        </button>
       </div>
       
-      <div className="audio-controls">
-        <button 
-          className="play-pause-btn"
-          onClick={togglePlayPause}
-          aria-label={isPlaying ? 'Pause' : 'Play'}
+      <div className="audio-player-center">
+        <div className="player-controls">
+          <button 
+            className={`control-btn shuffle-btn ${isShuffled ? 'active' : ''}`}
+            onClick={toggleShuffle}
+            aria-label="Shuffle"
+            title="Enable shuffle"
+          >
+            🔀
+          </button>
+          <button 
+            className="control-btn prev-btn"
+            aria-label="Previous"
+            title="Previous"
+          >
+            ⏮
+          </button>
+          <button 
+            className="play-pause-btn"
+            onClick={togglePlayPause}
+            aria-label={isPlaying ? 'Pause' : 'Play'}
+            title={isPlaying ? 'Pause' : 'Play'}
+          >
+            {isPlaying ? '⏸' : '▶'}
+          </button>
+          <button 
+            className="control-btn next-btn"
+            aria-label="Next"
+            title="Next"
+          >
+            ⏭
+          </button>
+          <button 
+            className={`control-btn repeat-btn ${repeatMode > 0 ? 'active' : ''}`}
+            onClick={toggleRepeat}
+            aria-label="Repeat"
+            title={repeatMode === 0 ? 'Enable repeat' : repeatMode === 1 ? 'Repeat all' : 'Repeat one'}
+          >
+            {getRepeatIcon()}
+          </button>
+        </div>
+        <div 
+          className="progress-section"
+          onMouseEnter={() => setIsHoveringProgress(true)}
+          onMouseLeave={() => setIsHoveringProgress(false)}
         >
-          {isPlaying ? '⏸' : '▶'}
-        </button>
-        
-        <div className="progress-section">
           <span className="time-display">{formatTime(currentTime)}</span>
-          <div className="progress-bar-container">
+          <div 
+            className={`progress-bar-container ${isHoveringProgress ? 'hovered' : ''}`}
+            style={{ '--progress': `${duration ? (currentTime / duration) * 100 : 0}%` }}
+          >
             <input
               type="range"
               min="0"
@@ -115,9 +225,32 @@ function AudioPlayer({ audioSrc, title, artist }) {
           </div>
           <span className="time-display">{formatTime(duration)}</span>
         </div>
+      </div>
 
+      <div className="audio-player-right">
+        <button className="control-btn queue-btn" aria-label="Queue" title="Queue">
+          📋
+        </button>
         <div className="volume-section">
-          <span className="volume-icon">🔊</span>
+          <button 
+            className="volume-icon-btn"
+            onClick={() => {
+              const audio = audioRef.current;
+              if (audio) {
+                if (volume > 0) {
+                  audio.volume = 0;
+                  setVolume(0);
+                } else {
+                  audio.volume = 1;
+                  setVolume(1);
+                }
+              }
+            }}
+            aria-label={volume > 0 ? 'Mute' : 'Unmute'}
+            title={volume > 0 ? 'Mute' : 'Unmute'}
+          >
+            {getVolumeIcon()}
+          </button>
           <input
             type="range"
             min="0"
@@ -125,8 +258,15 @@ function AudioPlayer({ audioSrc, title, artist }) {
             value={volume * 100}
             onChange={handleVolumeChange}
             className="volume-slider"
+            aria-label="Volume"
           />
         </div>
+        <button className="control-btn device-btn" aria-label="Connect to a device" title="Connect to a device">
+          📱
+        </button>
+        <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Fullscreen">
+          ⛶
+        </button>
       </div>
 
       <audio

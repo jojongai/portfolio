@@ -4,7 +4,7 @@ import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import PlaylistDetail from './components/PlaylistDetail';
 import SongDetail from './components/SongDetail';
-import Player from './components/Player';
+import AudioPlayer from './components/AudioPlayer';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -145,11 +145,13 @@ function App() {
             <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
             <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
           </Routes>
-          <Player 
-            selectedSong={selectedSong} 
-            onPlayPause={handlePlayPause}
-            isPlaying={isPlaying}
-          />
+          {selectedSong && selectedSong.mp3Path && (
+            <AudioPlayer 
+              audioSrc={selectedSong.mp3Path}
+              title={selectedSong.title}
+              artist={selectedSong.artist}
+            />
+          )}
         </div>
       </Router>
     </PlayerContext.Provider>
