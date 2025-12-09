@@ -114,6 +114,7 @@
 .lyrics-content {
   max-width: 1400px;
   width: 100%;
+  padding-right: 32px;
 }
 
 .lyrics-title {
@@ -124,6 +125,7 @@
   text-align: left;
   border-bottom: 2px solid #1db954;
   padding-bottom: 4px;
+  width: 100%;
 }
 
 .accomplishments-list {

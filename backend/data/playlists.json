@@ -7,29 +7,28 @@
         "imagePng": "/png/work-experience.png",
         "songs": [
             {
-                "id": "techcorp-song-id",
+                "id": "opener",
                 "title": "Software Engineer at Opener.",
                 "artist": "Sept 2025 - Dec 2025",
-                "location": "Toronto, Canada",
-                "description": "Led development of microservices architecture using Node.js and React",
+                "location": "Toronto, ON",
+                "description": "Client-facing features, data ingestion, backened development",
                 "mp3Path": "/audio/every_summertime.mp3",
-                "imagePng": "/png/techcorp.png",
+                "imagePng": "/png/opener.png",
                 "accomplishments": [
-                    "Developed a client-facing bulk-upload feature: built the UI, scheduled background jobs with BullMQ, and created REST/GraphQL APIs to validate incoming data, insert new stores, and maintain data integrity.",
-                    "Reduced API response time by 40% through database optimization and caching strategies",
-                    "Mentored a team of 3 junior developers, improving code quality and deployment frequency",
-                    "Led migration from monolithic architecture to microservices, reducing deployment time by 60%",
-                    "Implemented CI/CD pipelines that increased deployment frequency from weekly to daily"
+                    "Built a TypeScript/React bulk-upload system supporting unlimited store ingestion via BullMQ background jobs and Hasura GraphQL APIs. Implemented a Google Places–driven parsing pipeline to enrich CSV uploads and fully automate store onboarding.",
+                    "Built a TypeScript-based activity timeline that centralizes all client interactions—including emails, shipping status updates, stage transitions, and sales-agent notes—offering a clear, end-to-end view of the prospecting and ordering proces for each store.",
+                    "Developed the handoff/takeover system that transfers ownership of sales leads between agents and clients. Implemented automated emails, database updates, and the company’s first client-facing CRM tools for managing lead statuses.",
+                    "Redesigned the user settings page with OpenAI-driven custom sales emails, configurable follow-up schedules backed by email queues, and stronger validation and error handling for required fields."
                 ]
             },
             {
-                "id": "startupxyz-song-id",
-                "title": "Junior Developer at StartupXYZ",
-                "artist": "2021 - 2022",
-                "location": "1 year",
-                "description": "Built full-stack web applications and learned agile development practices",
+                "id": "missingwealth",
+                "title": "Machine Learning Engineer at MissingWealth",
+                "artist": "May 2025 - Aug 2025",
+                "location": "Toronto, ON",
+                "description": "Email Classification pipeline in GCP",
                 "mp3Path": "/audio/startupxyz-experience.mp3",
-                "imagePng": "/png/startupxyz.png",
+                "imagePng": "/png/missingwealth.png",
                 "accomplishments": [
                     "Developed 5+ production features using React and Node.js",
                     "Participated in daily standups and sprint planning sessions",
@@ -38,18 +37,45 @@
                 ]
             },
             {
-                "id": "bigtech-song-id",
-                "title": "Intern at BigTech Inc",
-                "artist": "2020 - 2021",
-                "location": "6 months",
-                "description": "Gained experience in Python, data analysis, and team collaboration",
-                "mp3Path": "/audio/bigtech-intern-experience.mp3",
-                "imagePng": "/png/bigtech.png",
+                "id": "rbc-datascientist",
+                "title": "Data Scientist at RBC",
+                "artist": "Jan 2025 - Apr 2025",
+                "location": "Toronto, ON",
+                "description": "Conversational data analysis, machine learning and classfication models",
+                "mp3Path": "/audio/rbc-datascientist.mp3",
+                "imagePng": "/png/rbc.png",
                 "accomplishments": [
-                    "Analyzed large datasets using Python and pandas",
-                    "Created data visualizations and reports for stakeholders",
-                    "Participated in code reviews and learned best practices",
-                    "Contributed to internal tools and documentation"
+                    "Built an ETL pipeline from a conversational API platform to Postgres DB hosted on an in house DBaaS",
+                    "Configured and deployed an application on Helios, a Docker orchestration platform",
+                    "Clustered conversational data using a BERTopic model with K-Means and HDBSCAN clustering algorithms",
+                    "Summarized each cluster and generated curated training phrases using openAI's gpt 3.5 api LLM"
+                ]
+            },
+            {
+                "id": "rbc-dataanalyst",
+                "title": "Data Analyst at RBC",
+                "artist": "May 2024 – Aug 2024",
+                "location": "Toronto, ON",
+                "description": "Data analytics, rporting, and optimization",
+                "mp3Path": "/audio/rbc-dataanalyst.mp3",
+                "imagePng": "/png/rbc.png",
+                "accomplishments": [
+                    "Automated financial and employee reporting by developing Python scripts, eliminating all manual intervention",
+                    "Optimized employee movement tracking in Superset by creating 50+ SQL views, validation queries, and charts",
+                    "Built data cleansing and preparation scripts that processed 10000+ data points, enabling real-time BI dashboards"
+                ]
+            },
+            {
+                "id": "toyota-datagovernance",
+                "title": "Data Governance Analyst at Toyota Canada",
+                "artist": "Sep 2023 – Dec 2023",
+                "location": "Toronto, ON",
+                "description": "Data quality, dashboards, and automation",
+                "mp3Path": "/audio/toyota-datagovernance.mp3",
+                "imagePng": "/png/toyota.png",
+                "accomplishments": [
+                    "Improved Python-based resume parser with Pandas, PyPDF2 and text classification. Used to hire following interns",
+                    "Developed a weather API dashboard with Power BI, Python scripts for data extraction, and SQL DB integration"
                 ]
             }
         ]

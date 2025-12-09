@@ -141,7 +141,7 @@
 
 .songs-header {
   display: grid;
-  grid-template-columns: 40px 1fr 200px 80px;
+  grid-template-columns: 40px 40px 1fr 150px 200px;
   gap: 16px;
   padding: 16px 0;
   border-bottom: 1px solid #282828;
@@ -152,9 +152,17 @@
   letter-spacing: 1px;
 }
 
+.songs-header .song-duration,
+.songs-header .song-artist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 .song-row {
   display: grid;
-  grid-template-columns: 40px 1fr 200px 80px;
+  grid-template-columns: 40px 40px 1fr 150px 200px;
   gap: 16px;
   padding: 12px 0;
   border-radius: 4px;
@@ -182,6 +190,22 @@
   content: "▶";
   color: #ffffff;
   font-size: 12px;
+}
+
+.song-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+}
+
+.song-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .song-info {
@@ -213,16 +237,21 @@
 .song-artist-text {
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #b3b3b3;
   font-size: 14px;
+  text-align: center;
+  width: 100%;
 }
 
 .song-duration-text {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   color: #b3b3b3;
   font-size: 14px;
+  text-align: center;
+  width: 100%;
 }
 
 .loading, .error {
@@ -305,7 +334,7 @@
   }
   
   .song-row {
-    grid-template-columns: 40px 1fr;
+    grid-template-columns: 40px 36px 1fr;
     gap: 12px;
     padding: 12px;
     border-radius: 8px;
@@ -316,6 +345,12 @@
   .song-number {
     font-size: 16px;
     font-weight: 500;
+  }
+
+  .song-image {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
   }
 
   .song-artist-text,
@@ -365,13 +400,19 @@
   }
 
   .song-row {
-    grid-template-columns: 32px 1fr;
+    grid-template-columns: 32px 32px 1fr;
     gap: 10px;
     padding: 10px;
   }
 
   .song-number {
     font-size: 14px;
+  }
+
+  .song-image {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
   }
 
   .song-title-text {

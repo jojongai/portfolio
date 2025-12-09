@@ -96,9 +96,10 @@ function PlaylistDetail({ selectSong }) {
       <div className="songs-list">
         <div className="songs-header">
           <div className="song-number">#</div>
+          <div className="song-image-header"></div>
           <div className="song-title">Title</div>
-          <div className="song-artist">Details</div>
           <div className="song-duration">Location</div>
+          <div className="song-artist">Details</div>
         </div>
         
         {playlist.songs.map((song, index) => (
@@ -108,12 +109,17 @@ function PlaylistDetail({ selectSong }) {
             onClick={() => navigate(`/playlist/${playlistId}/song/${song.id}`)}
           >
             <div className="song-number">{index + 1}</div>
+            <div className="song-image">
+              {song.imagePng ? (
+                <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
+              ) : null}
+            </div>
             <div className="song-info">
               <div className="song-title-text">{song.title}</div>
               <div className="song-description">{song.description}</div>
             </div>
-            <div className="song-artist-text">{song.artist}</div>
             <div className="song-duration-text">{formatLocation(song)}</div>
+            <div className="song-artist-text">{song.artist}</div>
           </div>
         ))}
       </div>

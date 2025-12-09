@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Icon from '../Icon';
+import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
@@ -61,7 +62,13 @@ function Sidebar() {
             onClick={() => navigate(`/playlist/${playlist.id}`)}
             className={`nav-item ${isPlaylistActive(playlist.id) ? 'active' : ''}`}
           >
-            <span className="nav-icon">{playlist.imageUrl}</span>
+            <span className="nav-icon">
+              {playlist.imagePng ? (
+                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="nav-icon-img" />
+              ) : (
+                playlist.imageUrl
+              )}
+            </span>
             {playlist.title}
           </button>
         ))}
