@@ -1,67 +1,142 @@
-# Deployment Guide
+# Vercel Deployment Guide
 
-This application can be deployed without a database. All data is stored in JSON files in the backend folder.
+This application is configured for deployment on **Vercel** for the frontend, with a separate backend service.
 
-## Deployment Options
+## Deployment Architecture
 
-### Option 1: Deploy Backend + Frontend Separately (Recommended)
+- **Frontend**: Deployed on Vercel
+- **Backend**: Deployed on Railway, Render, or similar Node.js hosting service
 
-#### Backend Deployment (Node.js)
-- **Railway**: https://railway.app
-- **Render**: https://render.com
-- **Heroku**: https://heroku.com
-- **Fly.io**: https://fly.io
-- **DigitalOcean App Platform**: https://www.digitalocean.com/products/app-platform
+## Frontend Deployment (Vercel)
 
-**Steps:**
-1. Push backend code to GitHub
-2. Connect repository to deployment platform
-3. Set environment variables:
-   - `PORT` (usually auto-set)
-   - `ALLOWED_ORIGINS` (your frontend URL, e.g., `https://yourdomain.com`)
-4. Deploy
+### Prerequisites
 
-#### Frontend Deployment (React)
-- **Vercel**: https://vercel.com (recommended for React)
-- **Netlify**: https://netlify.com
-- **GitHub Pages**: https://pages.github.com
+1. GitHub account with your code pushed to a repository
+2. Vercel account (free tier available): https://vercel.com
 
-**Steps:**
-1. Update frontend API URL in `App.js`:
-   ```javascript
-   const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+### Step-by-Step Deployment
+
+1. **Connect Repository to Vercel**
+   - Go to https://vercel.com
+   - Click "Add New Project"
+   - Import your GitHub repository
+
+2. **Configure Project Settings**
+   - **Framework Preset**: Create React App
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build` (auto-detected)
+   - **Output Directory**: `build` (auto-detected)
+   - **Install Command**: `npm install` (auto-detected)
+
+3. **Set Environment Variables**
+   - Go to Project Settings → Environment Variables
+   - Add:
+     ```
+     REACT_APP_API_URL=https://your-backend-url.com/api
+     ```
+   - Replace `your-backend-url.com` with your actual backend URL
+
+4. **Deploy**
+   - Click "Deploy"
+   - Vercel will automatically build and deploy your frontend
+   - Your app will be available at `https://your-project.vercel.app`
+
+### Vercel Configuration
+
+The `frontend/vercel.json` file is already configured with:
+- Build command
+- Output directory
+- Development settings
+
+## Backend Deployment
+
+Since Vercel is optimized for frontend and serverless functions, deploy your Express backend separately.
+
+### Option 1: Railway (Recommended)
+
+1. **Sign up**: https://railway.app
+2. **Create New Project** → Deploy from GitHub
+3. **Add Service** → Select your repository
+4. **Configure**:
+   - Root Directory: `backend`
+   - Start Command: `npm start`
+5. **Set Environment Variables**:
    ```
-2. Build frontend: `npm run build`
-3. Deploy build folder or connect GitHub repo
+   PORT=8080
+   ALLOWED_ORIGINS=https://your-app.vercel.app
+   NODE_ENV=production
+   ```
+6. **Deploy** - Railway will provide a URL like `https://your-app.up.railway.app`
 
-### Option 2: Deploy Everything Together
+### Option 2: Render
 
-**Platforms that support full-stack:**
-- **Railway**: Can deploy both in one project
-- **Render**: Can deploy both services
-- **Vercel**: Can deploy API routes + frontend
+1. **Sign up**: https://render.com
+2. **Create New Web Service**
+3. **Connect GitHub repository**
+4. **Configure**:
+   - Name: `portfolio-backend`
+   - Environment: `Node`
+   - Build Command: `cd backend && npm install`
+   - Start Command: `cd backend && npm start`
+5. **Set Environment Variables**:
+   ```
+   PORT=8080
+   ALLOWED_ORIGINS=https://your-app.vercel.app
+   ```
+6. **Deploy**
 
-### Option 3: Static JSON Files (No Backend)
+### Option 3: Fly.io
 
-If you want a completely static site:
-1. Export your data to static JSON files
-2. Place them in `public/api/` folder
-3. Update frontend to fetch from `/api/playlists.json`
-4. Deploy frontend only (Vercel, Netlify, etc.)
+1. **Install Fly CLI**: `curl -L https://fly.io/install.sh | sh`
+2. **Login**: `fly auth login`
+3. **Initialize**: `cd backend && fly launch`
+4. **Set secrets**:
+   ```bash
+   fly secrets set ALLOWED_ORIGINS=https://your-app.vercel.app
+   ```
+5. **Deploy**: `fly deploy`
 
-## Environment Variables
+## Post-Deployment Configuration
 
-### Backend
+### 1. Update Frontend Environment Variable
+
+After backend deploys, update your Vercel environment variable:
+1. Go to Vercel Dashboard → Your Project → Settings → Environment Variables
+2. Update `REACT_APP_API_URL` with your backend URL
+3. Redeploy (Vercel will auto-redeploy on next push, or trigger manually)
+
+### 2. Update Backend CORS
+
+After frontend deploys, update backend `ALLOWED_ORIGINS`:
+1. Go to your backend hosting platform
+2. Update environment variable:
+   ```
+   ALLOWED_ORIGINS=https://your-app.vercel.app,https://your-custom-domain.com
+   ```
+3. Restart the backend service
+
+## Environment Variables Summary
+
+### Frontend (Vercel)
+```env
+REACT_APP_API_URL=https://your-backend.railway.app/api
+```
+
+### Backend (Railway/Render/Fly.io)
 ```env
 PORT=8080
-ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+ALLOWED_ORIGINS=https://your-app.vercel.app
 NODE_ENV=production
 ```
 
-### Frontend
-```env
-REACT_APP_API_URL=https://your-backend-url.com/api
-```
+## Custom Domain Setup
+
+### Vercel Custom Domain
+
+1. Go to Vercel Dashboard → Your Project → Settings → Domains
+2. Add your custom domain
+3. Follow DNS configuration instructions
+4. Update backend `ALLOWED_ORIGINS` to include your custom domain
 
 ## File Structure for Deployment
 
@@ -69,7 +144,7 @@ REACT_APP_API_URL=https://your-backend-url.com/api
 portfolio/
 ├── backend/
 │   ├── data/
-│   │   └── playlists.json    # Your data file
+│   │   └── playlists.json    # Your data file (committed to git)
 │   ├── server.js
 │   ├── package.json
 │   └── .gitignore
@@ -79,13 +154,39 @@ portfolio/
 │   │   ├── png/
 │   │   └── audio/
 │   ├── src/
-│   └── package.json
+│   ├── package.json
+│   └── vercel.json           # Vercel configuration
+└── README.md
 ```
+
+## Troubleshooting
+
+### CORS Errors
+
+If you see CORS errors in the browser console:
+1. Check that `ALLOWED_ORIGINS` includes your exact Vercel URL
+2. Ensure the backend service is running
+3. Verify the frontend `REACT_APP_API_URL` is correct
+
+### Build Failures
+
+If Vercel build fails:
+1. Check build logs in Vercel dashboard
+2. Test build locally: `cd frontend && npm run build`
+3. Ensure all dependencies are in `package.json`
+
+### API Connection Issues
+
+If frontend can't connect to backend:
+1. Verify backend is deployed and accessible
+2. Check `REACT_APP_API_URL` environment variable
+3. Test backend URL directly in browser: `https://your-backend.com/api/playlists`
 
 ## Notes
 
-- Data is stored in `backend/data/playlists.json`
-- No database required - all data persists in the JSON file
-- Easy to edit: just update the JSON file and restart the server
-- For production, consider adding authentication if you need to protect write endpoints
-
+- ✅ No database required - data stored in JSON files
+- ✅ All assets (icons, PNGs, audio) are in `frontend/public/`
+- ✅ Vercel automatically handles HTTPS and CDN
+- ✅ Automatic deployments on git push
+- ⚠️ Remember to update CORS after frontend deployment
+- ⚠️ Environment variables must be set in both Vercel and backend platform

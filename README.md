@@ -1,25 +1,32 @@
 # Portfolio Website
 
-A full-stack portfolio website built with Node.js/Express backend and React frontend.
+A full-stack portfolio website built with Node.js/Express backend and React frontend, deployed on Vercel.
 
 ## Features
 
-- RESTful API for managing projects
+- RESTful API for managing playlists and songs
 - Modern React frontend with responsive design
 - CORS enabled for cross-origin requests
-- In-memory data storage (easily replaceable with a database)
+- JSON file-based data storage (no database required)
+- Spotify-inspired UI with audio player
 
 ## Project Structure
 
 ```
 portfolio/
 ├── backend/          # Node.js/Express API server
+│   ├── data/
+│   │   └── playlists.json    # Data storage
 │   ├── package.json
 │   └── server.js
 ├── frontend/         # React application
-│   ├── package.json
 │   ├── public/
-│   └── src/
+│   │   ├── icons/
+│   │   ├── png/
+│   │   └── audio/
+│   ├── src/
+│   ├── package.json
+│   └── vercel.json
 └── README.md
 ```
 
@@ -33,89 +40,106 @@ portfolio/
 ### Installation
 
 1. Clone the repository
-2. Install backend dependencies:
+2. Install all dependencies:
    ```bash
+   npm run install:all
+   ```
+
+3. Set up environment variables:
+   ```bash
+   # Backend
    cd backend
-   npm install
-   ```
-
-3. Install frontend dependencies:
-   ```bash
+   cp .env.example .env
+   # Edit .env with your values
+   
+   # Frontend
    cd ../frontend
-   npm install
+   cp .env.example .env.local
+   # Edit .env.local with your values
    ```
 
-### Running the Applications
+   See `ENV_SETUP.md` for detailed environment variable configuration.
 
-#### Option 1: Install dependencies and run both applications
+### Running Locally
 
-1. Install all dependencies (root, backend, and frontend):
-   ```bash
-   npm run install:all
-   ```
-
-2. Start both applications simultaneously:
-   ```bash
-   npm start
-   # or for development with auto-restart:
-   npm run dev
-   ```
-
-#### Option 2: Run separately
-
-1. Install dependencies:
-   ```bash
-   npm run install:all
-   ```
-
-2. Start the backend server (runs on port 8080):
+1. Start the backend server (runs on port 8080):
    ```bash
    npm run start:backend
    # or for development with auto-restart:
    npm run dev:backend
    ```
 
-3. Start the React frontend (runs on port 3000):
+2. Start the React frontend (runs on port 3000):
    ```bash
    npm run start:frontend
    ```
 
+Or run both simultaneously:
+```bash
+npm start
+# or for development:
+npm run dev
+```
 
 ### API Endpoints
 
 The backend provides the following REST API endpoints:
 
-- `GET /api/projects` - Get all projects
-- `GET /api/projects/:id` - Get a specific project
-- `POST /api/projects` - Create a new project
-- `PUT /api/projects/:id` - Update a project
-- `DELETE /api/projects/:id` - Delete a project
-- `GET /api/health` - Health check
+- `GET /api/playlists` - Get all playlists
+- `GET /api/playlists/:id` - Get a specific playlist
+- `POST /api/playlists` - Create a new playlist
+- `PUT /api/playlists/:id` - Update a playlist
+- `DELETE /api/playlists/:id` - Delete a playlist
 
-### Sample Project Data
+## Deployment
 
-The backend comes with sample project data that will be displayed on the frontend.
+This application is configured for deployment on **Vercel** (frontend) with a separate backend service.
+
+### Frontend Deployment (Vercel)
+
+1. Push your code to GitHub
+2. Connect your repository to [Vercel](https://vercel.com)
+3. Configure the project:
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `build`
+4. Set environment variable:
+   - `REACT_APP_API_URL`: Your backend API URL (e.g., `https://your-backend.railway.app/api`)
+5. Deploy!
+
+### Backend Deployment
+
+The backend needs to be deployed separately. Recommended platforms:
+- **Railway**: https://railway.app (recommended)
+- **Render**: https://render.com
+- **Fly.io**: https://fly.io
+
+See `DEPLOYMENT.md` for detailed backend deployment instructions.
+
+### Environment Variables
+
+**Frontend (Vercel):**
+```env
+REACT_APP_API_URL=https://your-backend-url.com/api
+```
+
+**Backend:**
+```env
+PORT=8080
+ALLOWED_ORIGINS=https://your-app.vercel.app
+NODE_ENV=production
+```
 
 ## Development
 
 - Backend: Express.js with CORS enabled
 - Frontend: React with modern CSS styling
-- Data: In-memory storage (replace with database for production)
+- Data: JSON file storage in `backend/data/playlists.json`
+- Assets: Icons, images, and audio files in `frontend/public/`
 
-## Production Deployment
+## Notes
 
-For production deployment:
-
-1. Replace in-memory storage with a proper database (MongoDB, PostgreSQL, etc.)
-2. Add environment variables for configuration
-3. Add authentication and authorization
-4. Build the React app: `npm run build`
-5. Serve the built files with a web server
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+- No database required - all data persists in JSON files
+- Easy to edit: update `backend/data/playlists.json` and restart the server
+- All assets are served from `frontend/public/` folder
+- CORS must be configured to allow your Vercel frontend URL
