@@ -11,6 +11,8 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
   const [isShuffled, setIsShuffled] = useState(false);
   const [repeatMode, setRepeatMode] = useState(0); // 0: off, 1: all, 2: one
   const [isLiked, setIsLiked] = useState(false);
+  const [isMicrophoneActive, setIsMicrophoneActive] = useState(false);
+  const [isQueueActive, setIsQueueActive] = useState(false);
   const [isHoveringProgress, setIsHoveringProgress] = useState(false);
   const audioRef = useRef(null);
 
@@ -24,13 +26,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
     const handleEnded = () => {
-      if (repeatMode === 2) {
-        // Repeat one - loop the current track
-        audio.currentTime = 0;
-        audio.play().catch(err => {
-          console.error('[AudioPlayer] Loop play error:', err);
-        });
-      } else if (repeatMode === 1) {
+      if (repeatMode === 1) {
         // Repeat all - would need playlist context, for now just restart
         audio.currentTime = 0;
         audio.play().catch(err => {
@@ -131,11 +127,19 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
   };
 
   const toggleRepeat = () => {
-    setRepeatMode((prev) => (prev + 1) % 3);
+    setRepeatMode((prev) => (prev + 1) % 2);
   };
 
   const toggleLike = () => {
     setIsLiked(!isLiked);
+  };
+
+  const toggleMicrophone = () => {
+    setIsMicrophoneActive(!isMicrophoneActive);
+  };
+
+  const toggleQueue = () => {
+    setIsQueueActive(!isQueueActive);
   };
 
   const getVolumeIcon = () => {
@@ -144,11 +148,6 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     return { name: 'volume-high', fallback: '🔊' };
   };
 
-  const getRepeatIcon = () => {
-    if (repeatMode === 0) return '🔁';
-    if (repeatMode === 1) return '🔁'; // Repeat all
-    return '🔂'; // Repeat one
-  };
 
   const formatTime = (seconds) => {
     if (!seconds || isNaN(seconds)) return '0:00';
@@ -234,12 +233,12 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn repeat-btn ${repeatMode > 0 ? 'active' : ''}`}
             onClick={toggleRepeat}
             aria-label="Repeat"
-            title={repeatMode === 0 ? 'Enable repeat' : repeatMode === 1 ? 'Repeat all' : 'Repeat one'}
+            title={repeatMode === 0 ? 'Enable repeat' : 'Disable repeat'}
             disabled={isEmpty}
           >
             <Icon 
-              name={repeatMode === 2 ? "repeat-one" : "repeat"} 
-              fallback={getRepeatIcon()} 
+              name="repeat" 
+              fallback="" 
               alt="Repeat" 
             />
           </button>
@@ -269,6 +268,26 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
       </div>
 
       <div className="audio-player-right">
+        <div className="audio-player-right-actions">
+          <button 
+            className={`control-btn microphone-btn ${isMicrophoneActive ? 'active' : ''}`}
+            onClick={toggleMicrophone}
+            aria-label="Microphone" 
+            title="Microphone" 
+            disabled={isEmpty}
+          >
+            <Icon name="microphone" fallback="🎤" alt="Microphone" />
+          </button>
+          <button 
+            className={`control-btn queue-btn ${isQueueActive ? 'active' : ''}`}
+            onClick={toggleQueue}
+            aria-label="Queue" 
+            title="Queue" 
+            disabled={isEmpty}
+          >
+            <Icon name="queue" fallback="☰" alt="Queue" />
+          </button>
+        </div>
         <div className="volume-section">
           <button 
             className="volume-icon-btn"

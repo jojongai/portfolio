@@ -74,30 +74,29 @@ function HomePage() {
       <div className="main-content">
         <div className="top-bar">
           <h1 className="welcome-text">Good afternoon</h1>
-          <div className="social-links">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              GitHub
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              LinkedIn
-            </a>
+          <div className="profile-picture">
+            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
         </div>
 
         <div className="content-area">
           <div className="intro-section">
+            <div className="intro-background"></div>
             <h2 className="intro-headline">
-              Hi, I'm Jojo — a 5th-year Management Engineering student at Waterloo with interests in software, machine learning, and music.
+              Hi, I'm Jojo — a 5th-year Management Engineering student at Waterloo with interests in software, data, machine learning, and AI.
             </h2>
             <p className="intro-subline">
-              This site highlights my experiences and kinda ties in my music taste.
+              This site highlights my experiences and skills with each entry tied to a song.
             </p>
-            <p className="intro-subtext">
-              Click any song/row in a playlist to see how each track connects to the story behind it along with a more in depth description.
-            </p>
+            <div className="social-links">
+              <a href="https://github.com/jojongai" target="_blank" rel="noopener noreferrer" className="social-link">
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/joseph-ngai-46a0a3175/" target="_blank" rel="noopener noreferrer" className="social-link">
+                LinkedIn
+              </a>
+            </div>
           </div>
-          
-          <h2 className="section-title">Made by Jojo Ngai</h2>
           
           <div className="playlists-grid">
             {playlists.map((playlist) => (

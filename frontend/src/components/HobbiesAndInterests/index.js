@@ -37,8 +37,10 @@ function HobbiesAndInterests() {
     return (
       <div className="app">
         <Sidebar />
-        <div className="hobbies-content">
-          <div className="loading">Loading hobbies...</div>
+        <div className="playlist-detail">
+          <div className="playlist-header">
+            <div className="loading">Loading hobbies...</div>
+          </div>
         </div>
       </div>
     );
@@ -48,62 +50,73 @@ function HobbiesAndInterests() {
     return (
       <div className="app">
         <Sidebar />
-        <div className="hobbies-content">
-          <div className="error">{error || 'Hobbies not found'}</div>
+        <div className="playlist-detail">
+          <div className="playlist-header">
+            <div className="error">{error || 'Hobbies not found'}</div>
+          </div>
         </div>
       </div>
     );
   }
 
-  const hobbies = playlist.songs || [];
-
   return (
     <div className="app">
       <Sidebar />
-      <div className="hobbies-content">
-        <div className="hobbies-header">
-          <div className="hobbies-header-content">
-            <div className="hobbies-icon-large">
+      <div className="playlist-detail">
+        <div className="playlist-header">
+          <div className="playlist-info">
+            <div className="playlist-image-large">
               {playlist.imagePng ? (
-                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="hobbies-header-icon-img" />
+                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="playlist-image-large-img" />
               ) : (
-                <Icon name="target" fallback={playlist.imageUrl || "🎯"} alt="Hobbies and Interests" className="hobbies-header-icon" />
+                playlist.imageUrl
               )}
             </div>
-            <div className="hobbies-header-details">
-              <p className="hobbies-type">Collection</p>
-              <h1 className="hobbies-title-large">{playlist.title}</h1>
-              <p className="hobbies-description">{playlist.description}</p>
+            <div className="playlist-details">
+              <p className="playlist-type">Collection</p>
+              <h1 className="playlist-title-large">{playlist.title}</h1>
+              <p className="playlist-description-large">{playlist.description}</p>
+              <div className="playlist-meta">
+                <span className="playlist-author">Jojo Ngai</span>
+                <span className="playlist-song-count">{playlist.songs.length} items</span>
+              </div>
             </div>
+          </div>
+          <div className="playlist-actions">
+            <button className="play-button-large">
+              <Icon name="play" fallback="▶" alt="Play" />
+            </button>
           </div>
         </div>
 
-        <div className="hobbies-grid">
-          {hobbies.map((hobby, index) => {
-            const iconMap = {
-              '📷': { name: 'photography', fallback: '📷' },
-              '📚': { name: 'reading', fallback: '📚' },
-              '⛰️': { name: 'hiking', fallback: '⛰️' },
-              '👨‍🍳': { name: 'cooking', fallback: '👨‍🍳' },
-              '🎮': { name: 'gaming', fallback: '🎮' },
-              '💻': { name: 'coding', fallback: '💻' }
-            };
-            const iconInfo = iconMap[hobby.icon] || { name: `hobby-${index}`, fallback: hobby.icon || '🎯' };
-            
-            return (
-              <div key={hobby.id || index} className="hobby-card">
-                <div className="hobby-icon">
-                  {hobby.imagePng ? (
-                    <img src={getAssetUrl(hobby.imagePng)} alt={hobby.title} className="hobby-icon-img" />
-                  ) : (
-                    <Icon {...iconInfo} alt={hobby.title} className="hobby-icon-img" />
-                  )}
-                </div>
-                <h3 className="hobby-title">{hobby.title}</h3>
-                <p className="hobby-description">{hobby.description}</p>
+        <div className="songs-list">
+          <div className="songs-header">
+            <div className="song-number">#</div>
+            <div className="song-image-header"></div>
+            <div className="song-title">Title</div>
+            <div className="song-duration">Category</div>
+            <div className="song-artist">Description</div>
+          </div>
+          
+          {playlist.songs.map((song, index) => (
+            <div 
+              key={song.id || index} 
+              className="song-row"
+            >
+              <div className="song-number">{index + 1}</div>
+              <div className="song-image">
+                {song.imagePng ? (
+                  <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
+                ) : null}
               </div>
-            );
-          })}
+              <div className="song-info">
+                <div className="song-title-text">{song.title}</div>
+                <div className="song-description">{song.description}</div>
+              </div>
+              <div className="song-duration-text">{song.location || song.duration || ''}</div>
+              <div className="song-artist-text">{song.artist || ''}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

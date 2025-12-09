@@ -13,6 +13,11 @@
   z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
   animation: slideUp 0.3s ease-out;
+  transition: opacity 0.3s ease;
+}
+
+.audio-player-container.empty-state {
+  opacity: 0.85;
 }
 
 .audio-player-container.empty-state .control-btn:disabled,
@@ -177,9 +182,65 @@
   justify-content: center;
   min-width: 32px;
   min-height: 32px;
+  position: relative;
+}
+
+.control-btn[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 12px;
+  background-color: #282828;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Tooltip arrow - only show when button is NOT active (so green dot can use ::after) */
+.control-btn[title]:hover:not(.active)::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #282828;
+  pointer-events: none;
+  z-index: 1000;
 }
 
 .control-btn .icon {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn .icon svg,
+.control-btn .icon-svg svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fullscreen-btn .icon,
+.fullscreen-btn .icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fullscreen-btn .icon svg,
+.fullscreen-btn .icon-svg svg {
   width: 18px;
   height: 18px;
 }
@@ -191,10 +252,35 @@
 
 .control-btn.active {
   color: #1db954;
+  position: relative;
 }
 
 .control-btn.active:hover {
   color: #1ed760;
+}
+
+.shuffle-btn.active::after,
+.repeat-btn.active::after,
+.microphone-btn.active::after,
+.queue-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: #1db954;
+  border-radius: 50%;
+  z-index: 1001;
+}
+
+/* Green dot changes to brighter green on hover */
+.shuffle-btn.active:hover::after,
+.repeat-btn.active:hover::after,
+.microphone-btn.active:hover::after,
+.queue-btn.active:hover::after {
+  background-color: #1ed760;
 }
 
 .control-btn.disabled {
@@ -339,6 +425,12 @@
   justify-content: flex-end;
 }
 
+.audio-player-right-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .volume-section {
   display: flex;
   align-items: center;
@@ -364,9 +456,52 @@
   align-items: center;
   justify-content: center;
   min-width: 32px;
+  position: relative;
 }
 
-.volume-icon-btn .icon {
+.volume-icon-btn[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background-color: #282828;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.volume-icon-btn[title]:hover::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 4px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #282828;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.volume-icon-btn .icon,
+.volume-icon-btn .icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+.volume-icon-btn .icon svg,
+.volume-icon-btn .icon-svg svg {
   width: 18px;
   height: 18px;
 }
