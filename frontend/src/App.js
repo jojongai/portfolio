@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import PlaylistDetail from './components/PlaylistDetail';
@@ -118,6 +118,16 @@ function PlaylistDetailWithContext() {
   return <PlaylistDetail selectSong={selectSong} />;
 }
 
+function PlaylistDetailOrHobbies() {
+  const { playlistId } = useParams();
+  const { selectSong } = useContext(PlayerContext);
+  
+  if (playlistId === 'hobbies-and-interests-playlist-id') {
+    return <HobbiesAndInterests />;
+  }
+  return <PlaylistDetail selectSong={selectSong} />;
+}
+
 function SongDetailWithContext() {
   const { selectSong } = useContext(PlayerContext);
   return <SongDetail selectSong={selectSong} />;
@@ -201,22 +211,19 @@ function App() {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/hobbies" element={<HobbiesAndInterests />} />
-          <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
+          <Route path="/playlist/:playlistId" element={<PlaylistDetailOrHobbies />} />
           <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
         </Routes>
-        {selectedSong && selectedSong.mp3Path && (
-          <AudioPlayer 
-            audioSrc={getAssetUrl(selectedSong.mp3Path)}
-            title={selectedSong.title}
-            artist={selectedSong.artist}
-            imagePng={selectedSong.imagePng}
-            onPrevious={handlePrevious}
-            onNext={handleNext}
-            hasPrevious={true}
-            hasNext={true}
-          />
-        )}
+        <AudioPlayer 
+          audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
+          title={selectedSong ? selectedSong.title : null}
+          artist={selectedSong ? selectedSong.artist : null}
+          imagePng={selectedSong ? selectedSong.imagePng : null}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          hasPrevious={true}
+          hasNext={true}
+        />
       </div>
     </PlayerContext.Provider>
   );

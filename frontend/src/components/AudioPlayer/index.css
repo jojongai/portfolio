@@ -15,6 +15,20 @@
   animation: slideUp 0.3s ease-out;
 }
 
+.audio-player-container.empty-state .control-btn:disabled,
+.audio-player-container.empty-state .play-pause-btn:disabled,
+.audio-player-container.empty-state .volume-icon-btn:disabled,
+.audio-player-container.empty-state .progress-slider:disabled,
+.audio-player-container.empty-state .volume-slider:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.audio-player-container.empty-state .audio-title-link,
+.audio-player-container.empty-state .audio-artist-link {
+  opacity: 0.6;
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);

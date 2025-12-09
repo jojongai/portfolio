@@ -13,25 +13,6 @@
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-}
-
-.back-button {
-  background-color: transparent;
-  border: 1px solid #b3b3b3;
-  border-radius: 50px;
-  padding: 8px 16px;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  align-self: flex-start;
-}
-
-.back-button:hover {
-  border-color: #ffffff;
-  transform: scale(1.04);
 }
 
 .song-header-info {
@@ -218,12 +199,6 @@
   
   .song-header {
     padding: 16px;
-    gap: 16px;
-  }
-
-  .back-button {
-    font-size: 13px;
-    padding: 6px 12px;
   }
   
   .song-header-info {

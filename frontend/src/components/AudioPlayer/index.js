@@ -123,51 +123,40 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
-  if (!audioSrc) {
-    console.warn('[AudioPlayer] No audio source provided');
-    return (
-      <div className="audio-player-container">
-        <p className="no-audio-message">No audio file available</p>
-      </div>
-    );
-  }
+  const isEmpty = !audioSrc || !title;
 
   return (
-    <div className="audio-player-container">
-      <div className="audio-player-left">
-        <div className="album-art">
-          <div className="album-image">
-            {imagePng ? (
-              <img src={getAssetUrl(imagePng)} alt={title || 'Album'} className="album-image-img" />
-            ) : (
-              <Icon name="music" fallback="🎵" alt="Music" className="album-icon" />
+    <div className={`audio-player-container ${isEmpty ? 'empty-state' : ''}`}>
+      {!isEmpty && (
+        <div className="audio-player-left">
+          <div className="album-art">
+            <div className="album-image">
+              {imagePng ? (
+                <img src={getAssetUrl(imagePng)} alt={title || 'Album'} className="album-image-img" />
+              ) : (
+                <Icon name="music" fallback="🎵" alt="Music" className="album-icon" />
+              )}
+            </div>
+          </div>
+          <div className="audio-info">
+            <button 
+              className="audio-title-link"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            >
+              {title}
+            </button>
+            {artist && (
+              <button 
+                className="audio-artist-link"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              >
+                {artist}
+              </button>
             )}
           </div>
         </div>
-        <div className="audio-info">
-          <button 
-            className="audio-title-link"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          >
-            {title || 'No song selected'}
-          </button>
-          {artist && (
-            <button 
-              className="audio-artist-link"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              {artist}
-            </button>
-          )}
-        </div>
-        <button 
-          className={`like-btn ${isLiked ? 'liked' : ''}`}
-          onClick={toggleLike}
-          aria-label={isLiked ? 'Unlike' : 'Like'}
-        >
-          <Icon name={isLiked ? "heart-filled" : "heart-outline"} fallback={isLiked ? '❤️' : '🤍'} alt={isLiked ? 'Unlike' : 'Like'} />
-        </button>
-      </div>
+      )}
+      {isEmpty && <div className="audio-player-left"></div>}
       
       <div className="audio-player-center">
         <div className="player-controls">
@@ -176,6 +165,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onClick={toggleShuffle}
             aria-label="Shuffle"
             title="Enable shuffle"
+            disabled={isEmpty}
           >
             <Icon name="shuffle" fallback="🔀" alt="Shuffle" />
           </button>
@@ -184,6 +174,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onClick={onPrevious}
             aria-label="Previous"
             title="Previous"
+            disabled={isEmpty}
           >
             <Icon name="previous" fallback="⏮" alt="Previous" />
           </button>
@@ -192,6 +183,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onClick={togglePlayPause}
             aria-label={isPlaying ? 'Pause' : 'Play'}
             title={isPlaying ? 'Pause' : 'Play'}
+            disabled={isEmpty}
           >
             <Icon name={isPlaying ? "pause" : "play"} fallback={isPlaying ? '⏸' : '▶'} alt={isPlaying ? 'Pause' : 'Play'} />
           </button>
@@ -200,6 +192,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onClick={onNext}
             aria-label="Next"
             title="Next"
+            disabled={isEmpty}
           >
             <Icon name="next" fallback="⏭" alt="Next" />
           </button>
@@ -208,6 +201,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onClick={toggleRepeat}
             aria-label="Repeat"
             title={repeatMode === 0 ? 'Enable repeat' : repeatMode === 1 ? 'Repeat all' : 'Repeat one'}
+            disabled={isEmpty}
           >
             <Icon 
               name={repeatMode === 2 ? "repeat-one" : "repeat"} 
@@ -233,6 +227,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
               value={duration ? (currentTime / duration) * 100 : 0}
               onChange={handleSeek}
               className="progress-slider"
+              disabled={isEmpty}
             />
           </div>
           <span className="time-display">{formatTime(duration)}</span>
@@ -240,9 +235,6 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
       </div>
 
       <div className="audio-player-right">
-        <button className="control-btn queue-btn" aria-label="Queue" title="Queue">
-          <Icon name="queue" fallback="📋" alt="Queue" />
-        </button>
         <div className="volume-section">
           <button 
             className="volume-icon-btn"
@@ -260,6 +252,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             }}
             aria-label={volume > 0 ? 'Mute' : 'Unmute'}
             title={volume > 0 ? 'Mute' : 'Unmute'}
+            disabled={isEmpty}
           >
             <Icon {...getVolumeIcon()} alt={volume > 0 ? 'Mute' : 'Unmute'} />
           </button>
@@ -271,28 +264,28 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             onChange={handleVolumeChange}
             className="volume-slider"
             aria-label="Volume"
+            disabled={isEmpty}
           />
         </div>
-        <button className="control-btn device-btn" aria-label="Connect to a device" title="Connect to a device">
-          <Icon name="device" fallback="📱" alt="Connect to a device" />
-        </button>
-        <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Fullscreen">
+        <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Fullscreen" disabled={isEmpty}>
           <Icon name="fullscreen" fallback="⛶" alt="Fullscreen" />
         </button>
       </div>
 
-      <audio
-        ref={audioRef}
-        src={audioSrc}
-        preload="metadata"
-        onError={(e) => {
-          console.error('[AudioPlayer] Audio load error:', e);
-          console.error('[AudioPlayer] Failed to load:', audioSrc);
-        }}
-        onLoadedData={() => {
-          console.log('[AudioPlayer] Audio loaded successfully');
-        }}
-      />
+      {audioSrc && (
+        <audio
+          ref={audioRef}
+          src={audioSrc}
+          preload="metadata"
+          onError={(e) => {
+            console.error('[AudioPlayer] Audio load error:', e);
+            console.error('[AudioPlayer] Failed to load:', audioSrc);
+          }}
+          onLoadedData={() => {
+            console.log('[AudioPlayer] Audio loaded successfully');
+          }}
+        />
+      )}
     </div>
   );
 }

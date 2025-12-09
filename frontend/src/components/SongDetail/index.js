@@ -90,9 +90,6 @@ function SongDetail({ selectSong }) {
       <Sidebar />
       <div className="song-detail">
         <div className="song-header">
-          <button className="back-button" onClick={() => navigate(`/playlist/${playlistId}`)}>
-            ← Back to {playlist.title}
-          </button>
           <div className="song-header-info">
             <div className="song-image-large">
               {playlist.imagePng ? (

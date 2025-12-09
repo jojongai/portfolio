@@ -26,7 +26,6 @@ function Sidebar() {
   };
 
   const isHomeActive = location.pathname === '/';
-  const isHobbiesActive = location.pathname === '/hobbies';
   const isPlaylistActive = (playlistId) => {
     return location.pathname.startsWith(`/playlist/${playlistId}`);
   };
@@ -46,15 +45,6 @@ function Sidebar() {
             <Icon name="home" fallback="🏠" alt="Home" />
           </span>
           Home
-        </button>
-        <button 
-          onClick={() => navigate('/hobbies')} 
-          className={`nav-item ${isHobbiesActive ? 'active' : ''}`}
-        >
-          <span className="nav-icon">
-            <Icon name="target" fallback="🎯" alt="Hobbies and Interests" />
-          </span>
-          Hobbies and Interests
         </button>
         {playlists.map((playlist) => (
           <button

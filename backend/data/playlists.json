@@ -145,5 +145,62 @@
                 "imagePng": "/png/database-mgmt.png"
             }
         ]
+    },
+    {
+        "id": "hobbies-and-interests-playlist-id",
+        "title": "Hobbies and Interests",
+        "description": "Things I enjoy doing in my free time and activities that keep me inspired and motivated",
+        "imageUrl": "🎯",
+        "imagePng": "/png/hobbies.png",
+        "songs": [
+            {
+                "id": "photography-hobby",
+                "title": "Photography",
+                "artist": "Creative",
+                "description": "Capturing moments and exploring different perspectives through the lens. Love experimenting with different lighting, compositions, and editing techniques.",
+                "imagePng": "/png/photography.png",
+                "icon": "📷"
+            },
+            {
+                "id": "reading-hobby",
+                "title": "Reading",
+                "artist": "Learning",
+                "description": "Avid reader of technology books, science fiction, and personal development. Always have a book in progress.",
+                "imagePng": "/png/reading.png",
+                "icon": "📚"
+            },
+            {
+                "id": "hiking-hobby",
+                "title": "Hiking & Nature",
+                "artist": "Outdoor",
+                "description": "Enjoy exploring trails and spending time outdoors. Great way to disconnect and recharge while staying active.",
+                "imagePng": "/png/hiking.png",
+                "icon": "⛰️"
+            },
+            {
+                "id": "cooking-hobby",
+                "title": "Cooking",
+                "artist": "Creative",
+                "description": "Love experimenting with new recipes and cuisines. Cooking is both creative and relaxing for me.",
+                "imagePng": "/png/cooking.png",
+                "icon": "👨‍🍳"
+            },
+            {
+                "id": "gaming-hobby",
+                "title": "Gaming",
+                "artist": "Entertainment",
+                "description": "Enjoy strategy games and puzzle games. Appreciate good game design and storytelling in video games.",
+                "imagePng": "/png/gaming.png",
+                "icon": "🎮"
+            },
+            {
+                "id": "learning-tech-hobby",
+                "title": "Learning New Technologies",
+                "artist": "Professional",
+                "description": "Passionate about staying up-to-date with the latest tech trends. Love exploring new frameworks, tools, and programming languages.",
+                "imagePng": "/png/learning.png",
+                "icon": "💻"
+            }
+        ]
     }
 ]
