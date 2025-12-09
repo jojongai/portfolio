@@ -1,0 +1,25 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.icon-emoji {
+  display: inline-block;
+  font-style: normal;
+}
+
+.album-icon {
+  font-size: 24px;
+}
+
+.hobbies-header-icon {
+  font-size: 120px;
+}
+
+.hobby-icon-img {
+  font-size: 48px;
+}
+

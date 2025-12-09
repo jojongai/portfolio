@@ -404,16 +404,19 @@
 @media (max-width: 768px) {
   .audio-player-container {
     height: 80px;
-    padding: 0 16px;
+    padding: 0 12px;
   }
   
   .audio-player-left {
-    gap: 12px;
+    gap: 10px;
+    min-width: 0;
+    flex: 0 1 auto;
   }
   
   .album-art {
     width: 48px;
     height: 48px;
+    flex-shrink: 0;
   }
   
   .album-image {
@@ -422,57 +425,106 @@
     font-size: 20px;
   }
   
-  .audio-title {
+  .audio-info {
+    min-width: 0;
+  }
+
+  .audio-title-link {
     font-size: 13px;
   }
   
-  .audio-artist {
+  .audio-artist-link {
     font-size: 11px;
   }
+
+  .like-btn {
+    display: none;
+  }
   
+  .audio-player-center {
+    flex: 1;
+    min-width: 0;
+  }
+
   .player-controls {
-    gap: 6px;
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .control-btn {
+    padding: 6px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 14px;
   }
   
   .play-pause-btn {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    margin: 0 2px;
   }
   
   .progress-section {
-    gap: 8px;
-    max-width: 300px;
+    gap: 6px;
+    max-width: 100%;
+    width: 100%;
   }
   
   .time-display {
-    font-size: 11px;
+    font-size: 10px;
     min-width: 28px;
   }
+
+  .progress-bar-container {
+    flex: 1;
+  }
   
+  .audio-player-right {
+    gap: 4px;
+    flex: 0 0 auto;
+  }
+
   .volume-section {
-    min-width: 80px;
+    min-width: 70px;
+    gap: 6px;
+  }
+
+  .volume-icon-btn {
+    min-width: 28px;
+    font-size: 14px;
   }
   
   .volume-slider {
-    width: 60px;
+    width: 50px;
+  }
+
+  .queue-btn,
+  .device-btn,
+  .fullscreen-btn {
+    display: none;
   }
 }
 
 @media (max-width: 480px) {
   .audio-player-container {
-    padding: 0 12px;
+    height: 70px;
+    padding: 0 8px;
+    flex-wrap: wrap;
   }
   
   .audio-player-left {
     gap: 8px;
-    flex: 0 0 auto;
-    min-width: 120px;
+    flex: 1 1 100%;
+    order: 1;
+    min-width: 0;
+    max-width: 100%;
   }
   
   .album-art {
     width: 40px;
     height: 40px;
+    flex-shrink: 0;
   }
   
   .album-image {
@@ -481,33 +533,68 @@
     font-size: 18px;
   }
   
+  .audio-info {
+    min-width: 0;
+    flex: 1;
+  }
+
   .audio-title-link {
     font-size: 12px;
   }
   
   .audio-artist-link {
-    font-size: 11px;
+    font-size: 10px;
   }
   
   .like-btn {
     display: none;
   }
   
+  .audio-player-center {
+    flex: 1 1 100%;
+    order: 3;
+    width: 100%;
+    margin-top: 4px;
+  }
+
   .player-controls {
-    gap: 4px;
+    gap: 2px;
+    margin-bottom: 4px;
   }
   
   .control-btn {
     padding: 4px;
-    min-width: 28px;
-    min-height: 28px;
-    font-size: 14px;
+    min-width: 24px;
+    min-height: 24px;
+    font-size: 12px;
   }
   
   .play-pause-btn {
     width: 28px;
     height: 28px;
     font-size: 12px;
+    margin: 0;
+  }
+  
+  .progress-section {
+    max-width: 100%;
+    gap: 4px;
+    width: 100%;
+  }
+  
+  .time-display {
+    font-size: 9px;
+    min-width: 24px;
+  }
+
+  .progress-bar-container {
+    flex: 1;
+  }
+
+  .audio-player-right {
+    flex: 0 0 auto;
+    order: 2;
+    gap: 2px;
   }
   
   .volume-section {
@@ -518,15 +605,5 @@
   .device-btn,
   .fullscreen-btn {
     display: none;
-  }
-  
-  .progress-section {
-    max-width: 200px;
-    gap: 6px;
-  }
-  
-  .time-display {
-    font-size: 10px;
-    min-width: 24px;
   }
 }

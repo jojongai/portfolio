@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
+import Icon from '../Icon';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -81,7 +82,9 @@ function PlaylistDetail({ selectSong }) {
           </div>
         </div>
         <div className="playlist-actions">
-          <button className="play-button-large">▶</button>
+          <button className="play-button-large">
+            <Icon name="play" fallback="▶" alt="Play" />
+          </button>
         </div>
       </div>
 

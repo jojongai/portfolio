@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Icon from '../Icon';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -24,7 +25,7 @@ function Sidebar() {
   };
 
   const isHomeActive = location.pathname === '/';
-  const isLikedSongsActive = location.pathname === '/liked-songs';
+  const isHobbiesActive = location.pathname === '/hobbies';
   const isPlaylistActive = (playlistId) => {
     return location.pathname.startsWith(`/playlist/${playlistId}`);
   };
@@ -40,15 +41,19 @@ function Sidebar() {
           onClick={() => navigate('/')} 
           className={`nav-item ${isHomeActive ? 'active' : ''}`}
         >
-          <span className="nav-icon">🏠</span>
+          <span className="nav-icon">
+            <Icon name="home" fallback="🏠" alt="Home" />
+          </span>
           Home
         </button>
         <button 
-          onClick={() => navigate('/liked-songs')} 
-          className={`nav-item ${isLikedSongsActive ? 'active' : ''}`}
+          onClick={() => navigate('/hobbies')} 
+          className={`nav-item ${isHobbiesActive ? 'active' : ''}`}
         >
-          <span className="nav-icon">❤️</span>
-          Liked Songs
+          <span className="nav-icon">
+            <Icon name="target" fallback="🎯" alt="Hobbies and Interests" />
+          </span>
+          Hobbies and Interests
         </button>
         {playlists.map((playlist) => (
           <button

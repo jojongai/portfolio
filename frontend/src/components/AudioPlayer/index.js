@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Icon from '../Icon';
 import './index.css';
 
 function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious, hasNext }) {
@@ -103,9 +104,9 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
   };
 
   const getVolumeIcon = () => {
-    if (volume === 0) return '🔇';
-    if (volume < 0.5) return '🔉';
-    return '🔊';
+    if (volume === 0) return { name: 'volume-mute', fallback: '🔇' };
+    if (volume < 0.5) return { name: 'volume-low', fallback: '🔉' };
+    return { name: 'volume-high', fallback: '🔊' };
   };
 
   const getRepeatIcon = () => {
@@ -135,7 +136,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
       <div className="audio-player-left">
         <div className="album-art">
           <div className="album-image">
-            🎵
+            <Icon name="music" fallback="🎵" alt="Music" className="album-icon" />
           </div>
         </div>
         <div className="audio-info">
@@ -159,7 +160,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
           onClick={toggleLike}
           aria-label={isLiked ? 'Unlike' : 'Like'}
         >
-          {isLiked ? '❤️' : '🤍'}
+          <Icon name={isLiked ? "heart-filled" : "heart-outline"} fallback={isLiked ? '❤️' : '🤍'} alt={isLiked ? 'Unlike' : 'Like'} />
         </button>
       </div>
       
@@ -171,7 +172,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label="Shuffle"
             title="Enable shuffle"
           >
-            🔀
+            <Icon name="shuffle" fallback="🔀" alt="Shuffle" />
           </button>
           <button 
             className="control-btn prev-btn"
@@ -179,7 +180,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label="Previous"
             title="Previous"
           >
-            ⏮
+            <Icon name="previous" fallback="⏮" alt="Previous" />
           </button>
           <button 
             className="play-pause-btn"
@@ -187,7 +188,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label={isPlaying ? 'Pause' : 'Play'}
             title={isPlaying ? 'Pause' : 'Play'}
           >
-            {isPlaying ? '⏸' : '▶'}
+            <Icon name={isPlaying ? "pause" : "play"} fallback={isPlaying ? '⏸' : '▶'} alt={isPlaying ? 'Pause' : 'Play'} />
           </button>
           <button 
             className="control-btn next-btn"
@@ -195,7 +196,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label="Next"
             title="Next"
           >
-            ⏭
+            <Icon name="next" fallback="⏭" alt="Next" />
           </button>
           <button 
             className={`control-btn repeat-btn ${repeatMode > 0 ? 'active' : ''}`}
@@ -203,7 +204,11 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label="Repeat"
             title={repeatMode === 0 ? 'Enable repeat' : repeatMode === 1 ? 'Repeat all' : 'Repeat one'}
           >
-            {getRepeatIcon()}
+            <Icon 
+              name={repeatMode === 2 ? "repeat-one" : "repeat"} 
+              fallback={getRepeatIcon()} 
+              alt="Repeat" 
+            />
           </button>
         </div>
         <div 
@@ -231,7 +236,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
 
       <div className="audio-player-right">
         <button className="control-btn queue-btn" aria-label="Queue" title="Queue">
-          📋
+          <Icon name="queue" fallback="📋" alt="Queue" />
         </button>
         <div className="volume-section">
           <button 
@@ -251,7 +256,7 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
             aria-label={volume > 0 ? 'Mute' : 'Unmute'}
             title={volume > 0 ? 'Mute' : 'Unmute'}
           >
-            {getVolumeIcon()}
+            <Icon {...getVolumeIcon()} alt={volume > 0 ? 'Mute' : 'Unmute'} />
           </button>
           <input
             type="range"
@@ -264,10 +269,10 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
           />
         </div>
         <button className="control-btn device-btn" aria-label="Connect to a device" title="Connect to a device">
-          📱
+          <Icon name="device" fallback="📱" alt="Connect to a device" />
         </button>
         <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Fullscreen">
-          ⛶
+          <Icon name="fullscreen" fallback="⛶" alt="Fullscreen" />
         </button>
       </div>
 

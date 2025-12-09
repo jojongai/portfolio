@@ -5,6 +5,7 @@
   min-height: 100vh;
   color: #ffffff;
   padding-bottom: 90px;
+  transition: margin-left 0.3s ease;
 }
 
 .song-header {
@@ -187,19 +188,39 @@
   color: #e22134;
 }
 
+@media (max-width: 1200px) {
+  .song-detail {
+    margin-left: 200px;
+  }
+}
+
+@media (max-width: 992px) {
+  .song-detail {
+    margin-left: 160px;
+  }
+}
+
 @media (max-width: 768px) {
   .song-detail {
-    margin-left: 0;
+    margin-left: 70px;
+    padding-bottom: 100px;
   }
   
   .song-header {
-    padding: 20px;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .back-button {
+    font-size: 13px;
+    padding: 6px 12px;
   }
   
   .song-header-info {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 16px;
   }
   
   .song-image-large {
@@ -207,26 +228,49 @@
     height: 180px;
     font-size: 80px;
   }
+
+  .song-header-details {
+    width: 100%;
+  }
   
   .song-title-large {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  .song-artist-large {
+    font-size: 18px;
+  }
+
+  .song-description-header {
+    font-size: 14px;
+    max-width: 100%;
   }
   
   .audio-player-section {
-    padding: 0 20px 20px;
+    padding: 0 16px 12px;
   }
   
   .lyrics-container {
-    padding: 20px;
+    padding: 16px;
+  }
+
+  .lyrics-content {
+    max-width: 100%;
   }
   
-  .accomplishment-text {
-    font-size: 15px;
-    line-height: 1.6;
+  .lyrics-title {
+    font-size: 22px;
+    margin-bottom: 20px;
+    padding-bottom: 4px;
+  }
+  
+  .accomplishments-list {
+    gap: 10px;
   }
   
   .accomplishment-item {
     gap: 12px;
+    padding: 10px 0;
   }
   
   .accomplishment-bullet {
@@ -235,8 +279,59 @@
     margin-top: 6px;
   }
   
-  .lyrics-title {
+  .accomplishment-text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .song-detail {
+    margin-left: 60px;
+    padding-bottom: 110px;
+  }
+
+  .song-header {
+    padding: 12px;
+  }
+
+  .song-image-large {
+    width: 150px;
+    height: 150px;
+    font-size: 64px;
+  }
+
+  .song-title-large {
     font-size: 24px;
-    margin-bottom: 32px;
+  }
+
+  .song-artist-large {
+    font-size: 16px;
+  }
+
+  .song-description-header {
+    font-size: 13px;
+  }
+
+  .audio-player-section {
+    padding: 0 12px 10px;
+  }
+
+  .lyrics-container {
+    padding: 12px;
+  }
+
+  .lyrics-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .accomplishment-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .accomplishment-item {
+    padding: 8px 0;
   }
 }

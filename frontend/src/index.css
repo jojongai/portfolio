@@ -38,8 +38,9 @@ code {
   padding: 24px 0 0 0;
   position: fixed;
   height: 100vh;
-  overflowing: auto;
+  overflow: auto;
   z-index: 1000;
+  transition: width 0.3s ease;
 }
 
 .sidebar-logo {
@@ -105,6 +106,7 @@ code {
   margin-left: 240px;
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #121212 100%);
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
 }
 
 .top-bar {
@@ -243,6 +245,7 @@ code {
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -272,31 +275,267 @@ code {
   text-align: center;
 }
 
-@media (max-width: 768px) {
+/* Medium screens - slightly narrower sidebar */
+@media (max-width: 1200px) {
   .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
+    width: 200px;
   }
-  
+
   .main-content {
-    margin-left: 0;
+    margin-left: 200px;
+  }
+
+  .sidebar-logo {
+    padding: 0 16px 18px;
+  }
+
+  .sidebar-logo h1 {
+    font-size: 20px;
+  }
+
+  .sidebar-logo p {
+    font-size: 12px;
+  }
+
+  .nav-item {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .nav-icon {
+    margin-right: 12px;
+    font-size: 18px;
+  }
+}
+
+/* Smaller tablets - even narrower */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 160px;
+  }
+
+  .main-content {
+    margin-left: 160px;
+  }
+
+  .sidebar-logo h1 {
+    font-size: 18px;
+  }
+
+  .sidebar-logo p {
+    font-size: 11px;
+  }
+
+  .nav-item {
+    padding: 8px 4px;
+    font-size: 11px;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .nav-icon {
+    margin-right: 0;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    padding-bottom: 100px; /* More space for mobile player */
+  }
+
+  .sidebar {
+    width: 70px;
+    padding: 16px 0 0 0;
+  }
+
+  .sidebar-logo {
+    padding: 0 8px 12px;
+    text-align: center;
+  }
+
+  .sidebar-logo h1 {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .sidebar-logo p {
+    display: none; /* Hide subtitle on small screens */
+  }
+
+  .sidebar-nav {
+    margin: 0 4px;
+  }
+
+  .nav-item {
+    padding: 10px 4px;
+    font-size: 10px;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .nav-icon {
+    margin-right: 0;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .nav-item > *:not(.nav-icon) {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+  }
+
+  .main-content {
+    margin-left: 70px;
   }
   
   .top-bar {
-    padding: 16px 20px;
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
   .welcome-text {
     font-size: 20px;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .play-button {
+    padding: 10px 24px;
+    font-size: 13px;
   }
   
   .content-area {
-    padding: 20px;
+    padding: 16px;
+  }
+
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 12px;
   }
   
   .playlists-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .playlist-card {
+    padding: 16px;
+  }
+
+  .playlist-image {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .playlist-title {
+    font-size: 14px;
+  }
+
+  .playlist-description {
+    font-size: 12px;
+  }
+
+  .playlist-tech {
+    font-size: 11px;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding-bottom: 110px;
+  }
+
+  .sidebar {
+    width: 60px;
+    padding: 12px 0 0 0;
+  }
+
+  .sidebar-logo {
+    padding: 0 4px 10px;
+  }
+
+  .sidebar-logo h1 {
+    font-size: 14px;
+  }
+
+  .sidebar-nav {
+    margin: 0 2px;
+  }
+
+  .nav-item {
+    padding: 8px 2px;
+    min-height: 60px;
+  }
+
+  .nav-icon {
+    font-size: 18px;
+  }
+
+  .nav-item span:not(.nav-icon) {
+    font-size: 9px;
+  }
+
+  .main-content {
+    margin-left: 60px;
+  }
+
+  .top-bar {
+    padding: 10px 12px;
+  }
+
+  .welcome-text {
+    font-size: 18px;
+  }
+
+  .play-button {
+    padding: 8px 20px;
+    font-size: 12px;
+  }
+
+  .content-area {
+    padding: 12px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .playlists-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .playlist-card {
+    padding: 12px;
+  }
+
+  .playlist-image {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .playlist-title {
+    font-size: 13px;
+  }
+
+  .playlist-description {
+    font-size: 11px;
   }
 }

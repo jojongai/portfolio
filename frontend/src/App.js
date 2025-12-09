@@ -4,7 +4,9 @@ import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import PlaylistDetail from './components/PlaylistDetail';
 import SongDetail from './components/SongDetail';
+import HobbiesAndInterests from './components/HobbiesAndInterests';
 import AudioPlayer from './components/AudioPlayer';
+import Icon from './components/Icon';
 import './index.css';
 
 const API_BASE_URL = 'http://localhost:8080/api';
@@ -88,7 +90,7 @@ function HomePage() {
                   {playlist.imageUrl}
                 </div>
                 <div className="play-button-overlay">
-                  ▶
+                  <Icon name="play" fallback="▶" alt="Play" />
                 </div>
                 <h3 className="playlist-title">{playlist.title}</h3>
                 <p className="playlist-description">{playlist.description}</p>
@@ -194,6 +196,7 @@ function App() {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/hobbies" element={<HobbiesAndInterests />} />
           <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
           <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
         </Routes>
