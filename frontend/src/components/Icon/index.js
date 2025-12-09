@@ -14,7 +14,7 @@ function Icon({ name, fallback, className = '', alt = '', ...props }) {
   
   // Try to load the icon, fallback to emoji if it fails
   const [svgContent, setSvgContent] = React.useState(null);
-  const [useImage, setUseImage] = React.useState(true);
+  const [loadFailed, setLoadFailed] = React.useState(false);
   
   React.useEffect(() => {
     // Try to fetch SVG as text to inline it (so currentColor works)
@@ -25,15 +25,16 @@ function Icon({ name, fallback, className = '', alt = '', ...props }) {
       })
       .then(text => {
         setSvgContent(text);
-        setUseImage(true);
+        setLoadFailed(false);
       })
       .catch(() => {
         setSvgContent(null);
-        setUseImage(false);
+        setLoadFailed(true);
       });
   }, [iconPath]);
 
-  if (useImage && svgContent) {
+  // If we have SVG content, use it
+  if (svgContent && !loadFailed) {
     // Inline SVG so currentColor works
     return (
       <span 
@@ -45,25 +46,25 @@ function Icon({ name, fallback, className = '', alt = '', ...props }) {
     );
   }
 
-  if (useImage) {
-    // Fallback to img tag if fetch fails
+  // Always show emoji fallback if provided (ensures buttons are always visible)
+  if (fallback) {
     return (
-      <img 
-        src={iconPath} 
-        alt={alt || name}
-        className={`icon ${className}`}
-        onError={() => setUseImage(false)}
-        style={{ filter: 'brightness(0) saturate(100%) invert(73%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%)' }}
-        {...props}
-      />
+      <span className={`icon icon-emoji ${className}`} aria-label={alt || name} {...props}>
+        {fallback}
+      </span>
     );
   }
 
-  // Fallback to emoji
+  // Last resort: try img tag (only if no fallback provided)
   return (
-    <span className={`icon-emoji ${className}`} aria-label={alt || name} {...props}>
-      {fallback}
-    </span>
+    <img 
+      src={iconPath} 
+      alt={alt || name}
+      className={`icon ${className}`}
+      onError={() => setLoadFailed(true)}
+      style={{ filter: 'brightness(0) saturate(100%) invert(73%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(95%)' }}
+      {...props}
+    />
   );
 }
 

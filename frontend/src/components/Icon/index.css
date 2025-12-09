@@ -25,6 +25,8 @@
 .icon-emoji {
   display: inline-block;
   font-style: normal;
+  line-height: 1;
+  vertical-align: middle;
 }
 
 .album-icon {

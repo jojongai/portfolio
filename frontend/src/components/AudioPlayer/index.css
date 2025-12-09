@@ -233,6 +233,16 @@
   height: 18px;
 }
 
+.control-btn .icon-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
+  width: 18px;
+  height: 18px;
+}
+
 .fullscreen-btn .icon,
 .fullscreen-btn .icon-svg {
   width: 18px;
@@ -241,6 +251,16 @@
 
 .fullscreen-btn .icon svg,
 .fullscreen-btn .icon-svg svg {
+  width: 18px;
+  height: 18px;
+}
+
+.fullscreen-btn .icon-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 1;
   width: 18px;
   height: 18px;
 }
@@ -304,6 +324,14 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
   flex-shrink: 0;
   margin: 0 4px;
+}
+
+.play-pause-btn .icon-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
 }
 
 .play-pause-btn:hover {
