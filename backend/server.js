@@ -2,131 +2,59 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Middleware
+const allowedOrigins = process.env.ALLOWED_ORIGINS 
+  ? process.env.ALLOWED_ORIGINS.split(',')
+  : ['http://localhost:3000'];
+
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(null, true); // Allow all origins in production, or restrict as needed
+    }
+  },
   credentials: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// In-memory data store (replace with database in production)
-// Using fixed UUIDs so IDs don't change on server restart
-let playlists = [
-  {
-    id: "work-experience-playlist-id",
-    title: "Work Experience",
-    description: "My professional journey through different companies",
-    imageUrl: "💼",
-    songs: [
-      {
-        id: "techcorp-song-id",
-        title: "Software Engineer at TechCorp",
-        artist: "2022 - 2024",
-        duration: "2 years",
-        description: "Led development of microservices architecture using Node.js and React",
-        mp3Path: "/audio/every_summertime.mp3", // Path to MP3 file in public/audio folder
-        accomplishments: [
-          "Architected and implemented a scalable microservices system serving 1M+ daily active users",
-          "Reduced API response time by 40% through database optimization and caching strategies",
-          "Mentored a team of 3 junior developers, improving code quality and deployment frequency",
-          "Led migration from monolithic architecture to microservices, reducing deployment time by 60%",
-          "Implemented CI/CD pipelines that increased deployment frequency from weekly to daily"
-        ]
-      },
-      {
-        id: "startupxyz-song-id",
-        title: "Junior Developer at StartupXYZ",
-        artist: "2021 - 2022",
-        duration: "1 year",
-        description: "Built full-stack web applications and learned agile development practices",
-        mp3Path: "/audio/startupxyz-experience.mp3", // Path to MP3 file in public/audio folder
-        accomplishments: [
-          "Developed 5+ production features using React and Node.js",
-          "Participated in daily standups and sprint planning sessions",
-          "Fixed 50+ bugs and improved application performance",
-          "Collaborated with designers to implement pixel-perfect UI components"
-        ]
-      },
-      {
-        id: "bigtech-song-id",
-        title: "Intern at BigTech Inc",
-        artist: "2020 - 2021",
-        duration: "6 months",
-        description: "Gained experience in Python, data analysis, and team collaboration",
-        mp3Path: "/audio/bigtech-intern-experience.mp3", // Path to MP3 file in public/audio folder
-        accomplishments: [
-          "Analyzed large datasets using Python and pandas",
-          "Created data visualizations and reports for stakeholders",
-          "Participated in code reviews and learned best practices",
-          "Contributed to internal tools and documentation"
-        ]
-      }
-    ]
-  },
-  {
-    id: "personal-projects-playlist-id",
-    title: "Personal Projects",
-    description: "Side projects and creative coding experiments",
-    imageUrl: "🚀",
-    songs: [
-      {
-        id: "portfolio-website-song-id",
-        title: "Portfolio Website",
-        artist: "React, Node.js",
-        duration: "2 weeks",
-        description: "A Spotify-inspired portfolio website with modern design"
-      },
-      {
-        id: "task-management-song-id",
-        title: "Task Management App",
-        artist: "Vue.js, Express",
-        duration: "1 month",
-        description: "Full-stack application for team collaboration and project tracking"
-      },
-      {
-        id: "weather-dashboard-song-id",
-        title: "Weather Dashboard",
-        artist: "JavaScript, APIs",
-        duration: "1 week",
-        description: "Real-time weather data visualization with interactive charts"
-      }
-    ]
-  },
-  {
-    id: "skills-technologies-playlist-id",
-    title: "Skills & Technologies",
-    description: "My technical skills and learning journey",
-    imageUrl: "⚡",
-    songs: [
-      {
-        id: "frontend-dev-song-id",
-        title: "Frontend Development",
-        artist: "React, Vue.js, TypeScript",
-        duration: "3+ years",
-        description: "Building responsive and interactive user interfaces"
-      },
-      {
-        id: "backend-dev-song-id",
-        title: "Backend Development",
-        artist: "Node.js, Python, Java",
-        duration: "2+ years",
-        description: "Server-side development and API design"
-      },
-      {
-        id: "database-mgmt-song-id",
-        title: "Database Management",
-        artist: "MongoDB, PostgreSQL",
-        duration: "2+ years",
-        description: "Data modeling and database optimization"
-      }
-    ]
+// Load data from JSON file
+const dataPath = path.join(__dirname, 'data', 'playlists.json');
+
+// Helper function to read playlists from file
+function loadPlaylists() {
+  try {
+    const data = fs.readFileSync(dataPath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error loading playlists:', error);
+    return [];
   }
-];
+}
+
+// Helper function to save playlists to file
+function savePlaylists(playlists) {
+  try {
+    fs.writeFileSync(dataPath, JSON.stringify(playlists, null, 2), 'utf8');
+    return true;
+  } catch (error) {
+    console.error('Error saving playlists:', error);
+    return false;
+  }
+}
+
+// In-memory data store (loaded from JSON file)
+// Using fixed UUIDs so IDs don't change on server restart
+let playlists = loadPlaylists();
 
 // Routes
 app.get('/api/playlists', (req, res) => {
@@ -167,6 +95,7 @@ app.post('/api/playlists', (req, res) => {
   };
   
   playlists.push(newPlaylist);
+  savePlaylists(playlists);
   res.status(201).json(newPlaylist);
 });
 
@@ -187,6 +116,7 @@ app.put('/api/playlists/:id', (req, res) => {
     songs: songs || playlists[playlistIndex].songs
   };
   
+  savePlaylists(playlists);
   res.json(playlists[playlistIndex]);
 });
 
@@ -198,6 +128,7 @@ app.delete('/api/playlists/:id', (req, res) => {
   }
   
   playlists.splice(playlistIndex, 1);
+  savePlaylists(playlists);
   res.status(204).send();
 });
 

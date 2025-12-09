@@ -7,9 +7,10 @@ import SongDetail from './components/SongDetail';
 import HobbiesAndInterests from './components/HobbiesAndInterests';
 import AudioPlayer from './components/AudioPlayer';
 import Icon from './components/Icon';
+import { getAssetUrl } from './utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 // Player Context for global state
 const PlayerContext = createContext();
@@ -87,7 +88,11 @@ function HomePage() {
                 onClick={() => handlePlaylistClick(playlist)}
               >
                 <div className="playlist-image">
-                  {playlist.imageUrl}
+                  {playlist.imagePng ? (
+                    <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="playlist-image-img" />
+                  ) : (
+                    playlist.imageUrl
+                  )}
                 </div>
                 <div className="play-button-overlay">
                   <Icon name="play" fallback="▶" alt="Play" />
@@ -202,9 +207,10 @@ function App() {
         </Routes>
         {selectedSong && selectedSong.mp3Path && (
           <AudioPlayer 
-            audioSrc={selectedSong.mp3Path}
+            audioSrc={getAssetUrl(selectedSong.mp3Path)}
             title={selectedSong.title}
             artist={selectedSong.artist}
+            imagePng={selectedSong.imagePng}
             onPrevious={handlePrevious}
             onNext={handleNext}
             hasPrevious={true}

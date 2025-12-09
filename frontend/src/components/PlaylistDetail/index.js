@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Icon from '../Icon';
+import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 function PlaylistDetail({ selectSong }) {
   const { playlistId } = useParams();
@@ -32,8 +33,8 @@ function PlaylistDetail({ selectSong }) {
     }
   };
 
-  const formatDuration = (duration) => {
-    return duration;
+  const formatLocation = (song) => {
+    return song.location || song.duration || '';
   };
 
   if (loading) {
@@ -69,7 +70,11 @@ function PlaylistDetail({ selectSong }) {
       <div className="playlist-header">
         <div className="playlist-info">
           <div className="playlist-image-large">
-            {playlist.imageUrl}
+            {playlist.imagePng ? (
+              <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="playlist-image-large-img" />
+            ) : (
+              playlist.imageUrl
+            )}
           </div>
           <div className="playlist-details">
             <p className="playlist-type">Playlist</p>
@@ -93,7 +98,7 @@ function PlaylistDetail({ selectSong }) {
           <div className="song-number">#</div>
           <div className="song-title">Title</div>
           <div className="song-artist">Details</div>
-          <div className="song-duration">Duration</div>
+          <div className="song-duration">Location</div>
         </div>
         
         {playlist.songs.map((song, index) => (
@@ -108,7 +113,7 @@ function PlaylistDetail({ selectSong }) {
               <div className="song-description">{song.description}</div>
             </div>
             <div className="song-artist-text">{song.artist}</div>
-            <div className="song-duration-text">{formatDuration(song.duration)}</div>
+            <div className="song-duration-text">{formatLocation(song)}</div>
           </div>
         ))}
       </div>

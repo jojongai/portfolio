@@ -1,0 +1,123 @@
+[
+    {
+        "id": "work-experience-playlist-id",
+        "title": "Work Experience",
+        "description": "My professional journey through different companies",
+        "imageUrl": "💼",
+        "imagePng": "/png/work-experience.png",
+        "songs": [
+            {
+                "id": "techcorp-song-id",
+                "title": "Software Engineer at Opener.",
+                "artist": "Sept 2025 - Dec 2025",
+                "location": "Toronto, Canada",
+                "description": "Led development of microservices architecture using Node.js and React",
+                "mp3Path": "/audio/every_summertime.mp3",
+                "imagePng": "/png/techcorp.png",
+                "accomplishments": [
+                    "Developed a client-facing bulk-upload feature: built the UI, scheduled background jobs with BullMQ, and created REST/GraphQL APIs to validate incoming data, insert new stores, and maintain data integrity.",
+                    "Reduced API response time by 40% through database optimization and caching strategies",
+                    "Mentored a team of 3 junior developers, improving code quality and deployment frequency",
+                    "Led migration from monolithic architecture to microservices, reducing deployment time by 60%",
+                    "Implemented CI/CD pipelines that increased deployment frequency from weekly to daily"
+                ]
+            },
+            {
+                "id": "startupxyz-song-id",
+                "title": "Junior Developer at StartupXYZ",
+                "artist": "2021 - 2022",
+                "location": "1 year",
+                "description": "Built full-stack web applications and learned agile development practices",
+                "mp3Path": "/audio/startupxyz-experience.mp3",
+                "imagePng": "/png/startupxyz.png",
+                "accomplishments": [
+                    "Developed 5+ production features using React and Node.js",
+                    "Participated in daily standups and sprint planning sessions",
+                    "Fixed 50+ bugs and improved application performance",
+                    "Collaborated with designers to implement pixel-perfect UI components"
+                ]
+            },
+            {
+                "id": "bigtech-song-id",
+                "title": "Intern at BigTech Inc",
+                "artist": "2020 - 2021",
+                "location": "6 months",
+                "description": "Gained experience in Python, data analysis, and team collaboration",
+                "mp3Path": "/audio/bigtech-intern-experience.mp3",
+                "imagePng": "/png/bigtech.png",
+                "accomplishments": [
+                    "Analyzed large datasets using Python and pandas",
+                    "Created data visualizations and reports for stakeholders",
+                    "Participated in code reviews and learned best practices",
+                    "Contributed to internal tools and documentation"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "personal-projects-playlist-id",
+        "title": "Personal Projects",
+        "description": "Side projects and creative coding experiments",
+        "imageUrl": "🚀",
+        "imagePng": "/png/personal-projects.png",
+        "songs": [
+            {
+                "id": "portfolio-website-song-id",
+                "title": "Portfolio Website",
+                "artist": "React, Node.js",
+                "duration": "2 weeks",
+                "description": "A Spotify-inspired portfolio website with modern design",
+                "imagePng": "/png/portfolio-website.png"
+            },
+            {
+                "id": "task-management-song-id",
+                "title": "Task Management App",
+                "artist": "Vue.js, Express",
+                "duration": "1 month",
+                "description": "Full-stack application for team collaboration and project tracking",
+                "imagePng": "/png/task-management.png"
+            },
+            {
+                "id": "weather-dashboard-song-id",
+                "title": "Weather Dashboard",
+                "artist": "JavaScript, APIs",
+                "duration": "1 week",
+                "description": "Real-time weather data visualization with interactive charts",
+                "imagePng": "/png/weather-dashboard.png"
+            }
+        ]
+    },
+    {
+        "id": "skills-technologies-playlist-id",
+        "title": "Skills & Technologies",
+        "description": "My technical skills and learning journey",
+        "imageUrl": "⚡",
+        "imagePng": "/png/skills-technologies.png",
+        "songs": [
+            {
+                "id": "frontend-dev-song-id",
+                "title": "Frontend Development",
+                "artist": "React, Vue.js, TypeScript",
+                "duration": "3+ years",
+                "description": "Building responsive and interactive user interfaces",
+                "imagePng": "/png/frontend-dev.png"
+            },
+            {
+                "id": "backend-dev-song-id",
+                "title": "Backend Development",
+                "artist": "Node.js, Python, Java",
+                "duration": "2+ years",
+                "description": "Server-side development and API design",
+                "imagePng": "/png/backend-dev.png"
+            },
+            {
+                "id": "database-mgmt-song-id",
+                "title": "Database Management",
+                "artist": "MongoDB, PostgreSQL",
+                "duration": "2+ years",
+                "description": "Data modeling and database optimization",
+                "imagePng": "/png/database-mgmt.png"
+            }
+        ]
+    }
+]

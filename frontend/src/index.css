@@ -195,6 +195,13 @@ code {
   overflow: hidden;
 }
 
+.playlist-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
 .playlist-image::before {
   content: '';
   position: absolute;

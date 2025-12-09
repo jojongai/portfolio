@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../Icon';
+import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious, hasNext }) {
+function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, hasPrevious, hasNext }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -136,7 +137,11 @@ function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious,
       <div className="audio-player-left">
         <div className="album-art">
           <div className="album-image">
-            <Icon name="music" fallback="🎵" alt="Music" className="album-icon" />
+            {imagePng ? (
+              <img src={getAssetUrl(imagePng)} alt={title || 'Album'} className="album-image-img" />
+            ) : (
+              <Icon name="music" fallback="🎵" alt="Music" className="album-icon" />
+            )}
           </div>
         </div>
         <div className="audio-info">

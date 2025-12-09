@@ -3,9 +3,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import AudioPlayer from '../AudioPlayer';
+import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 function SongDetail({ selectSong }) {
   const { playlistId, songId } = useParams();
@@ -94,7 +95,11 @@ function SongDetail({ selectSong }) {
           </button>
           <div className="song-header-info">
             <div className="song-image-large">
-              {playlist.imageUrl}
+              {playlist.imagePng ? (
+                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="song-image-large-img" />
+              ) : (
+                playlist.imageUrl
+              )}
             </div>
             <div className="song-header-details">
               <p className="song-type">Experience</p>
