@@ -22,7 +22,12 @@ This application is configured for deployment on **Vercel** for the frontend, wi
    - Import your GitHub repository
 
 2. **Configure Project Settings**
-   - **Framework Preset**: Create React App
+   
+   **Option A: Use Root Directory (Recommended)**
+   - **Root Directory**: Leave as root (`.`)
+   - The `vercel.json` in the root will handle the build configuration automatically
+   
+   **Option B: Use Frontend Directory**
    - **Root Directory**: `frontend`
    - **Build Command**: `npm run build` (auto-detected)
    - **Output Directory**: `build` (auto-detected)
@@ -43,10 +48,11 @@ This application is configured for deployment on **Vercel** for the frontend, wi
 
 ### Vercel Configuration
 
-The `frontend/vercel.json` file is already configured with:
-- Build command
-- Output directory
-- Development settings
+The `vercel.json` file in the root directory is configured with:
+- Build command: `cd frontend && npm install && npm run build`
+- Output directory: `frontend/build`
+- React Router rewrites for SPA routing
+- Framework: Create React App
 
 ## Backend Deployment
 
