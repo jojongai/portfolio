@@ -74,11 +74,30 @@ function HomePage() {
       <div className="main-content">
         <div className="top-bar">
           <h1 className="welcome-text">Good afternoon</h1>
-          <button className="play-button">PLAY</button>
+          <div className="social-links">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              GitHub
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
+              LinkedIn
+            </a>
+          </div>
         </div>
 
         <div className="content-area">
-          <h2 className="section-title">Made for Jojo Ngai</h2>
+          <div className="intro-section">
+            <h2 className="intro-headline">
+              Hi, I'm Jojo — a 5th-year Management Engineering student at Waterloo with interests in software, machine learning, and music.
+            </h2>
+            <p className="intro-subline">
+              This site highlights my experiences and kinda ties in my music taste.
+            </p>
+            <p className="intro-subtext">
+              Click any song/row in a playlist to see how each track connects to the story behind it along with a more in depth description.
+            </p>
+          </div>
+          
+          <h2 className="section-title">Made by Jojo Ngai</h2>
           
           <div className="playlists-grid">
             {playlists.map((playlist) => (
@@ -223,6 +242,8 @@ function App() {
           onNext={handleNext}
           hasPrevious={true}
           hasNext={true}
+          isPlaying={isPlaying}
+          onPlayPause={handlePlayPause}
         />
       </div>
     </PlayerContext.Provider>

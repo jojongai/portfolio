@@ -3,7 +3,7 @@ import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, hasPrevious, hasNext }) {
+function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, hasPrevious, hasNext, isPlaying: externalIsPlaying, onPlayPause }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -17,6 +17,9 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    // Set initial volume
+    audio.volume = volume;
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
@@ -48,16 +51,25 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [repeatMode]);
+  }, [repeatMode, volume]);
 
   useEffect(() => {
     console.log('[AudioPlayer] Audio source:', audioSrc);
     if (audioRef.current) {
       audioRef.current.load();
-      setIsPlaying(false);
+      audioRef.current.volume = volume; // Ensure volume is set when audio loads
       setCurrentTime(0);
+      // Auto-play when new song is selected
+      if (audioSrc && externalIsPlaying) {
+        audioRef.current.play().catch(err => {
+          console.error('[AudioPlayer] Auto-play error:', err);
+        });
+        setIsPlaying(true);
+      } else {
+        setIsPlaying(false);
+      }
     }
-  }, [audioSrc]);
+  }, [audioSrc, volume, externalIsPlaying]);
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
@@ -66,15 +78,37 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
+      if (onPlayPause) onPlayPause(false);
       console.log('[AudioPlayer] Paused');
     } else {
       audio.play().catch(err => {
         console.error('[AudioPlayer] Play error:', err);
       });
       setIsPlaying(true);
+      if (onPlayPause) onPlayPause(true);
       console.log('[AudioPlayer] Playing');
     }
   };
+
+  // Sync with external isPlaying state
+  useEffect(() => {
+    if (externalIsPlaying !== undefined && externalIsPlaying !== isPlaying) {
+      const audio = audioRef.current;
+      if (!audio) return;
+      
+      if (externalIsPlaying && !audio.paused) {
+        setIsPlaying(true);
+      } else if (!externalIsPlaying && !audio.paused) {
+        audio.pause();
+        setIsPlaying(false);
+      } else if (externalIsPlaying && audio.paused) {
+        audio.play().catch(err => {
+          console.error('[AudioPlayer] Sync play error:', err);
+        });
+        setIsPlaying(true);
+      }
+    }
+  }, [externalIsPlaying, isPlaying]);
 
   const handleSeek = (e) => {
     const audio = audioRef.current;

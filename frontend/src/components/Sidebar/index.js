@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
@@ -25,27 +24,17 @@ function Sidebar() {
     }
   };
 
-  const isHomeActive = location.pathname === '/';
   const isPlaylistActive = (playlistId) => {
     return location.pathname.startsWith(`/playlist/${playlistId}`);
   };
 
   return (
     <div className="sidebar">
-      <div className="sidebar-logo">
+      <div className="sidebar-logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <h1>Jojo Ngai</h1>
         <p>Portfolio</p>
       </div>
       <nav className="sidebar-nav">
-        <button 
-          onClick={() => navigate('/')} 
-          className={`nav-item ${isHomeActive ? 'active' : ''}`}
-        >
-          <span className="nav-icon">
-            <Icon name="home" fallback="🏠" alt="Home" />
-          </span>
-          Home
-        </button>
         {playlists.map((playlist) => (
           <button
             key={playlist.id}
