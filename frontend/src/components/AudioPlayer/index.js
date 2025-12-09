@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './index.css';
 
-function AudioPlayer({ audioSrc, title, artist }) {
+function AudioPlayer({ audioSrc, title, artist, onPrevious, onNext, hasPrevious, hasNext }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -175,6 +175,7 @@ function AudioPlayer({ audioSrc, title, artist }) {
           </button>
           <button 
             className="control-btn prev-btn"
+            onClick={onPrevious}
             aria-label="Previous"
             title="Previous"
           >
@@ -190,6 +191,7 @@ function AudioPlayer({ audioSrc, title, artist }) {
           </button>
           <button 
             className="control-btn next-btn"
+            onClick={onNext}
             aria-label="Next"
             title="Next"
           >

@@ -45,7 +45,8 @@ function SongDetail({ selectSong }) {
         setSong(foundSong);
         if (selectSong) {
           console.log('[SongDetail] Calling selectSong callback');
-          selectSong(foundSong);
+          const songIndex = response.data.songs.findIndex(s => s.id === songId);
+          selectSong(foundSong, response.data, songIndex);
         }
       } else {
         console.error('[SongDetail] Song not found in playlist');
@@ -127,7 +128,10 @@ function SongDetail({ selectSong }) {
               <div className="accomplishments-list">
                 {song.accomplishments.map((accomplishment, index) => (
                   <div key={index} className="accomplishment-item">
-                    <p className="accomplishment-text">{accomplishment}</p>
+                    <div className="accomplishment-bullet"></div>
+                    <div className="accomplishment-content">
+                      <p className="accomplishment-text">{accomplishment}</p>
+                    </div>
                   </div>
                 ))}
               </div>

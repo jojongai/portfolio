@@ -117,11 +117,16 @@ function SongDetailWithContext() {
 }
 
 function App() {
+  const navigate = useNavigate();
   const [selectedSong, setSelectedSong] = useState(null);
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+  const [currentSongIndex, setCurrentSongIndex] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const selectSong = (song) => {
+  const selectSong = (song, playlist = null, songIndex = -1) => {
     setSelectedSong(song);
+    setCurrentPlaylist(playlist);
+    setCurrentSongIndex(songIndex);
     setIsPlaying(true);
   };
 
@@ -129,33 +134,91 @@ function App() {
     setIsPlaying(!isPlaying);
   };
 
+  const handlePrevious = () => {
+    if (!currentPlaylist || currentSongIndex < 0) return;
+    
+    // Get all songs with mp3Path
+    const songsWithAudio = currentPlaylist.songs
+      .map((song, index) => ({ song, index }))
+      .filter(({ song }) => song && song.mp3Path);
+    
+    if (songsWithAudio.length === 0) return;
+    
+    // Find current song index in the filtered list
+    const currentFilteredIndex = songsWithAudio.findIndex(({ index }) => index === currentSongIndex);
+    
+    // Get previous song (loop to end if at beginning)
+    const prevIndex = currentFilteredIndex > 0 
+      ? currentFilteredIndex - 1 
+      : songsWithAudio.length - 1;
+    
+    const { song: prevSong, index: prevSongIndex } = songsWithAudio[prevIndex];
+    navigate(`/playlist/${currentPlaylist.id}/song/${prevSong.id}`);
+    selectSong(prevSong, currentPlaylist, prevSongIndex);
+  };
+
+  const handleNext = () => {
+    if (!currentPlaylist || currentSongIndex < 0) return;
+    
+    // Get all songs with mp3Path
+    const songsWithAudio = currentPlaylist.songs
+      .map((song, index) => ({ song, index }))
+      .filter(({ song }) => song && song.mp3Path);
+    
+    if (songsWithAudio.length === 0) return;
+    
+    // Find current song index in the filtered list
+    const currentFilteredIndex = songsWithAudio.findIndex(({ index }) => index === currentSongIndex);
+    
+    // Get next song (loop to beginning if at end)
+    const nextIndex = currentFilteredIndex < songsWithAudio.length - 1 
+      ? currentFilteredIndex + 1 
+      : 0;
+    
+    const { song: nextSong, index: nextSongIndex } = songsWithAudio[nextIndex];
+    navigate(`/playlist/${currentPlaylist.id}/song/${nextSong.id}`);
+    selectSong(nextSong, currentPlaylist, nextSongIndex);
+  };
+
   const playerContextValue = {
     selectedSong,
     isPlaying,
     selectSong,
-    handlePlayPause
+    handlePlayPause,
+    currentPlaylist,
+    setCurrentPlaylist
   };
 
   return (
     <PlayerContext.Provider value={playerContextValue}>
-      <Router>
-        <div className="app-container">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
-            <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
-          </Routes>
-          {selectedSong && selectedSong.mp3Path && (
-            <AudioPlayer 
-              audioSrc={selectedSong.mp3Path}
-              title={selectedSong.title}
-              artist={selectedSong.artist}
-            />
-          )}
-        </div>
-      </Router>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/playlist/:playlistId" element={<PlaylistDetailWithContext />} />
+          <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
+        </Routes>
+        {selectedSong && selectedSong.mp3Path && (
+          <AudioPlayer 
+            audioSrc={selectedSong.mp3Path}
+            title={selectedSong.title}
+            artist={selectedSong.artist}
+            onPrevious={handlePrevious}
+            onNext={handleNext}
+            hasPrevious={true}
+            hasNext={true}
+          />
+        )}
+      </div>
     </PlayerContext.Provider>
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default AppWrapper;

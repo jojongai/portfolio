@@ -170,6 +170,12 @@
   color: #1ed760;
 }
 
+.control-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .play-pause-btn {
   background-color: #ffffff;
   border: none;

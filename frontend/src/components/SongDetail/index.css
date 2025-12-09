@@ -91,60 +91,87 @@
 }
 
 .audio-player-section {
-  padding: 0 32px 32px;
+  padding: 0 32px 16px;
   display: flex;
   justify-content: center;
 }
 
 .lyrics-container {
-  padding: 40px 32px;
+  padding: 20px 32px;
   display: flex;
   justify-content: center;
 }
 
 .lyrics-content {
-  max-width: 700px;
+  max-width: 1400px;
   width: 100%;
 }
 
 .lyrics-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 32px;
-  text-align: center;
+  margin-bottom: 24px;
+  text-align: left;
+  border-bottom: 2px solid #1db954;
+  padding-bottom: 4px;
 }
 
 .accomplishments-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 12px;
 }
 
 .accomplishment-item {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.accomplishment-item:last-child {
+  border-bottom: none;
 }
 
 .accomplishment-item:hover {
-  opacity: 0.8;
+  padding-left: 8px;
+  border-left: 3px solid #1db954;
+  padding-left: 13px;
+}
+
+.accomplishment-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #1db954;
+  border-radius: 50%;
+  margin-top: 8px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(29, 185, 84, 0.4);
+}
+
+.accomplishment-content {
+  flex: 1;
 }
 
 .accomplishment-text {
-  font-size: 18px;
-  line-height: 1.8;
-  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #e0e0e0;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
   margin: 0;
+  letter-spacing: 0.2px;
 }
 
 .no-accomplishments {
-  text-align: center;
-  padding: 60px 20px;
+  text-align: left;
+  padding: 40px 20px;
   color: #b3b3b3;
   font-size: 16px;
+  font-style: italic;
 }
 
 .loading, .error {
@@ -194,6 +221,22 @@
   }
   
   .accomplishment-text {
-    font-size: 16px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  .accomplishment-item {
+    gap: 12px;
+  }
+  
+  .accomplishment-bullet {
+    width: 6px;
+    height: 6px;
+    margin-top: 6px;
+  }
+  
+  .lyrics-title {
+    font-size: 24px;
+    margin-bottom: 32px;
   }
 }
