@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import AudioPlayer from '../AudioPlayer';
 import { getAssetUrl } from '../../utils/imageUrl';
+import { PlayerContext } from '../../App';
 import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
@@ -11,6 +12,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api
 function SongDetail({ selectSong }) {
   const { playlistId, songId } = useParams();
   const navigate = useNavigate();
+  const { selectedSong } = useContext(PlayerContext);
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -44,7 +46,9 @@ function SongDetail({ selectSong }) {
         console.log('[SongDetail] Song found:', foundSong);
         console.log('[SongDetail] MP3 Path:', foundSong.mp3Path);
         setSong(foundSong);
-        if (selectSong) {
+        // Only call selectSong if this is a different song than what's currently playing
+        // This prevents pausing/restarting when navigating to the accomplishments page
+        if (selectSong && (!selectedSong || selectedSong.id !== foundSong.id)) {
           console.log('[SongDetail] Calling selectSong callback');
           const songIndex = response.data.songs.findIndex(s => s.id === songId);
           selectSong(foundSong, response.data, songIndex);
@@ -125,7 +129,18 @@ function SongDetail({ selectSong }) {
 
         <div className="lyrics-container">
           <div className="lyrics-content">
-            <h2 className="lyrics-title">Accomplishments</h2>
+            <div className="lyrics-title-row">
+              <h2 className="lyrics-title">Accomplishments</h2>
+              {(song.technologies || song.languages) && (
+                <div className="song-technologies">
+                  {song.technologies && song.languages ? (
+                    <p className="tech-content">{song.technologies}, {song.languages}</p>
+                  ) : (
+                    <p className="tech-content">{song.technologies || song.languages}</p>
+                  )}
+                </div>
+              )}
+            </div>
             {song.accomplishments && song.accomplishments.length > 0 ? (
               <div className="accomplishments-list">
                 {song.accomplishments.map((accomplishment, index) => (

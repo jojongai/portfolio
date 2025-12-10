@@ -14,6 +14,8 @@
                 "description": "Client-facing features, data ingestion, backened development",
                 "mp3Path": "/audio/every_summertime.mp3",
                 "imagePng": "/png/opener.png",
+                "technologies": "Hasura, Railway, Langfuse, Stytch, Gadget",
+                "languages": "TypeScript, React, Node.js, GraphQL, SQL",
                 "accomplishments": [
                     "Built a TypeScript/React bulk-upload system supporting unlimited store ingestion via BullMQ background jobs and Hasura GraphQL APIs. Implemented a Google Places–driven parsing pipeline to enrich CSV uploads and fully automate store onboarding.",
                     "Built a TypeScript-based activity timeline that centralizes all client interactions—including emails, shipping status updates, stage transitions, and sales-agent notes—offering a clear, end-to-end view of the prospecting and ordering proces for each store.",

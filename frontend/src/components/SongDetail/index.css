@@ -19,6 +19,8 @@
   display: flex;
   align-items: flex-end;
   gap: 24px;
+  position: relative;
+  justify-content: space-between;
 }
 
 .song-image-large {
@@ -98,15 +100,37 @@
   padding-right: 32px;
 }
 
+.lyrics-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1db954;
+}
+
 .lyrics-title {
   font-size: 28px;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 24px;
-  text-align: left;
-  border-bottom: 2px solid #1db954;
-  padding-bottom: 4px;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.song-technologies {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+}
+
+.tech-content {
+  font-size: 16px;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
 }
 
 .accomplishments-list {
@@ -148,10 +172,15 @@
   flex: 1;
 }
 
-.accomplishment-text {
+.accomplishment-content p,
+.accomplishment-text,
+.lyrics-content .accomplishment-content p,
+.lyrics-content .accomplishment-text,
+.accomplishments-list .accomplishment-content p,
+.accomplishments-list .accomplishment-text {
   font-size: 16px;
   line-height: 1.7;
-  color: #e0e0e0;
+  color: #ffffff !important;
   font-weight: 400;
   text-align: left;
   margin: 0;
@@ -217,6 +246,16 @@
   .song-header-details {
     width: 100%;
   }
+
+  .lyrics-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .song-technologies {
+    margin-left: 0;
+  }
   
   .song-title-large {
     font-size: 28px;
@@ -278,6 +317,16 @@
 
   .song-header {
     padding: 12px;
+  }
+
+  .lyrics-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .song-technologies {
+    margin-left: 0;
   }
 
   .song-image-large {

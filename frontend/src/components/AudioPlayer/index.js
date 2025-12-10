@@ -28,8 +28,16 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     // Set initial volume
     audio.volume = volume;
 
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
+    const updateTime = () => {
+      if (audio && !isNaN(audio.currentTime)) {
+        setCurrentTime(audio.currentTime);
+      }
+    };
+    const updateDuration = () => {
+      if (audio && !isNaN(audio.duration)) {
+        setDuration(audio.duration);
+      }
+    };
     const handleEnded = () => {
       if (repeatMode === 1) {
         // Repeat all - would need playlist context, for now just restart
@@ -45,14 +53,18 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('loadeddata', updateDuration); // Also listen to loadeddata
+    audio.addEventListener('durationchange', updateDuration); // And durationchange
     audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('loadeddata', updateDuration);
+      audio.removeEventListener('durationchange', updateDuration);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [repeatMode, volume]);
+  }, [repeatMode, volume, audioSrc]); // Add audioSrc as dependency
 
   // Only reload audio when audioSrc changes (new song selected)
   useEffect(() => {
@@ -61,17 +73,26 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
       audioRef.current.load();
       audioRef.current.volume = volume; // Ensure volume is set when audio loads
       setCurrentTime(0);
+      setDuration(0); // Reset duration when new song loads
       // Auto-play when new song is selected
       if (externalIsPlaying) {
-        audioRef.current.play().catch(err => {
-          console.error('[AudioPlayer] Auto-play error:', err);
-        });
-        setIsPlaying(true);
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              console.log('[AudioPlayer] Auto-play started');
+            })
+            .catch(err => {
+              console.error('[AudioPlayer] Auto-play error:', err);
+              setIsPlaying(false);
+            });
+        }
       } else {
         setIsPlaying(false);
       }
     }
-  }, [audioSrc]); // Only depend on audioSrc, not volume or externalIsPlaying
+  }, [audioSrc]); // Only depend on audioSrc - don't reload when play state changes
 
   // Update volume when it changes (without reloading audio)
   useEffect(() => {
@@ -161,7 +182,9 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     }
   }, [location.pathname, selectedSong, currentPlaylist]);
 
-  const toggleQueue = () => {
+  const toggleQueue = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (!selectedSong || !currentPlaylist) return;
     
     const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
@@ -207,7 +230,9 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
           <div className="audio-info">
             <button 
               className="audio-title-link"
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 if (selectedSong && currentPlaylist) {
                   navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
                 }
@@ -218,7 +243,9 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             {artist && (
               <button 
                 className="audio-artist-link"
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   if (selectedSong && currentPlaylist) {
                     navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
                   }
