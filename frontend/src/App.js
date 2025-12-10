@@ -13,7 +13,7 @@ import './index.css';
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 // Player Context for global state
-const PlayerContext = createContext();
+export const PlayerContext = createContext();
 
 function HomePage() {
   const [playlists, setPlaylists] = useState([]);
@@ -188,7 +188,7 @@ function App() {
       : songsWithAudio.length - 1;
     
     const { song: prevSong, index: prevSongIndex } = songsWithAudio[prevIndex];
-    navigate(`/playlist/${currentPlaylist.id}/song/${prevSong.id}`);
+    // Just play the song, don't navigate
     selectSong(prevSong, currentPlaylist, prevSongIndex);
   };
 
@@ -211,7 +211,7 @@ function App() {
       : 0;
     
     const { song: nextSong, index: nextSongIndex } = songsWithAudio[nextIndex];
-    navigate(`/playlist/${currentPlaylist.id}/song/${nextSong.id}`);
+    // Just play the song, don't navigate
     selectSong(nextSong, currentPlaylist, nextSongIndex);
   };
 

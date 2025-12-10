@@ -186,6 +186,24 @@
   background-color: rgba(255,255,255,0.1);
 }
 
+/* Selected state (grey highlight) */
+.song-row.selected {
+  background-color: rgba(255,255,255,0.05);
+}
+
+.song-row.selected:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Playing state (green highlight for title and number) */
+.song-row.playing .song-number.playing {
+  color: #1db954;
+}
+
+.song-row.playing .song-title-text.playing {
+  color: #1db954;
+}
+
 .song-number {
   display: flex;
   align-items: center;
@@ -202,6 +220,15 @@
   content: "▶";
   color: #ffffff;
   font-size: 12px;
+}
+
+/* Don't show play icon on hover for playing songs */
+.song-row.playing:hover .song-number.playing {
+  color: #1db954;
+}
+
+.song-row.playing:hover .song-number.playing::after {
+  display: none;
 }
 
 .song-image {

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
+import { PlayerContext } from '../../App';
 import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
@@ -11,9 +12,11 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api
 function PlaylistDetail({ selectSong }) {
   const { playlistId } = useParams();
   const navigate = useNavigate();
+  const { selectedSong, currentPlaylist } = useContext(PlayerContext);
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedSongId, setSelectedSongId] = useState(null);
 
   useEffect(() => {
     fetchPlaylist();
@@ -35,6 +38,27 @@ function PlaylistDetail({ selectSong }) {
 
   const formatLocation = (song) => {
     return song.location || song.duration || '';
+  };
+
+  const handleSongClick = (song, index, e) => {
+    // Single click - just select (grey highlight)
+    setSelectedSongId(song.id);
+  };
+
+  const handleSongDoubleClick = (song, index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Double click - play the song and highlight in green
+    if (song.mp3Path) {
+      selectSong(song, playlist, index);
+      // Clear selected state since song is now playing
+      setSelectedSongId(null);
+    }
+  };
+
+  // Check if song is currently playing
+  const isSongPlaying = (song) => {
+    return selectedSong && selectedSong.id === song.id && currentPlaylist && currentPlaylist.id === playlistId;
   };
 
   if (loading) {
@@ -102,26 +126,31 @@ function PlaylistDetail({ selectSong }) {
           <div className="song-artist">Details</div>
         </div>
         
-        {playlist.songs.map((song, index) => (
-          <div 
-            key={song.id} 
-            className="song-row"
-            onClick={() => navigate(`/playlist/${playlistId}/song/${song.id}`)}
-          >
-            <div className="song-number">{index + 1}</div>
-            <div className="song-image">
-              {song.imagePng ? (
-                <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
-              ) : null}
+        {playlist.songs.map((song, index) => {
+          const isPlaying = isSongPlaying(song);
+          const isSelected = selectedSongId === song.id;
+          return (
+            <div 
+              key={song.id} 
+              className={`song-row ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''}`}
+              onClick={(e) => handleSongClick(song, index, e)}
+              onDoubleClick={(e) => handleSongDoubleClick(song, index, e)}
+            >
+              <div className={`song-number ${isPlaying ? 'playing' : ''}`}>{index + 1}</div>
+              <div className="song-image">
+                {song.imagePng ? (
+                  <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
+                ) : null}
+              </div>
+              <div className="song-info">
+                <div className={`song-title-text ${isPlaying ? 'playing' : ''}`}>{song.title}</div>
+                <div className="song-description">{song.description}</div>
+              </div>
+              <div className="song-duration-text">{formatLocation(song)}</div>
+              <div className="song-artist-text">{song.artist}</div>
             </div>
-            <div className="song-info">
-              <div className="song-title-text">{song.title}</div>
-              <div className="song-description">{song.description}</div>
-            </div>
-            <div className="song-duration-text">{formatLocation(song)}</div>
-            <div className="song-artist-text">{song.artist}</div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       </div>
     </div>

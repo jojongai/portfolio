@@ -34,6 +34,16 @@
   opacity: 0.6;
 }
 
+/* Keep tooltips fully opaque even in empty state */
+.audio-player-container.empty-state .control-btn[title]:hover::before,
+.audio-player-container.empty-state .control-btn[title]:hover:not(.active)::after,
+.audio-player-container.empty-state .volume-icon-btn[title]:hover::before,
+.audio-player-container.empty-state .volume-icon-btn[title]:hover::after,
+.audio-player-container.empty-state .play-pause-btn[title]:hover::before {
+  opacity: 1 !important;
+  background-color: #282828 !important;
+}
+
 @keyframes slideUp {
   from {
     transform: translateY(100%);
@@ -201,6 +211,7 @@
   pointer-events: none;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  opacity: 1;
 }
 
 /* Tooltip arrow - only show when button is NOT active (so green dot can use ::after) */
@@ -217,6 +228,7 @@
   border-top: 5px solid #282828;
   pointer-events: none;
   z-index: 1000;
+  opacity: 1;
 }
 
 .control-btn .icon {
@@ -504,6 +516,7 @@
   pointer-events: none;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  opacity: 1;
 }
 
 .volume-icon-btn[title]:hover::after {
@@ -513,6 +526,7 @@
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 4px;
+  opacity: 1;
   width: 0;
   height: 0;
   border-left: 5px solid transparent;

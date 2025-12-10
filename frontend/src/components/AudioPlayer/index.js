@@ -1,9 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
+import { PlayerContext } from '../../App';
 import './index.css';
 
 function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, hasPrevious, hasNext, isPlaying: externalIsPlaying, onPlayPause }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { selectedSong, currentPlaylist } = useContext(PlayerContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -49,14 +54,15 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     };
   }, [repeatMode, volume]);
 
+  // Only reload audio when audioSrc changes (new song selected)
   useEffect(() => {
     console.log('[AudioPlayer] Audio source:', audioSrc);
-    if (audioRef.current) {
+    if (audioRef.current && audioSrc) {
       audioRef.current.load();
       audioRef.current.volume = volume; // Ensure volume is set when audio loads
       setCurrentTime(0);
       // Auto-play when new song is selected
-      if (audioSrc && externalIsPlaying) {
+      if (externalIsPlaying) {
         audioRef.current.play().catch(err => {
           console.error('[AudioPlayer] Auto-play error:', err);
         });
@@ -65,7 +71,14 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
         setIsPlaying(false);
       }
     }
-  }, [audioSrc, volume, externalIsPlaying]);
+  }, [audioSrc]); // Only depend on audioSrc, not volume or externalIsPlaying
+
+  // Update volume when it changes (without reloading audio)
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
 
   const togglePlayPause = () => {
     const audio = audioRef.current;
@@ -138,8 +151,28 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     setIsMicrophoneActive(!isMicrophoneActive);
   };
 
+  // Sync queue active state with current location
+  useEffect(() => {
+    if (selectedSong && currentPlaylist) {
+      const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+      setIsQueueActive(isOnSongDetail);
+    } else {
+      setIsQueueActive(false);
+    }
+  }, [location.pathname, selectedSong, currentPlaylist]);
+
   const toggleQueue = () => {
-    setIsQueueActive(!isQueueActive);
+    if (!selectedSong || !currentPlaylist) return;
+    
+    const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+    
+    if (isOnSongDetail) {
+      // If on song detail page, navigate back to playlist
+      navigate(`/playlist/${currentPlaylist.id}`);
+    } else {
+      // If on playlist page, navigate to song detail
+      navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+    }
   };
 
   const getVolumeIcon = () => {
@@ -174,14 +207,22 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
           <div className="audio-info">
             <button 
               className="audio-title-link"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => {
+                if (selectedSong && currentPlaylist) {
+                  navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+                }
+              }}
             >
               {title}
             </button>
             {artist && (
               <button 
                 className="audio-artist-link"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                onClick={() => {
+                  if (selectedSong && currentPlaylist) {
+                    navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+                  }
+                }}
               >
                 {artist}
               </button>
@@ -197,7 +238,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn shuffle-btn ${isShuffled ? 'active' : ''}`}
             onClick={toggleShuffle}
             aria-label="Shuffle"
-            title="Enable shuffle"
+            title="Not going to lie this button does nothing"
             disabled={isEmpty}
           >
             <Icon name="shuffle" fallback="🔀" alt="Shuffle" />
@@ -233,7 +274,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn repeat-btn ${repeatMode > 0 ? 'active' : ''}`}
             onClick={toggleRepeat}
             aria-label="Repeat"
-            title={repeatMode === 0 ? 'Enable repeat' : 'Disable repeat'}
+            title= 'This one also does nothing...'
             disabled={isEmpty}
           >
             <Icon 
@@ -273,7 +314,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn microphone-btn ${isMicrophoneActive ? 'active' : ''}`}
             onClick={toggleMicrophone}
             aria-label="Microphone" 
-            title="Microphone" 
+            title="Click here to see the song connection to the entry" 
             disabled={isEmpty}
           >
             <Icon name="microphone" fallback="🎤" alt="Microphone" />
@@ -282,7 +323,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn queue-btn ${isQueueActive ? 'active' : ''}`}
             onClick={toggleQueue}
             aria-label="Queue" 
-            title="Queue" 
+            title="Click here to see the details for the selected entry" 
             disabled={isEmpty}
           >
             <Icon name="queue" fallback="☰" alt="Queue" />
@@ -320,7 +361,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             disabled={isEmpty}
           />
         </div>
-        <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Fullscreen" disabled={isEmpty}>
+        <button className="control-btn fullscreen-btn" aria-label="Fullscreen" title="Does nothing..." disabled={isEmpty}>
           <Icon name="fullscreen" fallback="⛶" alt="Fullscreen" />
         </button>
       </div>
