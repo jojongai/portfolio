@@ -119,16 +119,22 @@ See `DEPLOYMENT.md` for detailed backend deployment instructions.
 ### Environment Variables
 
 **Frontend (Vercel):**
+Set in Vercel Dashboard → Settings → Environment Variables:
 ```env
-REACT_APP_API_URL=https://your-backend-url.com/api
+REACT_APP_API_URL=https://portfolio-production-a561.up.railway.app/api
 ```
 
-**Backend:**
+**Backend (Railway):**
+Set in Railway Dashboard → Variables:
 ```env
 PORT=8080
 ALLOWED_ORIGINS=https://your-app.vercel.app
 NODE_ENV=production
 ```
+
+**Important:** Never commit `.env` files to git. Set variables in platform dashboards (Vercel/Railway).
+
+See `ENVIRONMENT_VARIABLES.md` for detailed instructions.
 
 ## Development
 

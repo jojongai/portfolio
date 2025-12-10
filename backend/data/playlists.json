@@ -28,14 +28,16 @@
                 "title": "Machine Learning Engineer at MissingWealth",
                 "artist": "May 2025 - Aug 2025",
                 "location": "Toronto, ON",
-                "description": "Email Classification pipeline in GCP",
+                "description": "Email classification pipeline in GCP",
                 "mp3Path": "/audio/startupxyz-experience.mp3",
                 "imagePng": "/png/missingwealth.png",
+                "technologies": "Google Cloud Platform, Vertex AI, Gemini",
+                "languages": "Python, Pandas, Scikit-learn, NumPy",
                 "accomplishments": [
-                    "Developed 5+ production features using React and Node.js",
-                    "Participated in daily standups and sprint planning sessions",
-                    "Fixed 50+ bugs and improved application performance",
-                    "Collaborated with designers to implement pixel-perfect UI components"
+                    "Deployed a GCP ETL pipeline (Cloud Storage + Python + Vertex AI) that processed and cleaned 50k+ emails for automated triage.",
+                    "Built a Gemini-driven zero-/few-shot classifier categorizing emails into four outcomes (Record Found, No Record, More Action Required, Inconclusive) with F1 > 0.90.",
+                    "Performed confusion matrix analysis and prompt refinement to improve model robustness.",
+                    "Automated the majority of email triage workflows, reducing manual review effort and improving processing consistency."
                 ]
             },
             {
