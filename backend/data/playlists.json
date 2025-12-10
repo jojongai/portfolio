@@ -15,7 +15,7 @@
                 "mp3Path": "/audio/every_summertime.mp3",
                 "imagePng": "/png/opener.png",
                 "technologies": "Hasura, Railway, Langfuse, Stytch, Gadget",
-                "languages": "TypeScript, React, Node.js, GraphQL, SQL",
+                "languages": "TypeScript, React, Node.js, GraphQL, SQL, APIs",
                 "accomplishments": [
                     "Built a TypeScript/React bulk-upload system supporting unlimited store ingestion via BullMQ background jobs and Hasura GraphQL APIs. Implemented a Google Places–driven parsing pipeline to enrich CSV uploads and fully automate store onboarding.",
                     "Built a TypeScript-based activity timeline that centralizes all client interactions—including emails, shipping status updates, stage transitions, and sales-agent notes—offering a clear, end-to-end view of the prospecting and ordering proces for each store.",
@@ -48,11 +48,13 @@
                 "description": "Conversational data analysis, machine learning and classfication models",
                 "mp3Path": "/audio/rbc-datascientist.mp3",
                 "imagePng": "/png/rbc.png",
+                "technologies": "Liveperson, Postman, Postgres, Armada (DBaas)",
+                "languages": "Python, SQL, Pandas, BERTopic, scikit-learn",
                 "accomplishments": [
-                    "Built an ETL pipeline from a conversational API platform to Postgres DB hosted on an in house DBaaS",
-                    "Configured and deployed an application on Helios, a Docker orchestration platform",
-                    "Clustered conversational data using a BERTopic model with K-Means and HDBSCAN clustering algorithms",
-                    "Summarized each cluster and generated curated training phrases using openAI's gpt 3.5 api LLM"
+                    "Designed and deployed a production ETL workflow (Python + internal APIs + Postgres) to ingest millions of conversational utterances from RBC’s virtual assistant platform.",
+                    "Ran BERTopic models with K-Means and HDBSCAN to discover latent conversational topics behind unhandled bot queries, surfacing recurring failure patterns.",
+                    "Automated topic summarization and data augmentation using OpenAI GPT-3.5 to produce high-quality candidate intents and training examples for model retraining.",
+                    "Containerized pipelines and deployed on Helios, supporting scheduled runs and reproducible ML environments for ongoing conversation-quality monitoring."
                 ]
             },
             {
@@ -60,13 +62,16 @@
                 "title": "Data Analyst at RBC",
                 "artist": "May 2024 – Aug 2024",
                 "location": "Toronto, ON",
-                "description": "Data analytics, rporting, and optimization",
+                "description": "Data analytics, reporting, and optimization",
                 "mp3Path": "/audio/rbc-dataanalyst.mp3",
                 "imagePng": "/png/rbc.png",
+                "technologies": "Superset, SQL",
+                "languages": "Python",
                 "accomplishments": [
-                    "Automated financial and employee reporting by developing Python scripts, eliminating all manual intervention",
-                    "Optimized employee movement tracking in Superset by creating 50+ SQL views, validation queries, and charts",
-                    "Built data cleansing and preparation scripts that processed 10000+ data points, enabling real-time BI dashboards"
+                    "Automated Excel-based processes using Python, pandas, and scheduled scripts, enabling reproducible and error-free workforce tracking workflows.",
+                    "Created parameterized SQL models and Superset datasets to support self-serve BI, reducing ad-hoc SQL requests and standardizing metric definitions across teams.",
+                    "Developed data validation frameworks with cross-table checks, anomaly rules, and reconciliation logic to maintain high data integrity across 10k+ records.",
+                    "Optimized SQL queries and Superset visualizations to reduce load times and improve usability for analytics stakeholders."
                 ]
             },
             {
@@ -77,9 +82,12 @@
                 "description": "Data quality, dashboards, and automation",
                 "mp3Path": "/audio/toyota-datagovernance.mp3",
                 "imagePng": "/png/toyota.png",
+                "technologies": "AWS, Power BI, SAP/HANA",
+                "languages": "SQL, Python, PyPDF2, Pandas, APIs",
                 "accomplishments": [
-                    "Improved Python-based resume parser with Pandas, PyPDF2 and text classification. Used to hire following interns",
-                    "Developed a weather API dashboard with Power BI, Python scripts for data extraction, and SQL DB integration"
+                    "Delivered data quality and reporting insights by querying, cleansing, and joining enterprise data across multiple SQL tables for various teams.",
+                    "Enhanced an internal Python-based résumé parsing tool by optimizing text-classification logic, redesigning the weighting system, and enabling customizable keyword weights for hiring managers—resulting in more accurate and intuitive candidate scoring.",
+                    "Implemented a real-time weather analytics dashboard using Power BI, a Python ETL script, and REST API ingestion; automated extraction, transformation, and loading into a SQL database to support operational decision-making."
                 ]
             }
         ]
