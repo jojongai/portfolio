@@ -101,7 +101,7 @@
         "songs": [
             {
                 "id": "portfolio-website-song-id",
-                "title": "Portfolio Website",
+                "title": "Portfolio",
                 "artist": "React, Node.js",
                 "duration": "2 weeks",
                 "description": "A Spotify-inspired portfolio website with modern design",
@@ -109,7 +109,7 @@
             },
             {
                 "id": "task-management-song-id",
-                "title": "Task Management App",
+                "title": "Autfill Extension",
                 "artist": "Vue.js, Express",
                 "duration": "1 month",
                 "description": "Full-stack application for team collaboration and project tracking",
@@ -117,10 +117,26 @@
             },
             {
                 "id": "weather-dashboard-song-id",
-                "title": "Weather Dashboard",
+                "title": "SeekSwift",
                 "artist": "JavaScript, APIs",
                 "duration": "1 week",
                 "description": "Real-time weather data visualization with interactive charts",
+                "imagePng": "/png/weather-dashboard.png"
+            },
+            {
+                "id": "trade-watt-song-id",
+                "title": "TradeWatt",
+                "artist": "JavaScript, APIs",
+                "duration": "1 week",
+                "description": "test",
+                "imagePng": "/png/weather-dashboard.png"
+            },
+            {
+                "id": "mindful-meals-song-id",
+                "title": "MindfulMeals",
+                "artist": "JavaScript, APIs",
+                "duration": "1 week",
+                "description": "test",
                 "imagePng": "/png/weather-dashboard.png"
             }
         ]
