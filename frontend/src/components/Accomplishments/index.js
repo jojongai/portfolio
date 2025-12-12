@@ -9,7 +9,7 @@ import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
-function SongDetail({ selectSong }) {
+function Accomplishments({ selectSong }) {
   const { playlistId, songId } = useParams();
   const navigate = useNavigate();
   const { selectedSong } = useContext(PlayerContext);
@@ -24,7 +24,7 @@ function SongDetail({ selectSong }) {
 
   useEffect(() => {
     if (song) {
-      console.log('[SongDetail] Song state updated:', {
+      console.log('[Accomplishments] Song state updated:', {
         title: song.title,
         mp3Path: song.mp3Path,
         hasMp3: !!song.mp3Path
@@ -34,36 +34,36 @@ function SongDetail({ selectSong }) {
 
   const fetchPlaylistAndSong = async () => {
     try {
-      console.log('[SongDetail] Fetching playlist and song...', { playlistId, songId });
+      console.log('[Accomplishments] Fetching playlist and song...', { playlistId, songId });
       setLoading(true);
       const response = await axios.get(`${API_BASE_URL}/playlists/${playlistId}`);
-      console.log('[SongDetail] Playlist data received:', response.data);
+      console.log('[Accomplishments] Playlist data received:', response.data);
       setPlaylist(response.data);
       const foundSong = response.data.songs.find(s => s.id === songId);
-      console.log('[SongDetail] Looking for song with ID:', songId);
-      console.log('[SongDetail] Available songs:', response.data.songs.map(s => ({ id: s.id, title: s.title })));
+      console.log('[Accomplishments] Looking for song with ID:', songId);
+      console.log('[Accomplishments] Available songs:', response.data.songs.map(s => ({ id: s.id, title: s.title })));
       if (foundSong) {
-        console.log('[SongDetail] Song found:', foundSong);
-        console.log('[SongDetail] MP3 Path:', foundSong.mp3Path);
+        console.log('[Accomplishments] Song found:', foundSong);
+        console.log('[Accomplishments] MP3 Path:', foundSong.mp3Path);
         setSong(foundSong);
         // Only call selectSong if this is a different song than what's currently playing
         // This prevents pausing/restarting when navigating to the accomplishments page
         if (selectSong && (!selectedSong || selectedSong.id !== foundSong.id)) {
-          console.log('[SongDetail] Calling selectSong callback');
+          console.log('[Accomplishments] Calling selectSong callback');
           const songIndex = response.data.songs.findIndex(s => s.id === songId);
           selectSong(foundSong, response.data, songIndex);
         }
       } else {
-        console.error('[SongDetail] Song not found in playlist');
+        console.error('[Accomplishments] Song not found in playlist');
         setError('Song not found');
       }
       setError(null);
     } catch (err) {
-      console.error('[SongDetail] Error fetching song:', err);
+      console.error('[Accomplishments] Error fetching song:', err);
       setError('Failed to fetch song details. Make sure the backend server is running on port 8080.');
     } finally {
       setLoading(false);
-      console.log('[SongDetail] Loading complete');
+      console.log('[Accomplishments] Loading complete');
     }
   };
 
@@ -164,4 +164,4 @@ function SongDetail({ selectSong }) {
   );
 }
 
-export default SongDetail;
+export default Accomplishments;

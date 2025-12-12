@@ -2,9 +2,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar';
-import PlaylistDetail from './components/PlaylistDetail';
-import SongDetail from './components/SongDetail';
-import HobbiesAndInterests from './components/HobbiesAndInterests';
+import Playlist from './components/Playlist';
+import Accomplishments from './components/Accomplishments';
 import AudioPlayer from './components/AudioPlayer';
 import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
@@ -131,24 +130,19 @@ function HomePage() {
   );
 }
 
-function PlaylistDetailWithContext() {
+function PlaylistWithContext() {
   const { selectSong } = useContext(PlayerContext);
-  return <PlaylistDetail selectSong={selectSong} />;
+  return <Playlist selectSong={selectSong} />;
 }
 
-function PlaylistDetailOrHobbies() {
-  const { playlistId } = useParams();
+function PlaylistOrHobbies() {
   const { selectSong } = useContext(PlayerContext);
-  
-  if (playlistId === 'hobbies-and-interests-playlist-id') {
-    return <HobbiesAndInterests />;
-  }
-  return <PlaylistDetail selectSong={selectSong} />;
+  return <Playlist selectSong={selectSong} />;
 }
 
-function SongDetailWithContext() {
+function AccomplishmentsWithContext() {
   const { selectSong } = useContext(PlayerContext);
-  return <SongDetail selectSong={selectSong} />;
+  return <Accomplishments selectSong={selectSong} />;
 }
 
 function App() {
@@ -229,8 +223,8 @@ function App() {
       <div className="app-container">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/playlist/:playlistId" element={<PlaylistDetailOrHobbies />} />
-          <Route path="/playlist/:playlistId/song/:songId" element={<SongDetailWithContext />} />
+          <Route path="/playlist/:playlistId" element={<PlaylistOrHobbies />} />
+          <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
         </Routes>
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}

@@ -9,7 +9,7 @@ import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
-function PlaylistDetail({ selectSong }) {
+function Playlist({ selectSong }) {
   const { playlistId } = useParams();
   const navigate = useNavigate();
   const { selectedSong, currentPlaylist } = useContext(PlayerContext);
@@ -18,6 +18,9 @@ function PlaylistDetail({ selectSong }) {
   const [error, setError] = useState(null);
   const [selectedSongId, setSelectedSongId] = useState(null);
 
+  // Check if this is the hobbies playlist (only for UI labels)
+  const isHobbiesPlaylist = playlistId === 'hobbies-and-interests-playlist-id';
+
   useEffect(() => {
     fetchPlaylist();
   }, [playlistId]);
@@ -25,7 +28,8 @@ function PlaylistDetail({ selectSong }) {
   const fetchPlaylist = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/playlists/${playlistId}`);
+      const id = playlistId || 'hobbies-and-interests-playlist-id';
+      const response = await axios.get(`${API_BASE_URL}/playlists/${id}`);
       setPlaylist(response.data);
       setError(null);
     } catch (err) {
@@ -41,11 +45,13 @@ function PlaylistDetail({ selectSong }) {
   };
 
   const handleSongClick = (song, index, e) => {
+    if (!selectSong) return;
     // Single click - just select (grey highlight)
     setSelectedSongId(song.id);
   };
 
   const handleSongDoubleClick = (song, index, e) => {
+    if (!selectSong) return;
     e.preventDefault();
     e.stopPropagation();
     // Double click - play the song and highlight in green
@@ -101,12 +107,12 @@ function PlaylistDetail({ selectSong }) {
             )}
           </div>
           <div className="playlist-details">
-            <p className="playlist-type">Playlist</p>
+            <p className="playlist-type">{isHobbiesPlaylist ? 'Collection' : 'Playlist'}</p>
             <h1 className="playlist-title-large">{playlist.title}</h1>
             <p className="playlist-description-large">{playlist.description}</p>
             <div className="playlist-meta">
               <span className="playlist-author">Jojo Ngai</span>
-              <span className="playlist-song-count">{playlist.songs.length} songs</span>
+              <span className="playlist-song-count">{playlist.songs.length} {isHobbiesPlaylist ? 'items' : 'songs'}</span>
             </div>
           </div>
         </div>
@@ -122,8 +128,8 @@ function PlaylistDetail({ selectSong }) {
           <div className="song-number">#</div>
           <div className="song-image-header"></div>
           <div className="song-title">Title</div>
-          <div className="song-duration">Location</div>
-          <div className="song-artist">Details</div>
+          <div className="song-duration">{isHobbiesPlaylist ? 'Category' : 'Location'}</div>
+          <div className="song-artist">{isHobbiesPlaylist ? 'Description' : 'Details'}</div>
         </div>
         
         {playlist.songs.map((song, index) => {
@@ -131,7 +137,7 @@ function PlaylistDetail({ selectSong }) {
           const isSelected = selectedSongId === song.id;
           return (
             <div 
-              key={song.id} 
+              key={song.id || index} 
               className={`song-row ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''}`}
               onClick={(e) => handleSongClick(song, index, e)}
               onDoubleClick={(e) => handleSongDoubleClick(song, index, e)}
@@ -147,7 +153,7 @@ function PlaylistDetail({ selectSong }) {
                 <div className="song-description">{song.description}</div>
               </div>
               <div className="song-duration-text">{formatLocation(song)}</div>
-              <div className="song-artist-text">{song.artist}</div>
+              <div className="song-artist-text">{song.artist || ''}</div>
             </div>
           );
         })}
@@ -157,4 +163,4 @@ function PlaylistDetail({ selectSong }) {
   );
 }
 
-export default PlaylistDetail;
+export default Playlist;
