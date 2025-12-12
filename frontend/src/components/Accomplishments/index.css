@@ -7,7 +7,7 @@
   height: 100vh;
   color: #ffffff;
   padding-bottom: 90px;
-  transition: margin-left 0.3s ease, margin-right 0.3s ease;
+  transition: margin-left 0.3s ease, margin-right 0.3s ease, background-color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -179,45 +179,17 @@
   align-items: center;
 }
 
-.lyrics-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 40px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #1db954;
-}
 
-.lyrics-title {
-  font-size: 28px;
+.accomplishment-label {
   font-weight: 700;
-  color: #ffffff;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-.song-technologies {
-  display: flex;
-  align-items: center;
-  margin-left: 24px;
-}
-
-.tech-content {
-  font-size: 16px;
-  color: #ffffff;
-  line-height: 1.5;
-  margin: 0;
-  font-weight: 400;
 }
 
 .accomplishments-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 40px;
-  text-align: center;
+  text-align: left;
   width: 100%;
   padding: 200px 0;
   min-height: 100%;
@@ -227,16 +199,16 @@
   font-size: 24px;
   line-height: 1.6;
   color: #b3b3b3;
-  font-weight: 400;
+  font-weight: 700;
   margin: 0;
   letter-spacing: 0.5px;
-  transition: color 0.3s ease, font-weight 0.3s ease;
+  transition: color 0.3s ease;
   padding: 20px 0;
 }
 
 .accomplishment-text.center-highlight {
   color: #ffffff !important;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .no-accomplishments {
@@ -338,16 +310,6 @@
     width: 100%;
   }
 
-  .lyrics-title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .song-technologies {
-    margin-left: 0;
-  }
-  
   .song-title-large {
     font-size: 28px;
   }
@@ -371,12 +333,6 @@
 
   .lyrics-content {
     max-width: 100%;
-  }
-  
-  .lyrics-title {
-    font-size: 22px;
-    margin-bottom: 20px;
-    padding-bottom: 4px;
   }
   
   .accomplishments-list {
@@ -405,16 +361,6 @@
     padding: 12px;
   }
 
-  .lyrics-title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .song-technologies {
-    margin-left: 0;
-  }
-
   .song-image-large {
     width: 150px;
     height: 150px;
@@ -439,11 +385,6 @@
 
   .lyrics-container {
     padding: 12px;
-  }
-
-  .lyrics-title {
-    font-size: 20px;
-    margin-bottom: 16px;
   }
 
   .accomplishment-text {

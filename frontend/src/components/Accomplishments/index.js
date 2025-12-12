@@ -137,32 +137,45 @@ function Accomplishments({ selectSong }) {
     );
   }
 
+  // Get background color from song data (supports both camelCase and kebab-case)
+  const backgroundColor = song?.backgroundAccomplishment || song?.['background-accomplishment'] || null;
+
   return (
     <div className="app">
       <Sidebar />
-      <div className="song-detail">
+      <div 
+        className="song-detail"
+        style={backgroundColor ? { backgroundColor } : {}}
+      >
         <div ref={lyricsContainerRef} className="lyrics-container">
           <div className="lyrics-content">
-            <div className="lyrics-title-row">
-              <h2 className="lyrics-title">Accomplishments</h2>
-              {(song.technologies || song.languages) && (
-                <div className="song-technologies">
-                  {song.technologies && song.languages ? (
-                    <p className="tech-content">{song.technologies}, {song.languages}</p>
-                  ) : (
-                    <p className="tech-content">{song.technologies || song.languages}</p>
-                  )}
-                </div>
-              )}
-            </div>
             {song.accomplishments && song.accomplishments.length > 0 ? (
               <div className="accomplishments-list">
+                {song.technologies && (
+                  <p 
+                    ref={el => accomplishmentRefs.current[0] = el}
+                    className={`accomplishment-text accomplishment-label ${0 === centerIndex ? 'center-highlight' : ''}`}
+                  >
+                    Technologies: {song.technologies}
+                  </p>
+                )}
+                {song.languages && (
+                  <p 
+                    ref={el => accomplishmentRefs.current[song.technologies ? 1 : 0] = el}
+                    className={`accomplishment-text accomplishment-label ${(song.technologies ? 1 : 0) === centerIndex ? 'center-highlight' : ''}`}
+                  >
+                    Languages: {song.languages}
+                  </p>
+                )}
                 {song.accomplishments.map((accomplishment, index) => {
-                  const isCenter = index === centerIndex;
+                  // Calculate header offset: technologies (0 or 1) + languages (0 or 1)
+                  const headerOffset = (song.technologies ? 1 : 0) + (song.languages ? 1 : 0);
+                  const actualIndex = index + headerOffset;
+                  const isCenter = actualIndex === centerIndex;
                   return (
                     <p 
                       key={index} 
-                      ref={el => accomplishmentRefs.current[index] = el}
+                      ref={el => accomplishmentRefs.current[actualIndex] = el}
                       className={`accomplishment-text ${isCenter ? 'center-highlight' : ''}`}
                     >
                       {accomplishment}
