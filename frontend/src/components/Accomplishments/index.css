@@ -1,11 +1,83 @@
 .song-detail {
   flex: 1;
   margin-left: 240px;
+  margin-right: 240px;
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #121212 100%);
   min-height: 100vh;
+  height: 100vh;
   color: #ffffff;
   padding-bottom: 90px;
-  transition: margin-left 0.3s ease;
+  transition: margin-left 0.3s ease, margin-right 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.song-info-sidebar {
+  width: 240px;
+  background-color: #121212;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.song-info-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.song-info-image {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 24px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.song-info-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-info-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  color: #000000;
+  font-weight: 900;
+}
+
+.song-info-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.3;
+  word-wrap: break-word;
+}
+
+.song-info-description {
+  font-size: 14px;
+  color: #b3b3b3;
+  line-height: 1.6;
+  word-wrap: break-word;
 }
 
 .song-header {
@@ -89,15 +161,22 @@
 }
 
 .lyrics-container {
-  padding: 20px 32px;
+  padding: 0;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .lyrics-content {
-  max-width: 1400px;
+  max-width: 1200px;
   width: 100%;
-  padding-right: 32px;
+  padding: 80px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lyrics-title-row {
@@ -105,7 +184,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 40px;
   padding-bottom: 8px;
   border-bottom: 2px solid #1db954;
 }
@@ -136,55 +215,28 @@
 .accomplishments-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+  width: 100%;
+  padding: 200px 0;
+  min-height: 100%;
 }
 
-.accomplishment-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.2s ease;
-}
-
-.accomplishment-item:last-child {
-  border-bottom: none;
-}
-
-.accomplishment-item:hover {
-  padding-left: 8px;
-  border-left: 3px solid #1db954;
-  padding-left: 13px;
-}
-
-.accomplishment-bullet {
-  width: 8px;
-  height: 8px;
-  background-color: #1db954;
-  border-radius: 50%;
-  margin-top: 8px;
-  flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(29, 185, 84, 0.4);
-}
-
-.accomplishment-content {
-  flex: 1;
-}
-
-.accomplishment-content p,
-.accomplishment-text,
-.lyrics-content .accomplishment-content p,
-.lyrics-content .accomplishment-text,
-.accomplishments-list .accomplishment-content p,
-.accomplishments-list .accomplishment-text {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #ffffff !important;
+.accomplishment-text {
+  font-size: 24px;
+  line-height: 1.6;
+  color: #b3b3b3;
   font-weight: 400;
-  text-align: left;
   margin: 0;
-  letter-spacing: 0.2px;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+  padding: 20px 0;
+}
+
+.accomplishment-text.center-highlight {
+  color: #ffffff !important;
+  font-weight: 500;
 }
 
 .no-accomplishments {
@@ -211,19 +263,58 @@
 @media (max-width: 1200px) {
   .song-detail {
     margin-left: 200px;
+    margin-right: 200px;
+  }
+  
+  .song-info-sidebar {
+    width: 200px;
+    padding: 20px;
+  }
+  
+  .song-info-image {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .song-info-title {
+    font-size: 20px;
   }
 }
 
 @media (max-width: 992px) {
   .song-detail {
     margin-left: 160px;
+    margin-right: 160px;
+  }
+  
+  .song-info-sidebar {
+    width: 160px;
+    padding: 16px;
+  }
+  
+  .song-info-image {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .song-info-title {
+    font-size: 18px;
+  }
+  
+  .song-info-description {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 768px) {
   .song-detail {
     margin-left: 70px;
+    margin-right: 0;
     padding-bottom: 100px;
+  }
+  
+  .song-info-sidebar {
+    display: none;
   }
   
   .song-header {
@@ -289,22 +380,12 @@
   }
   
   .accomplishments-list {
-    gap: 10px;
-  }
-  
-  .accomplishment-item {
-    gap: 12px;
-    padding: 10px 0;
-  }
-  
-  .accomplishment-bullet {
-    width: 6px;
-    height: 6px;
-    margin-top: 6px;
+    gap: 30px;
+    padding: 150px 0;
   }
   
   .accomplishment-text {
-    font-size: 15px;
+    font-size: 36px;
     line-height: 1.6;
   }
 }
@@ -312,7 +393,12 @@
 @media (max-width: 480px) {
   .song-detail {
     margin-left: 60px;
+    margin-right: 0;
     padding-bottom: 110px;
+  }
+  
+  .song-info-sidebar {
+    display: none;
   }
 
   .song-header {
@@ -361,11 +447,7 @@
   }
 
   .accomplishment-text {
-    font-size: 14px;
+    font-size: 28px;
     line-height: 1.5;
-  }
-
-  .accomplishment-item {
-    padding: 8px 0;
   }
 }

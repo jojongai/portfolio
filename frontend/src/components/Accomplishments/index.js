@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
@@ -17,6 +17,9 @@ function Accomplishments({ selectSong }) {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [centerIndex, setCenterIndex] = useState(-1);
+  const accomplishmentRefs = useRef([]);
+  const lyricsContainerRef = useRef(null);
 
   useEffect(() => {
     fetchPlaylistAndSong();
@@ -31,6 +34,51 @@ function Accomplishments({ selectSong }) {
       });
     }
   }, [song]);
+
+  useEffect(() => {
+    if (!song || !song.accomplishments || song.accomplishments.length === 0) return;
+
+    const handleScroll = () => {
+      const container = lyricsContainerRef.current;
+      if (!container) return;
+      
+      const containerRect = container.getBoundingClientRect();
+      const viewportCenter = containerRect.top + containerRect.height / 2;
+      
+      let closestIndex = -1;
+      let closestDistance = Infinity;
+      
+      accomplishmentRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+        const rect = ref.getBoundingClientRect();
+        const elementCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(viewportCenter - elementCenter);
+        
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+      
+      if (closestIndex !== -1 && closestIndex !== centerIndex) {
+        setCenterIndex(closestIndex);
+      }
+    };
+
+    // Check initial position after a short delay to ensure refs are set
+    setTimeout(handleScroll, 100);
+    
+    const container = lyricsContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+    }
+    
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [song, centerIndex]);
 
   const fetchPlaylistAndSong = async () => {
     try {
@@ -93,41 +141,7 @@ function Accomplishments({ selectSong }) {
     <div className="app">
       <Sidebar />
       <div className="song-detail">
-        <div className="song-header">
-          <div className="song-header-info">
-            <div className="song-image-large">
-              {playlist.imagePng ? (
-                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="song-image-large-img" />
-              ) : (
-                playlist.imageUrl
-              )}
-            </div>
-            <div className="song-header-details">
-              <p className="song-type">Experience</p>
-              <h1 className="song-title-large">{song.title}</h1>
-              <p className="song-artist-large">{song.artist}</p>
-              <p className="song-description-header">{song.description}</p>
-            </div>
-          </div>
-        </div>
-
-        {song.mp3Path ? (
-          <div className="audio-player-section">
-            <AudioPlayer 
-              audioSrc={song.mp3Path} 
-              title={song.title}
-              artist={song.artist}
-            />
-          </div>
-        ) : (
-          <div className="audio-player-section">
-            <p style={{ color: '#b3b3b3', textAlign: 'center' }}>
-              No audio file available for this experience
-            </p>
-          </div>
-        )}
-
-        <div className="lyrics-container">
+        <div ref={lyricsContainerRef} className="lyrics-container">
           <div className="lyrics-content">
             <div className="lyrics-title-row">
               <h2 className="lyrics-title">Accomplishments</h2>
@@ -143,14 +157,18 @@ function Accomplishments({ selectSong }) {
             </div>
             {song.accomplishments && song.accomplishments.length > 0 ? (
               <div className="accomplishments-list">
-                {song.accomplishments.map((accomplishment, index) => (
-                  <div key={index} className="accomplishment-item">
-                    <div className="accomplishment-bullet"></div>
-                    <div className="accomplishment-content">
-                      <p className="accomplishment-text">{accomplishment}</p>
-                    </div>
-                  </div>
-                ))}
+                {song.accomplishments.map((accomplishment, index) => {
+                  const isCenter = index === centerIndex;
+                  return (
+                    <p 
+                      key={index} 
+                      ref={el => accomplishmentRefs.current[index] = el}
+                      className={`accomplishment-text ${isCenter ? 'center-highlight' : ''}`}
+                    >
+                      {accomplishment}
+                    </p>
+                  );
+                })}
               </div>
             ) : (
               <div className="no-accomplishments">
@@ -158,6 +176,21 @@ function Accomplishments({ selectSong }) {
               </div>
             )}
           </div>
+        </div>
+      </div>
+      <div className="song-info-sidebar">
+        <div className="song-info-content">
+          <div className="song-info-image">
+            {song.imagePng ? (
+              <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-info-image-img" />
+            ) : (
+              <div className="song-info-image-placeholder">
+                {song.title ? song.title.charAt(0).toUpperCase() : '?'}
+              </div>
+            )}
+          </div>
+          <h1 className="song-info-title">{song.title}</h1>
+          <p className="song-info-description">{song.description}</p>
         </div>
       </div>
     </div>
