@@ -103,41 +103,80 @@
                 "id": "portfolio-website-song-id",
                 "title": "Portfolio",
                 "artist": "React, Node.js",
-                "duration": "2 weeks",
-                "description": "A Spotify-inspired portfolio website with modern design",
-                "imagePng": "/png/portfolio-website.png"
+                "location": "2 weeks",
+                "description": "Spotify inspired portfolio website",
+                "mp3Path": "",
+                "imagePng": "/png/portfolio-website.png",
+                "technologies": "Railway, Vercel",
+                "languages": "React, Node.js",
+                "accomplishments": [
+                    "Built a portfolio website using React and Node.js, hosted on Railway and Vercel.",
+                    "Curated the user interface to be a spotify inspired portfolio website, with a clean and modern design.",
+                    "Implemented a audio player that allows the user to listen to the songs and playlists."
+                ]
             },
             {
                 "id": "task-management-song-id",
-                "title": "Autfill Extension",
-                "artist": "Vue.js, Express",
-                "duration": "1 month",
-                "description": "Full-stack application for team collaboration and project tracking",
-                "imagePng": "/png/task-management.png"
+                "title": "Autofill Pro",
+                "artist": "Chrome Extension",
+                "location": "1 month",
+                "description": "Chrome autofill extension for user info and shipping info",
+                "mp3Path": "",
+                "imagePng": "/png/task-management.png",
+                "technologies": "Chrome Extension APIs, Chrome Storage API",
+                "languages": "JavaScript, HTML, CSS",
+                "accomplishments": [
+                    "Built a full Chrome extension using Manifest V3 that can automatically detect and fill form fields on almost any website by checking patterns in the HTML, placeholders, and surrounding context.",
+                    "Structured the extension like a mini full-stack app, with separate modules for the UI, storage, and form-filling logic — around ~1,000 lines of JavaScript across just three main files.",
+                    "Created smart dropdown handling that tries multiple matching strategies (exact text, partial matches, fuzzy logic) and even triggers the right events so sites think the user actually selected the option.",
+                    "Designed a smooth, modern UI with tabs, gradients, keyboard shortcuts (Cmd/Ctrl + Shift + F), a right-click context menu, and clear visual cues (like green highlights) when fields are filled — all powered by secure, local-only storage."
+                ]
             },
             {
                 "id": "weather-dashboard-song-id",
                 "title": "SeekSwift",
                 "artist": "JavaScript, APIs",
-                "duration": "1 week",
+                "location": "1 week",
                 "description": "Real-time weather data visualization with interactive charts",
-                "imagePng": "/png/weather-dashboard.png"
+                "mp3Path": "",
+                "imagePng": "/png/weather-dashboard.png",
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "trade-watt-song-id",
                 "title": "TradeWatt",
-                "artist": "JavaScript, APIs",
-                "duration": "1 week",
-                "description": "test",
-                "imagePng": "/png/weather-dashboard.png"
+                "artist": "May 2025 – Aug 2025",
+                "location": "",
+                "description": "Energy market data analysis and price prediction using machine learning",
+                "mp3Path": "",
+                "imagePng": "/png/weather-dashboard.png",
+                "technologies": "MongoDB, Neural Networks, Regression, Decision Trees",
+                "languages": "Python, Scikit-learn, Pandas, Numpy",
+                "accomplishments": [
+                    "Built an automated ETL pipeline to ingest, clean, and structure real-time and historical energy market data into MongoDB, enabling consistent and scalable data access for modeling tasks.",
+                    "Developed a full machine learning workflow that handled data extraction, preprocessing, feature engineering, and model training for energy price prediction.",
+                    "Implemented and compared multiple predictive models—including neural networks, regression approaches, and decision trees—to evaluate performance and optimize model accuracy.",
+                    "Ran iterative experimentation and hyperparameter tuning, using performance metrics to refine model selection and improve forecasting quality."
+                ]
             },
             {
                 "id": "mindful-meals-song-id",
                 "title": "MindfulMeals",
-                "artist": "JavaScript, APIs",
-                "duration": "1 week",
-                "description": "test",
-                "imagePng": "/png/weather-dashboard.png"
+                "artist": "Jan 2024 – Apr 2024",
+                "location": "",
+                "description": "Full-stack recipe management app with personalized dietary filtering and recipe discovery",
+                "mp3Path": "",
+                "imagePng": "/png/weather-dashboard.png",
+                "technologies": "Firebase, MySqlWorkbench",
+                "languages": "Python, JavaScript, React, Node.js, SQL",
+                "accomplishments": [
+                    "Built a full-stack recipe management app with Firebase authentication, user profiles, and personalized dietary filtering.",
+                    "Developed a recipe discovery experience with real-time search, an API-powered recipe finder, and curated filtering for dietary needs and ingredients.",
+                    "Implemented core user features including a grocery cart, saved recipe collections, ratings/reviews, and advanced recipe filtering.",
+                    "Integrated Firebase + SQL for secure data storage, fast querying, and sync across devices."
+                ]
             }
         ]
     },
@@ -152,25 +191,37 @@
                 "id": "frontend-dev-song-id",
                 "title": "Frontend Development",
                 "artist": "React, Vue.js, TypeScript",
-                "duration": "3+ years",
+                "location": "3+ years",
                 "description": "Building responsive and interactive user interfaces",
-                "imagePng": "/png/frontend-dev.png"
+                "mp3Path": "",
+                "imagePng": "/png/frontend-dev.png",
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "backend-dev-song-id",
                 "title": "Backend Development",
                 "artist": "Node.js, Python, Java",
-                "duration": "2+ years",
+                "location": "2+ years",
                 "description": "Server-side development and API design",
-                "imagePng": "/png/backend-dev.png"
+                "mp3Path": "",
+                "imagePng": "/png/backend-dev.png",
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "database-mgmt-song-id",
                 "title": "Database Management",
                 "artist": "MongoDB, PostgreSQL",
-                "duration": "2+ years",
+                "location": "2+ years",
                 "description": "Data modeling and database optimization",
-                "imagePng": "/png/database-mgmt.png"
+                "mp3Path": "",
+                "imagePng": "/png/database-mgmt.png",
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             }
         ]
     },
@@ -185,49 +236,73 @@
                 "id": "photography-hobby",
                 "title": "Photography",
                 "artist": "Creative",
+                "location": "",
                 "description": "Capturing moments and exploring different perspectives through the lens. Love experimenting with different lighting, compositions, and editing techniques.",
+                "mp3Path": "",
                 "imagePng": "/png/photography.png",
-                "icon": "📷"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "reading-hobby",
                 "title": "Reading",
                 "artist": "Learning",
+                "location": "",
                 "description": "Avid reader of technology books, science fiction, and personal development. Always have a book in progress.",
+                "mp3Path": "",
                 "imagePng": "/png/reading.png",
-                "icon": "📚"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "hiking-hobby",
                 "title": "Hiking & Nature",
                 "artist": "Outdoor",
+                "location": "",
                 "description": "Enjoy exploring trails and spending time outdoors. Great way to disconnect and recharge while staying active.",
+                "mp3Path": "",
                 "imagePng": "/png/hiking.png",
-                "icon": "⛰️"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "cooking-hobby",
                 "title": "Cooking",
                 "artist": "Creative",
+                "location": "",
                 "description": "Love experimenting with new recipes and cuisines. Cooking is both creative and relaxing for me.",
+                "mp3Path": "",
                 "imagePng": "/png/cooking.png",
-                "icon": "👨‍🍳"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "gaming-hobby",
                 "title": "Gaming",
                 "artist": "Entertainment",
+                "location": "",
                 "description": "Enjoy strategy games and puzzle games. Appreciate good game design and storytelling in video games.",
+                "mp3Path": "",
                 "imagePng": "/png/gaming.png",
-                "icon": "🎮"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             },
             {
                 "id": "learning-tech-hobby",
                 "title": "Learning New Technologies",
                 "artist": "Professional",
+                "location": "",
                 "description": "Passionate about staying up-to-date with the latest tech trends. Love exploring new frameworks, tools, and programming languages.",
+                "mp3Path": "",
                 "imagePng": "/png/learning.png",
-                "icon": "💻"
+                "technologies": "",
+                "languages": "",
+                "accomplishments": []
             }
         ]
     }
