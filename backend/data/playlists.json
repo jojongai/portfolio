@@ -195,9 +195,14 @@
                 "description": "Building responsive and interactive user interfaces",
                 "mp3Path": "",
                 "imagePng": "/png/frontend-dev.png",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": []
+                "technologies": "React, Vue.js, Redux, Next.js, Vite, Webpack",
+                "languages": "TypeScript, JavaScript, HTML, CSS, JSX",
+                "accomplishments": [
+                    "Developed responsive web applications using React and Vue.js with TypeScript for type safety and improved code quality.",
+                    "Built reusable component libraries and implemented state management solutions using Redux and Context API.",
+                    "Optimized frontend performance through code splitting, lazy loading, and efficient rendering techniques.",
+                    "Created accessible user interfaces following WCAG guidelines and implemented responsive designs for mobile and desktop."
+                ]
             },
             {
                 "id": "backend-dev-song-id",
@@ -207,9 +212,14 @@
                 "description": "Server-side development and API design",
                 "mp3Path": "",
                 "imagePng": "/png/backend-dev.png",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": []
+                "technologies": "Express.js, Flask, Spring Boot, REST APIs, GraphQL, Docker",
+                "languages": "Node.js, Python, Java, SQL",
+                "accomplishments": [
+                    "Designed and implemented RESTful APIs and GraphQL endpoints for scalable web applications.",
+                    "Built microservices architecture using Node.js and Python with proper error handling and logging.",
+                    "Developed authentication and authorization systems using JWT tokens and OAuth 2.0.",
+                    "Optimized database queries and implemented caching strategies to improve API response times."
+                ]
             },
             {
                 "id": "database-mgmt-song-id",
@@ -219,9 +229,14 @@
                 "description": "Data modeling and database optimization",
                 "mp3Path": "",
                 "imagePng": "/png/database-mgmt.png",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": []
+                "technologies": "MongoDB, PostgreSQL, Redis, SQL Server, Mongoose, Prisma",
+                "languages": "SQL, NoSQL, Python, JavaScript",
+                "accomplishments": [
+                    "Designed and implemented database schemas for both relational and NoSQL databases, ensuring data integrity and optimal performance.",
+                    "Optimized database queries and created indexes to improve query performance and reduce response times.",
+                    "Implemented database migrations and version control for schema changes across development and production environments.",
+                    "Set up database replication and backup strategies to ensure data availability and disaster recovery."
+                ]
             }
         ]
     },
@@ -240,9 +255,14 @@
                 "description": "Capturing moments and exploring different perspectives through the lens. Love experimenting with different lighting, compositions, and editing techniques.",
                 "mp3Path": "",
                 "imagePng": "/png/photography.png",
-                "technologies": "",
+                "technologies": "Adobe Lightroom, Photoshop, Camera Equipment",
                 "languages": "",
-                "accomplishments": []
+                "accomplishments": [
+                    "Developed skills in portrait, landscape, and street photography through consistent practice and experimentation.",
+                    "Mastered manual camera settings and composition techniques including rule of thirds, leading lines, and depth of field.",
+                    "Created a portfolio of edited photographs showcasing various styles and techniques.",
+                    "Explored different photography genres and continuously learning new editing workflows and post-processing techniques."
+                ]
             },
             {
                 "id": "reading-hobby",
@@ -254,7 +274,12 @@
                 "imagePng": "/png/reading.png",
                 "technologies": "",
                 "languages": "",
-                "accomplishments": []
+                "accomplishments": [
+                    "Read extensively across multiple genres including technology, science fiction, and personal development literature.",
+                    "Maintained a consistent reading habit, completing numerous books on software engineering, system design, and career growth.",
+                    "Applied insights from technical books to improve coding practices and problem-solving approaches.",
+                    "Explored diverse perspectives through fiction and non-fiction, expanding knowledge and critical thinking skills."
+                ]
             },
             {
                 "id": "hiking-hobby",
@@ -266,7 +291,12 @@
                 "imagePng": "/png/hiking.png",
                 "technologies": "",
                 "languages": "",
-                "accomplishments": []
+                "accomplishments": [
+                    "Completed numerous hiking trails of varying difficulty levels, building endurance and appreciation for nature.",
+                    "Explored diverse landscapes including mountains, forests, and coastal trails across different regions.",
+                    "Developed navigation skills using maps, GPS, and trail markers for safe outdoor adventures.",
+                    "Found hiking to be an excellent way to maintain physical fitness while providing mental clarity and stress relief."
+                ]
             },
             {
                 "id": "cooking-hobby",
@@ -278,7 +308,12 @@
                 "imagePng": "/png/cooking.png",
                 "technologies": "",
                 "languages": "",
-                "accomplishments": []
+                "accomplishments": [
+                    "Experimented with various cuisines including Italian, Asian, and Mediterranean cooking styles.",
+                    "Mastered fundamental cooking techniques including knife skills, sautéing, roasting, and baking.",
+                    "Developed the ability to modify recipes and create original dishes based on available ingredients.",
+                    "Found cooking to be a creative outlet that combines technical skills with artistic expression and provides a relaxing break from work."
+                ]
             },
             {
                 "id": "gaming-hobby",
@@ -290,7 +325,12 @@
                 "imagePng": "/png/gaming.png",
                 "technologies": "",
                 "languages": "",
-                "accomplishments": []
+                "accomplishments": [
+                    "Played and analyzed various strategy and puzzle games, appreciating well-designed game mechanics and narratives.",
+                    "Studied game design principles and user experience patterns that translate to software development.",
+                    "Enjoyed multiplayer gaming experiences that require teamwork, communication, and strategic thinking.",
+                    "Found gaming to be an engaging way to unwind while also learning about interactive design and problem-solving."
+                ]
             },
             {
                 "id": "learning-tech-hobby",
@@ -300,9 +340,14 @@
                 "description": "Passionate about staying up-to-date with the latest tech trends. Love exploring new frameworks, tools, and programming languages.",
                 "mp3Path": "",
                 "imagePng": "/png/learning.png",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": []
+                "technologies": "Various Frameworks, Tools, Cloud Platforms",
+                "languages": "Multiple Programming Languages",
+                "accomplishments": [
+                    "Continuously learning new programming languages, frameworks, and tools to stay current with industry trends.",
+                    "Completed online courses and tutorials on emerging technologies including cloud computing, machine learning, and modern web frameworks.",
+                    "Built side projects to practice and experiment with new technologies before applying them in professional settings.",
+                    "Maintained a growth mindset and actively seek out learning opportunities through documentation, tutorials, and hands-on experimentation."
+                ]
             }
         ]
     }
