@@ -14,6 +14,7 @@
                 "description": "Client-facing features, data ingestion, backened development",
                 "mp3Path": "/audio/every_summertime.mp3",
                 "imagePng": "/png/opener.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Hasura, Railway, Langfuse, Stytch, Gadget",
                 "languages": "TypeScript, React, Node.js, GraphQL, SQL, APIs",
                 "accomplishments": [
@@ -31,6 +32,7 @@
                 "description": "Email classification pipeline in GCP",
                 "mp3Path": "/audio/startupxyz-experience.mp3",
                 "imagePng": "/png/missingwealth.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Google Cloud Platform, Vertex AI, Gemini",
                 "languages": "Python, Pandas, Scikit-learn, NumPy",
                 "accomplishments": [
@@ -48,6 +50,7 @@
                 "description": "Conversational data analysis, machine learning and classfication models",
                 "mp3Path": "/audio/rbc-datascientist.mp3",
                 "imagePng": "/png/rbc.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Liveperson, Postman, Postgres, Armada (DBaas)",
                 "languages": "Python, SQL, Pandas, BERTopic, scikit-learn",
                 "accomplishments": [
@@ -65,6 +68,7 @@
                 "description": "Data analytics, reporting, and optimization",
                 "mp3Path": "/audio/rbc-dataanalyst.mp3",
                 "imagePng": "/png/rbc.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Superset, SQL",
                 "languages": "Python",
                 "accomplishments": [
@@ -82,6 +86,7 @@
                 "description": "Data quality, dashboards, and automation",
                 "mp3Path": "/audio/toyota-datagovernance.mp3",
                 "imagePng": "/png/toyota.png",
+                "backgroundAccomplishment": "",
                 "technologies": "AWS, Power BI, SAP/HANA",
                 "languages": "SQL, Python, PyPDF2, Pandas, APIs",
                 "accomplishments": [
@@ -107,6 +112,7 @@
                 "description": "Spotify inspired portfolio website",
                 "mp3Path": "",
                 "imagePng": "/png/portfolio-website.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Railway, Vercel",
                 "languages": "React, Node.js",
                 "accomplishments": [
@@ -123,6 +129,7 @@
                 "description": "Chrome autofill extension for user info and shipping info",
                 "mp3Path": "",
                 "imagePng": "/png/task-management.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Chrome Extension APIs, Chrome Storage API",
                 "languages": "JavaScript, HTML, CSS",
                 "accomplishments": [
@@ -140,6 +147,7 @@
                 "description": "Real-time weather data visualization with interactive charts",
                 "mp3Path": "",
                 "imagePng": "/png/weather-dashboard.png",
+                "backgroundAccomplishment": "",
                 "technologies": "",
                 "languages": "",
                 "accomplishments": []
@@ -152,6 +160,7 @@
                 "description": "Energy market data analysis and price prediction using machine learning",
                 "mp3Path": "",
                 "imagePng": "/png/weather-dashboard.png",
+                "backgroundAccomplishment": "",
                 "technologies": "MongoDB, Neural Networks, Regression, Decision Trees",
                 "languages": "Python, Scikit-learn, Pandas, Numpy",
                 "accomplishments": [
@@ -169,6 +178,7 @@
                 "description": "Full-stack recipe management app with personalized dietary filtering and recipe discovery",
                 "mp3Path": "",
                 "imagePng": "/png/weather-dashboard.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Firebase, MySqlWorkbench",
                 "languages": "Python, JavaScript, React, Node.js, SQL",
                 "accomplishments": [
@@ -195,6 +205,7 @@
                 "description": "Building responsive and interactive user interfaces",
                 "mp3Path": "",
                 "imagePng": "/png/frontend-dev.png",
+                "backgroundAccomplishment": "",
                 "technologies": "React, Vue.js, Redux, Next.js, Vite, Webpack",
                 "languages": "TypeScript, JavaScript, HTML, CSS, JSX",
                 "accomplishments": [
@@ -212,6 +223,7 @@
                 "description": "Server-side development and API design",
                 "mp3Path": "",
                 "imagePng": "/png/backend-dev.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Express.js, Flask, Spring Boot, REST APIs, GraphQL, Docker",
                 "languages": "Node.js, Python, Java, SQL",
                 "accomplishments": [
@@ -229,6 +241,7 @@
                 "description": "Data modeling and database optimization",
                 "mp3Path": "",
                 "imagePng": "/png/database-mgmt.png",
+                "backgroundAccomplishment": "",
                 "technologies": "MongoDB, PostgreSQL, Redis, SQL Server, Mongoose, Prisma",
                 "languages": "SQL, NoSQL, Python, JavaScript",
                 "accomplishments": [
@@ -255,6 +268,7 @@
                 "description": "Capturing moments and exploring different perspectives through the lens. Love experimenting with different lighting, compositions, and editing techniques.",
                 "mp3Path": "",
                 "imagePng": "/png/photography.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Adobe Lightroom, Photoshop, Camera Equipment",
                 "languages": "",
                 "accomplishments": [
@@ -272,6 +286,7 @@
                 "description": "Avid reader of technology books, science fiction, and personal development. Always have a book in progress.",
                 "mp3Path": "",
                 "imagePng": "/png/reading.png",
+                "backgroundAccomplishment": "",
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
@@ -289,6 +304,7 @@
                 "description": "Enjoy exploring trails and spending time outdoors. Great way to disconnect and recharge while staying active.",
                 "mp3Path": "",
                 "imagePng": "/png/hiking.png",
+                "backgroundAccomplishment": "",
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
@@ -306,6 +322,7 @@
                 "description": "Love experimenting with new recipes and cuisines. Cooking is both creative and relaxing for me.",
                 "mp3Path": "",
                 "imagePng": "/png/cooking.png",
+                "backgroundAccomplishment": "",
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
@@ -323,6 +340,7 @@
                 "description": "Enjoy strategy games and puzzle games. Appreciate good game design and storytelling in video games.",
                 "mp3Path": "",
                 "imagePng": "/png/gaming.png",
+                "backgroundAccomplishment": "",
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
@@ -340,6 +358,7 @@
                 "description": "Passionate about staying up-to-date with the latest tech trends. Love exploring new frameworks, tools, and programming languages.",
                 "mp3Path": "",
                 "imagePng": "/png/learning.png",
+                "backgroundAccomplishment": "",
                 "technologies": "Various Frameworks, Tools, Cloud Platforms",
                 "languages": "Multiple Programming Languages",
                 "accomplishments": [

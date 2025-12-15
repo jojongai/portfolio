@@ -54,12 +54,10 @@ function Playlist({ selectSong }) {
     if (!selectSong) return;
     e.preventDefault();
     e.stopPropagation();
-    // Double click - play the song and highlight in green
-    if (song.mp3Path) {
-      selectSong(song, playlist, index);
-      // Clear selected state since song is now playing
-      setSelectedSongId(null);
-    }
+    // Double click - select the song and highlight in green (works even without mp3Path)
+    selectSong(song, playlist, index);
+    // Clear selected state since song is now playing/selected
+    setSelectedSongId(null);
   };
 
   // Check if song is currently playing
