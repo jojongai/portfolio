@@ -9,9 +9,43 @@
   align-items: center;
   justify-content: center;
   padding: 32px;
-  padding-top: 80px;
   text-align: center;
   position: relative;
+}
+
+.home-button {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.home-button:hover {
+  color: #1db954;
+  transform: scale(1.1);
+}
+
+.home-button .icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-button .icon svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
 }
 
 .song-relationship-content {

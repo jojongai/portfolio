@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
@@ -115,13 +116,14 @@ function SongRelationship() {
 
   return (
     <div className="song-relationship" style={backgroundStyle}>
-      <div className="top-bar top-bar-full-width">
-        {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
-        {!isHomePage && <div></div>}
-        <div className="profile-picture">
-          <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
-        </div>
-      </div>
+      <button 
+        className="home-button"
+        onClick={() => navigate('/')}
+        aria-label="Home"
+        title="Go to home page"
+      >
+        <Icon name="home" fallback="🏠" alt="Home" />
+      </button>
       <div className="song-relationship-content">
           <div className="song-cover-container">
             {song.songCover ? (

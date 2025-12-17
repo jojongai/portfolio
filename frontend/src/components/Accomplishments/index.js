@@ -15,6 +15,7 @@ function Accomplishments({ selectSong }) {
   const location = useLocation();
   const { selectedSong } = useContext(PlayerContext);
   const isHomePage = location.pathname === '/';
+  const isWorkExperiencePlaylist = playlistId === 'work-experience-playlist-id';
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -168,13 +169,6 @@ function Accomplishments({ selectSong }) {
     <div className="app">
       <Sidebar />
       <div className="main-content accomplishments-page">
-        <div className="top-bar top-bar-full-width">
-          {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
-          {!isHomePage && <div></div>}
-          <div className="profile-picture">
-            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
-          </div>
-        </div>
         <div 
           className="song-detail"
           style={backgroundStyle}
@@ -227,17 +221,25 @@ function Accomplishments({ selectSong }) {
         <div className="song-info-content">
           <div className="song-info-image">
             {song.imagePng ? (
-              <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-info-image-img" />
+              <img 
+                src={getAssetUrl(song.imagePng)} 
+                alt={isWorkExperiencePlaylist ? (song.role || song.title) : (song.name || song.title)} 
+                className="song-info-image-img" 
+              />
             ) : (
               <div className="song-info-image-placeholder">
-                {song.title ? song.title.charAt(0).toUpperCase() : '?'}
+                {isWorkExperiencePlaylist 
+                  ? (song.role || song.title || '?').charAt(0).toUpperCase()
+                  : (song.name || song.title || '?').charAt(0).toUpperCase()}
               </div>
             )}
           </div>
-          <h1 className="song-info-title">{song.title}</h1>
+          <h1 className="song-info-title">
+            {isWorkExperiencePlaylist ? (song.role || song.title) : (song.name || song.title)}
+          </h1>
           <p className="song-info-description">{song.description}</p>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );

@@ -230,8 +230,16 @@ function App() {
           </Routes>
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
-          title={selectedSong ? selectedSong.title : null}
-          artist={selectedSong ? selectedSong.artist : null}
+          title={selectedSong ? (
+            currentPlaylist?.id === 'work-experience-playlist-id' 
+              ? (selectedSong.role || selectedSong.title)
+              : (selectedSong.name || selectedSong.title)
+          ) : null}
+          artist={selectedSong ? (
+            currentPlaylist?.id === 'work-experience-playlist-id'
+              ? (selectedSong.duration || selectedSong.artist)
+              : (selectedSong.category || selectedSong.artist)
+          ) : null}
           imagePng={selectedSong ? selectedSong.imagePng : null}
           onPrevious={handlePrevious}
           onNext={handleNext}
