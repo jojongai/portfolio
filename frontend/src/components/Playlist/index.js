@@ -21,6 +21,7 @@ function Playlist({ selectSong }) {
   // Check if this is the hobbies playlist (only for UI labels)
   const isHobbiesPlaylist = playlistId === 'hobbies-and-interests-playlist-id';
   const isPersonalProjectsPlaylist = playlistId === 'personal-projects-playlist-id';
+  const isWorkExperiencePlaylist = playlistId === 'work-experience-playlist-id';
 
   useEffect(() => {
     fetchPlaylist();
@@ -148,11 +149,19 @@ function Playlist({ selectSong }) {
                 ) : null}
               </div>
               <div className="song-info">
-                <div className={`song-title-text ${isPlaying ? 'playing' : ''}`}>{song.title}</div>
+                <div className={`song-title-text ${isPlaying ? 'playing' : ''}`}>
+                  {isWorkExperiencePlaylist ? (song.role || song.title) : (song.name || song.title)}
+                </div>
                 <div className="song-description">{song.description}</div>
               </div>
               <div className="song-duration-text">{formatLocation(song)}</div>
-              <div className="song-artist-text">{song.artist || ''}</div>
+              <div className="song-artist-text">
+                {isWorkExperiencePlaylist 
+                  ? (song.duration || '') 
+                  : isPersonalProjectsPlaylist 
+                    ? (song.category || '') 
+                    : (song.category || song.artist || '')}
+              </div>
             </div>
           );
         })}

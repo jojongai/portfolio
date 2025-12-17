@@ -69,9 +69,9 @@ function SongRelationship() {
       <div className="song-relationship">
         <div className="song-relationship-content">
           <div className="song-cover-container">
-            {song.songCoverImage ? (
+            {song.songCover ? (
               <img 
-                src={getAssetUrl(song.songCoverImage)} 
+                src={getAssetUrl(song.songCover)} 
                 alt={song.title} 
                 className="song-cover-image" 
               />
@@ -79,7 +79,7 @@ function SongRelationship() {
               <div className="song-cover-placeholder">No Image</div>
             )}
           </div>
-          <div className="song-artist-name">{song.songArtist || 'Unknown Artist'}</div>
+          <div className="song-artist-name">{song.artist || 'Unknown Artist'}</div>
           {song.songRelationship && (
             <div className="song-relationship-description">{song.songRelationship}</div>
           )}
