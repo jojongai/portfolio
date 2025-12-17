@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Sidebar from '../Sidebar';
 import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
@@ -16,10 +15,40 @@ function SongRelationship() {
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {
     fetchPlaylistAndSong();
   }, [playlistId, songId]);
+
+  // Typewriter effect for song relationship text
+  useEffect(() => {
+    if (!song || !song.songRelationship) {
+      setDisplayedText('');
+      setIsTyping(false);
+      return;
+    }
+
+    setIsTyping(true);
+    setDisplayedText('');
+    const fullText = song.songRelationship;
+    let currentIndex = 0;
+
+    const typingInterval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setDisplayedText(fullText.substring(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 30); // Adjust speed here (milliseconds per character)
+
+    return () => {
+      clearInterval(typingInterval);
+    };
+  }, [song]);
 
   const fetchPlaylistAndSong = async () => {
     try {
@@ -43,30 +72,22 @@ function SongRelationship() {
 
   if (loading) {
     return (
-      <div className="app">
-        <Sidebar />
-        <div className="song-relationship">
-          <div className="loading">Loading song relationship...</div>
-        </div>
+      <div className="song-relationship">
+        <div className="loading">Loading song relationship...</div>
       </div>
     );
   }
 
   if (error || !song || !playlist) {
     return (
-      <div className="app">
-        <Sidebar />
-        <div className="song-relationship">
-          <div className="error">{error || 'Song not found'}</div>
-        </div>
+      <div className="song-relationship">
+        <div className="error">{error || 'Song not found'}</div>
       </div>
     );
   }
 
   return (
-    <div className="app">
-      <Sidebar />
-      <div className="song-relationship">
+    <div className="song-relationship">
         <div className="song-relationship-content">
           <div className="song-cover-container">
             {song.songCover ? (
@@ -81,10 +102,12 @@ function SongRelationship() {
           </div>
           <div className="song-artist-name">{song.artist || 'Unknown Artist'}</div>
           {song.songRelationship && (
-            <div className="song-relationship-description">{song.songRelationship}</div>
+            <div className="song-relationship-description">
+              {displayedText}
+              {isTyping && <span className="typing-cursor">|</span>}
+            </div>
           )}
         </div>
-      </div>
     </div>
   );
 }
