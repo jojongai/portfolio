@@ -1,6 +1,6 @@
 .playlist-detail {
   flex: 1;
-  margin-left: 240px;
+  margin-left: 0;
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #121212 100%);
   min-height: 100vh;
   color: #ffffff;
@@ -308,19 +308,19 @@
 
 @media (max-width: 1200px) {
   .playlist-detail {
-    margin-left: 200px;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 992px) {
   .playlist-detail {
-    margin-left: 160px;
+    margin-left: 0;
   }
 }
 
 @media (max-width: 768px) {
   .playlist-detail {
-    margin-left: 70px;
+    margin-left: 0;
   }
   
   .playlist-header {
@@ -413,7 +413,7 @@
 
 @media (max-width: 480px) {
   .playlist-detail {
-    margin-left: 60px;
+    margin-left: 0;
   }
 
   .playlist-header {

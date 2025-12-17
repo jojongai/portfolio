@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import Icon from '../Icon';
@@ -12,7 +12,9 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api
 function Playlist({ selectSong }) {
   const { playlistId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { selectedSong, currentPlaylist } = useContext(PlayerContext);
+  const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -96,7 +98,15 @@ function Playlist({ selectSong }) {
   return (
     <div className="app">
       <Sidebar />
-      <div className="playlist-detail">
+      <div className="main-content">
+        <div className="top-bar">
+          {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
+          {!isHomePage && <div></div>}
+          <div className="profile-picture">
+            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
+          </div>
+        </div>
+        <div className="playlist-detail">
       <div className="playlist-header">
         <div className="playlist-info">
           <div className="playlist-image-large">
@@ -166,6 +176,7 @@ function Playlist({ selectSong }) {
           );
         })}
       </div>
+        </div>
       </div>
     </div>
   );

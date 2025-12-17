@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
@@ -10,7 +10,9 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api
 function SongRelationship() {
   const { playlistId, songId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { selectedSong } = useContext(PlayerContext);
+  const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -88,7 +90,14 @@ function SongRelationship() {
 
   return (
     <div className="song-relationship">
-        <div className="song-relationship-content">
+      <div className="top-bar top-bar-full-width">
+        {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
+        {!isHomePage && <div></div>}
+        <div className="profile-picture">
+          <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
+        </div>
+      </div>
+      <div className="song-relationship-content">
           <div className="song-cover-container">
             {song.songCover ? (
               <img 

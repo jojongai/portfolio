@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import AudioPlayer from '../AudioPlayer';
@@ -12,7 +12,9 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api
 function Accomplishments({ selectSong }) {
   const { playlistId, songId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { selectedSong } = useContext(PlayerContext);
+  const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -143,10 +145,18 @@ function Accomplishments({ selectSong }) {
   return (
     <div className="app">
       <Sidebar />
-      <div 
-        className="song-detail"
-        style={backgroundColor ? { backgroundColor } : {}}
-      >
+      <div className="main-content accomplishments-page">
+        <div className="top-bar top-bar-full-width">
+          {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
+          {!isHomePage && <div></div>}
+          <div className="profile-picture">
+            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
+          </div>
+        </div>
+        <div 
+          className="song-detail"
+          style={backgroundColor ? { backgroundColor } : {}}
+        >
         <div ref={lyricsContainerRef} className="lyrics-container">
           <div className="lyrics-content">
             {song.accomplishments && song.accomplishments.length > 0 ? (
@@ -205,6 +215,7 @@ function Accomplishments({ selectSong }) {
           <h1 className="song-info-title">{song.title}</h1>
           <p className="song-info-description">{song.description}</p>
         </div>
+      </div>
       </div>
     </div>
   );

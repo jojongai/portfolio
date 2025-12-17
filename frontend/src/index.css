@@ -148,6 +148,14 @@ code {
   z-index: 100;
 }
 
+.top-bar-full-width {
+  margin-left: 0 !important;
+  width: 100% !important;
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
 .welcome-text {
   font-size: 28px;
   font-weight: 700;
