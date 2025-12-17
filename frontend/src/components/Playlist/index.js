@@ -20,6 +20,7 @@ function Playlist({ selectSong }) {
 
   // Check if this is the hobbies playlist (only for UI labels)
   const isHobbiesPlaylist = playlistId === 'hobbies-and-interests-playlist-id';
+  const isPersonalProjectsPlaylist = playlistId === 'personal-projects-playlist-id';
 
   useEffect(() => {
     fetchPlaylist();
@@ -126,7 +127,7 @@ function Playlist({ selectSong }) {
           <div className="song-number">#</div>
           <div className="song-image-header"></div>
           <div className="song-title">Title</div>
-          <div className="song-duration">{isHobbiesPlaylist ? 'Category' : 'Location'}</div>
+          <div className="song-duration">{isHobbiesPlaylist ? 'Category' : isPersonalProjectsPlaylist ? 'Duration' : 'Location'}</div>
           <div className="song-artist">{isHobbiesPlaylist ? 'Description' : 'Details'}</div>
         </div>
         

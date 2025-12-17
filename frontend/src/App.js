@@ -4,6 +4,7 @@ import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import Playlist from './components/Playlist';
 import Accomplishments from './components/Accomplishments';
+import SongRelationship from './components/SongRelationship';
 import AudioPlayer from './components/AudioPlayer';
 import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
@@ -225,6 +226,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/playlist/:playlistId" element={<PlaylistOrHobbies />} />
           <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
+          <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
         </Routes>
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}

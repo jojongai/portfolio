@@ -168,26 +168,34 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     setIsLiked(!isLiked);
   };
 
-  const toggleMicrophone = () => {
-    setIsMicrophoneActive(!isMicrophoneActive);
-  };
+  // Sync microphone active state with current location
+  useEffect(() => {
+    if (selectedSong && currentPlaylist) {
+      const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`) && 
+                             !location.pathname.includes('/relationship');
+      setIsMicrophoneActive(isOnSongDetail);
+    } else {
+      setIsMicrophoneActive(false);
+    }
+  }, [location.pathname, selectedSong, currentPlaylist]);
 
   // Sync queue active state with current location
   useEffect(() => {
     if (selectedSong && currentPlaylist) {
-      const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
-      setIsQueueActive(isOnSongDetail);
+      const isOnSongRelationship = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}/relationship`);
+      setIsQueueActive(isOnSongRelationship);
     } else {
       setIsQueueActive(false);
     }
   }, [location.pathname, selectedSong, currentPlaylist]);
 
-  const toggleQueue = (e) => {
+  const toggleMicrophone = (e) => {
     e.preventDefault();
     e.stopPropagation();
     if (!selectedSong || !currentPlaylist) return;
     
-    const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+    const isOnSongDetail = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`) &&
+                           !location.pathname.includes('/relationship');
     
     if (isOnSongDetail) {
       // If on song detail page, navigate back to playlist
@@ -195,6 +203,22 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
     } else {
       // If on playlist page, navigate to song detail
       navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}`);
+    }
+  };
+
+  const toggleQueue = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!selectedSong || !currentPlaylist) return;
+    
+    const isOnSongRelationship = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}/relationship`);
+    
+    if (isOnSongRelationship) {
+      // If on song relationship page, navigate back to playlist
+      navigate(`/playlist/${currentPlaylist.id}`);
+    } else {
+      // If on playlist page, navigate to song relationship
+      navigate(`/playlist/${currentPlaylist.id}/song/${selectedSong.id}/relationship`);
     }
   };
 
@@ -341,16 +365,16 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn microphone-btn ${isMicrophoneActive ? 'active' : ''}`}
             onClick={toggleMicrophone}
             aria-label="Microphone" 
-            title="Click here to see the song connection to the entry" 
+            title="Click here to see the details for the selected entry" 
             disabled={isEmpty}
           >
             <Icon name="microphone" fallback="🎤" alt="Microphone" />
           </button>
-          <button 
+          <button
             className={`control-btn queue-btn ${isQueueActive ? 'active' : ''}`}
             onClick={toggleQueue}
             aria-label="Queue" 
-            title="Click here to see the details for the selected entry" 
+            title="Click here to see why this song was attached to this experience" 
             disabled={isEmpty}
           >
             <Icon name="queue" fallback="☰" alt="Queue" />

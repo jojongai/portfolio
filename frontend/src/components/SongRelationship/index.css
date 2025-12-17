@@ -1,0 +1,99 @@
+.song-relationship {
+  margin-left: 240px;
+  min-height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+}
+
+.song-relationship-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.song-cover-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.song-cover-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.song-cover-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #282828;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3b3b3;
+  font-size: 16px;
+}
+
+.song-artist-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.song-relationship-description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #b3b3b3;
+  text-align: center;
+  max-width: 500px;
+}
+
+.song-relationship .loading,
+.song-relationship .error {
+  text-align: center;
+  padding: 40px;
+  color: #b3b3b3;
+}
+
+.song-relationship .error {
+  color: #e22134;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .song-relationship {
+    margin-left: 0;
+    padding: 24px;
+  }
+
+  .song-relationship-content {
+    padding: 20px 0;
+  }
+
+  .song-cover-container {
+    max-width: 300px;
+  }
+
+  .song-artist-name {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .song-relationship-description {
+    font-size: 16px;
+  }
+}
+
