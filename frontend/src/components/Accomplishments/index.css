@@ -1,11 +1,14 @@
 .accomplishments-page {
-  margin-left: 0 !important;
+  margin-left: 240px !important;
+  width: calc(100% - 240px) !important;
 }
 
 .accomplishments-page .song-detail {
   margin-left: 0;
   margin-right: 0;
   padding-top: 80px;
+  width: 100%;
+  padding-right: 240px;
 }
 
 .song-detail {

@@ -137,8 +137,7 @@ code {
 }
 
 .top-bar {
-  background-color: rgba(0,0,0,0.3);
-  backdrop-filter: blur(20px);
+  background-color: #181818;
   padding: 16px 32px;
   display: flex;
   align-items: center;

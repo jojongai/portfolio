@@ -251,7 +251,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
               )}
             </div>
           </div>
-          <div className="audio-info">
+        <div className="audio-info">
             <button 
               className="audio-title-link"
               onClick={(e) => {
@@ -303,10 +303,10 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
           >
             <Icon name="previous" fallback="⏮" alt="Previous" />
           </button>
-          <button 
-            className="play-pause-btn"
-            onClick={togglePlayPause}
-            aria-label={isPlaying ? 'Pause' : 'Play'}
+        <button 
+          className="play-pause-btn"
+          onClick={togglePlayPause}
+          aria-label={isPlaying ? 'Pause' : 'Play'}
             title={isPlaying ? 'Pause' : 'Play'}
             disabled={isEmpty}
           >
@@ -357,7 +357,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
           </div>
           <span className="time-display">{formatTime(duration)}</span>
         </div>
-      </div>
+        </div>
 
       <div className="audio-player-right">
         <div className="audio-player-right-actions">
@@ -418,18 +418,18 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
       </div>
 
       {audioSrc && (
-        <audio
-          ref={audioRef}
-          src={audioSrc}
-          preload="metadata"
-          onError={(e) => {
-            console.error('[AudioPlayer] Audio load error:', e);
-            console.error('[AudioPlayer] Failed to load:', audioSrc);
-          }}
-          onLoadedData={() => {
-            console.log('[AudioPlayer] Audio loaded successfully');
-          }}
-        />
+      <audio
+        ref={audioRef}
+        src={audioSrc}
+        preload="metadata"
+        onError={(e) => {
+          console.error('[AudioPlayer] Audio load error:', e);
+          console.error('[AudioPlayer] Failed to load:', audioSrc);
+        }}
+        onLoadedData={() => {
+          console.log('[AudioPlayer] Audio loaded successfully');
+        }}
+      />
       )}
     </div>
   );

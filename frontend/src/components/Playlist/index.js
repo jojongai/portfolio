@@ -59,9 +59,9 @@ function Playlist({ selectSong }) {
     e.preventDefault();
     e.stopPropagation();
     // Double click - select the song and highlight in green (works even without mp3Path)
-    selectSong(song, playlist, index);
+      selectSong(song, playlist, index);
     // Clear selected state since song is now playing/selected
-    setSelectedSongId(null);
+      setSelectedSongId(null);
   };
 
   // Check if song is currently playing
@@ -106,7 +106,7 @@ function Playlist({ selectSong }) {
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
         </div>
-        <div className="playlist-detail">
+      <div className="playlist-detail">
       <div className="playlist-header">
         <div className="playlist-info">
           <div className="playlist-image-large">
@@ -176,7 +176,7 @@ function Playlist({ selectSong }) {
           );
         })}
       </div>
-        </div>
+      </div>
       </div>
     </div>
   );

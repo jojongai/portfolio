@@ -88,8 +88,33 @@ function SongRelationship() {
     );
   }
 
+  // Get background color/gradient from song data
+  const backgroundAccomplishment = song?.backgroundAccomplishment || song?.['background-accomplishment'] || null;
+  
+  // Parse gradient colors if provided (array format: ["color1", "color2"])
+  let backgroundStyle = {};
+  if (Array.isArray(backgroundAccomplishment) && backgroundAccomplishment.length > 0) {
+    if (backgroundAccomplishment.length === 2) {
+      // Two colors = gradient
+      backgroundStyle.background = `linear-gradient(to bottom, ${backgroundAccomplishment[0]}, ${backgroundAccomplishment[1]})`;
+    } else if (backgroundAccomplishment.length === 1) {
+      // Single color = solid background
+      backgroundStyle.backgroundColor = backgroundAccomplishment[0];
+    }
+  } else if (backgroundAccomplishment && typeof backgroundAccomplishment === 'string') {
+    // Backward compatibility: handle string format (legacy)
+    if (backgroundAccomplishment.includes(',')) {
+      const colors = backgroundAccomplishment.split(',').map(c => c.trim());
+      if (colors.length === 2) {
+        backgroundStyle.background = `linear-gradient(to bottom, ${colors[0]}, ${colors[1]})`;
+      }
+    } else {
+      backgroundStyle.backgroundColor = backgroundAccomplishment;
+    }
+  }
+
   return (
-    <div className="song-relationship">
+    <div className="song-relationship" style={backgroundStyle}>
       <div className="top-bar top-bar-full-width">
         {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
         {!isHomePage && <div></div>}

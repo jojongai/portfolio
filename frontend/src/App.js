@@ -221,13 +221,13 @@ function App() {
 
   return (
     <PlayerContext.Provider value={playerContextValue}>
-      <div className="app-container">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
           <Route path="/playlist/:playlistId" element={<PlaylistOrHobbies />} />
           <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
           <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
-        </Routes>
+          </Routes>
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
           title={selectedSong ? selectedSong.title : null}
@@ -238,9 +238,9 @@ function App() {
           hasPrevious={true}
           hasNext={true}
           isPlaying={isPlaying}
-          onPlayPause={handlePlayPause}
-        />
-      </div>
+            onPlayPause={handlePlayPause}
+          />
+        </div>
     </PlayerContext.Provider>
   );
 }
