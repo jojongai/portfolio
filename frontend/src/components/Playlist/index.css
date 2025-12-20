@@ -162,6 +162,28 @@
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
+  align-items: center;
+}
+
+.songs-header .song-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.songs-header .song-title {
+  display: flex;
+  align-items: center;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .songs-header .song-duration,
@@ -170,6 +192,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .song-row {
