@@ -136,13 +136,15 @@ function SongRelationship() {
               <div className="song-cover-placeholder">No Image</div>
             )}
           </div>
+          <div className="song-title">{song.title || 'Unknown Title'}</div>
           <div className="song-artist-name">{song.artist || 'Unknown Artist'}</div>
-          {song.songRelationship && (
+          {/* Temporarily hidden - song relationship description */}
+          {/* {song.songRelationship && (
             <div className="song-relationship-description">
               {displayedText}
               {isTyping && <span className="typing-cursor">|</span>}
             </div>
-          )}
+          )} */}
         </div>
     </div>
   );

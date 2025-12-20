@@ -86,7 +86,7 @@ function HomePage() {
               Hi, I'm Jojo — a 5th-year Management Engineering student at Waterloo with interests in software, data, machine learning, and AI.
             </h2>
             <p className="intro-subline">
-              This site highlights my experiences and skills with each entry tied to a song.
+              This site is a little about myself, my experiences, and from the theme of the site, my music taste.
             </p>
             <div className="social-links">
               <a href="https://github.com/jojongai" target="_blank" rel="noopener noreferrer" className="social-link">

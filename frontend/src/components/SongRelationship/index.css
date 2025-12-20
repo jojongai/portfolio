@@ -87,10 +87,20 @@
   font-size: 16px;
 }
 
-.song-artist-name {
-  font-size: 24px;
-  font-weight: 600;
+.song-title {
+  font-size: 32px;
+  font-weight: 700;
   color: #ffffff;
+  margin: 0 auto 8px;
+  text-align: center;
+  width: 100%;
+  line-height: 1.3;
+}
+
+.song-artist-name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #b3b3b3;
   margin: 0 auto 32px;
   text-align: center;
   width: 100%;
@@ -150,8 +160,13 @@
     max-width: 300px;
   }
 
+  .song-title {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
   .song-artist-name {
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 24px;
   }
 
