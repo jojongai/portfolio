@@ -12,7 +12,7 @@
                 "duration": "Sept 2025 - Dec 2025",
                 "location": "Toronto, ON",
                 "description": "Client-facing features, data ingestion, backened development",
-                "mp3Path": "/audio/every_summertime.mp3",
+                "mp3Path": "/audio/before.mp3",
                 "imagePng": "/png/work-experience/opener.png",
                 "backgroundAccomplishment": [
                     "#8A342E",
@@ -37,7 +37,7 @@
                 "duration": "May 2025 - Aug 2025",
                 "location": "Toronto, ON",
                 "description": "Email classification pipeline in GCP",
-                "mp3Path": "/audio/startupxyz-experience.mp3",
+                "mp3Path": "/audio/say.mp3",
                 "imagePng": "/png/work-experience/missingwealth.png",
                 "backgroundAccomplishment": [
                     "#595242",
@@ -62,7 +62,7 @@
                 "duration": "Jan 2025 - Apr 2025",
                 "location": "Toronto, ON",
                 "description": "Conversational data analysis, machine learning and classfication models",
-                "mp3Path": "/audio/rbc-datascientist.mp3",
+                "mp3Path": "/audio/chicken-tendies.mp3",
                 "imagePng": "/png/work-experience/rbc.png",
                 "backgroundAccomplishment": [
                     "#3E5564",
@@ -87,7 +87,7 @@
                 "duration": "May 2024 – Aug 2024",
                 "location": "Toronto, ON",
                 "description": "Data analytics, reporting, and optimization",
-                "mp3Path": "/audio/rbc-dataanalyst.mp3",
+                "mp3Path": "/audio/you-were-good-to-me.mp3",
                 "imagePng": "/png/work-experience/rbc.png",
                 "backgroundAccomplishment": [
                     "#1C5681",
@@ -112,7 +112,7 @@
                 "duration": "Sep 2023 – Dec 2023",
                 "location": "Toronto, ON",
                 "description": "Data quality, dashboards, and automation",
-                "mp3Path": "/audio/toyota-datagovernance.mp3",
+                "mp3Path": "/audio/logical.mp3",
                 "imagePng": "/png/work-experience/toyota.png",
                 "backgroundAccomplishment": [
                     "#18183F",
@@ -145,7 +145,7 @@
                 "category": "React, Node.js",
                 "location": "December 2025",
                 "description": "Spotify inspired portfolio website",
-                "mp3Path": "/audio/startupxyz-experience.mp3",
+                "mp3Path": "/audio/dancing-with-your-ghost.mp3",
                 "imagePng": "/png/personal-projects/portfolio.png",
                 "backgroundAccomplishment": [
                     "#5A4A7A",
@@ -169,7 +169,7 @@
                 "category": "JavaScript, HTML, CSS",
                 "location": "December 2025",
                 "description": "Chrome autofill extension for user info and shipping info",
-                "mp3Path": "/audio/startupxyz-experience.mp3",
+                "mp3Path": "/audio/that-way.mp3",
                 "imagePng": "/png/personal-projects/chrome.png",
                 "backgroundAccomplishment": [
                     "#283747",
@@ -194,7 +194,7 @@
                 "category": "JavaScript, APIs",
                 "location": "Jan 2025 - Apr 2025",
                 "description": "Real-time weather data visualization with interactive charts",
-                "mp3Path": "",
+                "mp3Path": "/audio/mikrokosmos.mp3",
                 "imagePng": "/png/personal-projects/seekswift.png",
                 "backgroundAccomplishment": [
                     "#9A114A",
@@ -218,7 +218,7 @@
                 "category": "Python, Regression, Trees, Neural Networks",
                 "location": "Sep 2024 - Dec 2024",
                 "description": "Energy market data analysis and price prediction using machine learning",
-                "mp3Path": "",
+                "mp3Path": "/audio/illicit-affairs.mp3",
                 "imagePng": "/png/personal-projects/tradewatt.png",
                 "backgroundAccomplishment": [
                     "#515151",
@@ -243,7 +243,7 @@
                 "category": "Python, JavaScript",
                 "location": "Jan 2024 – Apr 2024",
                 "description": "Full-stack recipe management app with personalized dietary filtering and recipe discovery",
-                "mp3Path": "",
+                "mp3Path": "/audio/hope-not.mp3",
                 "imagePng": "/png/personal-projects/mindfulmeals.png",
                 "backgroundAccomplishment": [
                     "#70474F",
