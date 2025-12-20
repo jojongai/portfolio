@@ -131,8 +131,6 @@ code {
   margin-left: 240px;
   background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #121212 100%);
   min-height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
   transition: margin-left 0.3s ease;
 }
 
