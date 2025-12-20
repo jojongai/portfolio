@@ -14,7 +14,10 @@
                 "description": "Client-facing features, data ingestion, backened development",
                 "mp3Path": "/audio/every_summertime.mp3",
                 "imagePng": "/png/work-experience/opener.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#8A342E",
+                    "#531613"
+                ],
                 "songRelationship": "My Spotify Wrapped came out during this time... this was my number one song for the year.",
                 "title": "Before",
                 "songCover": "/png/song-covers/before.png",
@@ -61,10 +64,13 @@
                 "description": "Conversational data analysis, machine learning and classfication models",
                 "mp3Path": "/audio/rbc-datascientist.mp3",
                 "imagePng": "/png/work-experience/rbc.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#3E5564",
+                    "#21303B"
+                ],
                 "songRelationship": "",
                 "title": "CHICKEN TENDIES",
-                "songCover": "",
+                "songCover": "/png/song-covers/chicken-tendies.png",
                 "artist": "Clinton Kane",
                 "technologies": "Liveperson, Postman, Postgres, Armada (DBaas)",
                 "languages": "Python, SQL, Pandas, BERTopic, scikit-learn",
@@ -83,10 +89,13 @@
                 "description": "Data analytics, reporting, and optimization",
                 "mp3Path": "/audio/rbc-dataanalyst.mp3",
                 "imagePng": "/png/work-experience/rbc.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#1C5681",
+                    "#0C2F4D"
+                ],
                 "songRelationship": "",
                 "title": "you were good to me",
-                "songCover": "",
+                "songCover": "/png/song-covers/you-were-good-to-me.png",
                 "artist": "Jeremy Zucker, Chelsea Cutler",
                 "technologies": "Superset, SQL",
                 "languages": "Python",
@@ -105,10 +114,13 @@
                 "description": "Data quality, dashboards, and automation",
                 "mp3Path": "/audio/toyota-datagovernance.mp3",
                 "imagePng": "/png/work-experience/toyota.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#18183F",
+                    "##17173C"
+                ],
                 "songRelationship": "",
                 "title": "logical",
-                "songCover": "",
+                "songCover": "/png/song-covers/logical.png",
                 "artist": "Olivia Rodrigo",
                 "technologies": "AWS, Power BI, SAP/HANA",
                 "languages": "SQL, Python, PyPDF2, Pandas, APIs",
@@ -135,10 +147,13 @@
                 "description": "Spotify inspired portfolio website",
                 "mp3Path": "/audio/startupxyz-experience.mp3",
                 "imagePng": "/png/personal-projects/portfolio.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#5A4A7A",
+                    "#382B4F"
+                ],
                 "songRelationship": "",
                 "title": "Dancing with your ghost",
-                "songCover": "",
+                "songCover": "/png/song-covers/dancing-with-your-ghost.png",
                 "artist": "Sasha Alex Sloan",
                 "technologies": "Railway, Vercel",
                 "languages": "React, Node.js",
@@ -156,10 +171,13 @@
                 "description": "Chrome autofill extension for user info and shipping info",
                 "mp3Path": "/audio/startupxyz-experience.mp3",
                 "imagePng": "/png/personal-projects/chrome.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#283747",
+                    "#212C37"
+                ],
                 "songRelationship": "",
                 "title": "that way",
-                "songCover": "",
+                "songCover": "/png/song-covers/that-way.png",
                 "artist": "Tate McRae",
                 "technologies": "Chrome Extension APIs, Chrome Storage API",
                 "languages": "JavaScript, HTML, CSS",
@@ -178,14 +196,21 @@
                 "description": "Real-time weather data visualization with interactive charts",
                 "mp3Path": "",
                 "imagePng": "/png/personal-projects/seekswift.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#9A114A",
+                    "#6B012D"
+                ],
                 "songRelationship": "",
                 "title": "Mikrokosmos",
-                "songCover": "",
+                "songCover": "/png/song-covers/mikrokosmos.png",
                 "artist": "BTS",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": []
+                "technologies": "Command-Line Interface (CLI)",
+                "languages": "Python, Text Processing",
+                "accomplishments": [
+                    "Built a Python-based search engine that indexes large compressed document collections and supports keyword search using an inverted index and BM25 ranking for relevance scoring.",
+                    "Designed and implemented an end-to-end information retrieval pipeline, including tokenization, lexicon generation, document ID mapping, and efficient query-time ranking.",
+                    "Developed query-aware document summarization, extracting and ranking relevant sentences to generate concise previews for top search results."
+                ]
             },
             {
                 "id": "trade-watt-song-id",
@@ -195,10 +220,13 @@
                 "description": "Energy market data analysis and price prediction using machine learning",
                 "mp3Path": "",
                 "imagePng": "/png/personal-projects/tradewatt.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#515151",
+                    "#373737"
+                ],
                 "songRelationship": "I made it to the eras tour. Paid retail price for them too.",
                 "title": "Illicit Affairs",
-                "songCover": "",
+                "songCover": "/png/song-covers/illicit-affairs.png",
                 "artist": "Taylor Swift",
                 "technologies": "MongoDB, Neural Networks, Regression, Decision Trees",
                 "languages": "Python, Scikit-learn, Pandas, Numpy",
@@ -217,10 +245,13 @@
                 "description": "Full-stack recipe management app with personalized dietary filtering and recipe discovery",
                 "mp3Path": "",
                 "imagePng": "/png/personal-projects/mindfulmeals.png",
-                "backgroundAccomplishment": [],
+                "backgroundAccomplishment": [
+                    "#70474F",
+                    "#41262B"
+                ],
                 "songRelationship": "",
                 "title": "Hope Not",
-                "songCover": "",
+                "songCover": "/png/song-covers/hope-not.png",
                 "artist": "Black Pink",
                 "technologies": "Firebase, MySqlWorkbench",
                 "languages": "Python, JavaScript, React, Node.js, SQL",
