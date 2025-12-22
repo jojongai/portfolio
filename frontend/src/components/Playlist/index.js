@@ -13,7 +13,7 @@ function Playlist({ selectSong }) {
   const { playlistId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const { selectedSong, currentPlaylist } = useContext(PlayerContext);
+  const { selectedSong, currentPlaylist, isPlaying, handlePlayPause } = useContext(PlayerContext);
   const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -209,6 +209,36 @@ function Playlist({ selectSong }) {
     return selectedSong && selectedSong.id === song.id && currentPlaylist && currentPlaylist.id === playlistId;
   };
 
+  // Check if any song from this playlist is currently selected
+  const isPlaylistSongSelected = () => {
+    return selectedSong && currentPlaylist && currentPlaylist.id === playlistId;
+  };
+
+  // Handle play button click
+  const handlePlayButtonClick = () => {
+    if (!playlist || !selectSong) return;
+
+    // Check if a song from this playlist is currently selected
+    if (isPlaylistSongSelected()) {
+      // If playing, pause it
+      if (isPlaying) {
+        handlePlayPause();
+      } else {
+        // If paused, unpause it
+        handlePlayPause();
+      }
+    } else {
+      // Find the first song with mp3Path, or just the first song if none have mp3Path
+      const firstSongWithAudio = playlist.songs.find(song => song.mp3Path);
+      const firstSong = firstSongWithAudio || playlist.songs[0];
+      
+      if (firstSong) {
+        const songIndex = playlist.songs.findIndex(s => s.id === firstSong.id);
+        selectSong(firstSong, playlist, songIndex);
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="app">
@@ -267,8 +297,8 @@ function Playlist({ selectSong }) {
           </div>
         </div>
         <div className="playlist-actions">
-          <button className="play-button-large">
-            <Icon name="play" fallback="▶" alt="Play" />
+          <button className="play-button-large" onClick={handlePlayButtonClick}>
+            <Icon name={isPlaylistSongSelected() && isPlaying ? "pause" : "play"} fallback={isPlaylistSongSelected() && isPlaying ? "⏸" : "▶"} alt={isPlaylistSongSelected() && isPlaying ? "Pause" : "Play"} />
           </button>
         </div>
       </div>
