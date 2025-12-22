@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import Playlist from './components/Playlist';
@@ -148,6 +148,7 @@ function AccomplishmentsWithContext() {
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedSong, setSelectedSong] = useState(null);
   const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const [currentSongIndex, setCurrentSongIndex] = useState(-1);
@@ -183,8 +184,22 @@ function App() {
       : songsWithAudio.length - 1;
     
     const { song: prevSong, index: prevSongIndex } = songsWithAudio[prevIndex];
-    // Just play the song, don't navigate
+    
+    // Check if user is on accomplishments or song relationship page
+    const isOnAccomplishments = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/`) && 
+                                !location.pathname.includes('/relationship');
+    const isOnSongRelationship = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/`) && 
+                                  location.pathname.includes('/relationship');
+    
+    // Select the song first
     selectSong(prevSong, currentPlaylist, prevSongIndex);
+    
+    // Navigate to the appropriate page if on a detail page
+    if (isOnAccomplishments) {
+      navigate(`/playlist/${currentPlaylist.id}/song/${prevSong.id}`);
+    } else if (isOnSongRelationship) {
+      navigate(`/playlist/${currentPlaylist.id}/song/${prevSong.id}/relationship`);
+    }
   };
 
   const handleNext = () => {
@@ -206,8 +221,22 @@ function App() {
       : 0;
     
     const { song: nextSong, index: nextSongIndex } = songsWithAudio[nextIndex];
-    // Just play the song, don't navigate
+    
+    // Check if user is on accomplishments or song relationship page
+    const isOnAccomplishments = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/`) && 
+                                !location.pathname.includes('/relationship');
+    const isOnSongRelationship = location.pathname.includes(`/playlist/${currentPlaylist.id}/song/`) && 
+                                  location.pathname.includes('/relationship');
+    
+    // Select the song first
     selectSong(nextSong, currentPlaylist, nextSongIndex);
+    
+    // Navigate to the appropriate page if on a detail page
+    if (isOnAccomplishments) {
+      navigate(`/playlist/${currentPlaylist.id}/song/${nextSong.id}`);
+    } else if (isOnSongRelationship) {
+      navigate(`/playlist/${currentPlaylist.id}/song/${nextSong.id}/relationship`);
+    }
   };
 
   const playerContextValue = {
