@@ -374,7 +374,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
             className={`control-btn queue-btn ${isQueueActive ? 'active' : ''}`}
             onClick={toggleQueue}
             aria-label="Queue" 
-            title="Click here to see why this song was attached to this experience" 
+            title="Click here to see the song information" 
             disabled={isEmpty}
           >
             <Icon name="queue" fallback="☰" alt="Queue" />
