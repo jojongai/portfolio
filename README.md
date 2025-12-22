@@ -1,151 +1,51 @@
 # Portfolio Website
 
-A full-stack portfolio website built with Node.js/Express backend and React frontend, deployed on Vercel.
+A Spotify-inspired portfolio website that presents my work experience, personal projects, skills, and hobbies through an interactive music player interface.
+
+## About
+
+This portfolio reimagines the traditional resume and portfolio as a music streaming experience. Each work experience, project, and skill is represented as a "song" in a playlist, complete with:
+
+- **Audio tracks** - Each entry has an associated song that represents the experience
+- **Visual covers** - Custom artwork for each entry
+- **Detailed accomplishments** - Scrollable lists of achievements and technologies used
+- **Song relationships** - Explanations of why each song was chosen for that particular experience
 
 ## Features
 
-- RESTful API for managing playlists and songs
-- Modern React frontend with responsive design
-- CORS enabled for cross-origin requests
-- JSON file-based data storage (no database required)
-- Spotify-inspired UI with audio player
+### Playlist-Based Navigation
+- **Work Experience** - Professional roles and internships presented as tracks
+- **Personal Projects** - Side projects and coding experiments
+- **Skills & Technologies** - Technical competencies organized by category
+- **Hobbies and Interests** - Personal interests and activities
 
-## Project Structure
+### Interactive Audio Player
+- Play, pause, skip, and shuffle through experiences
+- Real-time progress tracking
+- Volume control and fullscreen mode
+- Visual feedback with green highlights for active selections
 
-```
-portfolio/
-├── backend/          # Node.js/Express API server
-│   ├── data/
-│   │   └── playlists.json    # Data storage
-│   ├── package.json
-│   └── server.js
-├── frontend/         # React application
-│   ├── public/
-│   │   ├── icons/
-│   │   ├── png/
-│   │   └── audio/
-│   ├── src/
-│   ├── package.json
-│   └── vercel.json
-└── README.md
-```
+### Rich Content Pages
+- **Accomplishments View** - Detailed lists of achievements, technologies, and languages used
+- **Song Relationship Page** - Personal stories explaining the connection between songs and experiences
+- Custom background gradients for each entry
+- Typewriter effect for relationship descriptions
 
-## Getting Started
+### User Experience
+- Smooth transitions and animations
+- Responsive design for all screen sizes
+- Interactive tutorials for first-time visitors
+- Intuitive navigation with visual cues
 
-### Prerequisites
+## Technology Stack
 
-- Node.js (v14 or higher)
-- npm or yarn
+- **Frontend**: React with modern CSS
+- **Backend**: Node.js/Express REST API
+- **Data Storage**: JSON file-based storage
+- **Deployment**: Vercel (frontend) + Railway (backend)
 
-### Installation
+## Design Philosophy
 
-1. Clone the repository
-2. Install all dependencies:
-   ```bash
-   npm run install:all
-   ```
+This portfolio breaks away from traditional static resumes by creating an engaging, interactive experience. The music player metaphor makes exploring professional experiences feel natural and enjoyable, while maintaining all the important information recruiters and employers need.
 
-3. Set up environment variables:
-   ```bash
-   # Backend
-   cd backend
-   cp .env.example .env
-   # Edit .env with your values
-   
-   # Frontend
-   cd ../frontend
-   cp .env.example .env.local
-   # Edit .env.local with your values
-   ```
-
-   See `ENV_SETUP.md` for detailed environment variable configuration.
-
-### Running Locally
-
-1. Start the backend server (runs on port 8080):
-   ```bash
-   npm run start:backend
-   # or for development with auto-restart:
-   npm run dev:backend
-   ```
-
-2. Start the React frontend (runs on port 3000):
-   ```bash
-   npm run start:frontend
-   ```
-
-Or run both simultaneously:
-```bash
-npm start
-# or for development:
-npm run dev
-```
-
-### API Endpoints
-
-The backend provides the following REST API endpoints:
-
-- `GET /api/playlists` - Get all playlists
-- `GET /api/playlists/:id` - Get a specific playlist
-- `POST /api/playlists` - Create a new playlist
-- `PUT /api/playlists/:id` - Update a playlist
-- `DELETE /api/playlists/:id` - Delete a playlist
-
-## Deployment
-
-This application is configured for deployment on **Vercel** (frontend) with a separate backend service.
-
-### Frontend Deployment (Vercel)
-
-1. Push your code to GitHub
-2. Connect your repository to [Vercel](https://vercel.com)
-3. Configure the project:
-   - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `build`
-4. Set environment variable:
-   - `REACT_APP_API_URL`: Your backend API URL (e.g., `https://your-backend.railway.app/api`)
-5. Deploy!
-
-### Backend Deployment
-
-The backend needs to be deployed separately. Recommended platforms:
-- **Railway**: https://railway.app (recommended)
-- **Render**: https://render.com
-- **Fly.io**: https://fly.io
-
-See `DEPLOYMENT.md` for detailed backend deployment instructions.
-
-### Environment Variables
-
-**Frontend (Vercel):**
-Set in Vercel Dashboard → Settings → Environment Variables:
-```env
-REACT_APP_API_URL=https://portfolio-production-a561.up.railway.app/api
-```
-
-**Backend (Railway):**
-Set in Railway Dashboard → Variables:
-```env
-PORT=8080
-ALLOWED_ORIGINS=https://your-app.vercel.app
-NODE_ENV=production
-```
-
-**Important:** Never commit `.env` files to git. Set variables in platform dashboards (Vercel/Railway).
-
-See `ENVIRONMENT_VARIABLES.md` for detailed instructions.
-
-## Development
-
-- Backend: Express.js with CORS enabled
-- Frontend: React with modern CSS styling
-- Data: JSON file storage in `backend/data/playlists.json`
-- Assets: Icons, images, and audio files in `frontend/public/`
-
-## Notes
-
-- No database required - all data persists in JSON files
-- Easy to edit: update `backend/data/playlists.json` and restart the server
-- All assets are served from `frontend/public/` folder
-- CORS must be configured to allow your Vercel frontend URL
+Each song choice is intentional and personal, creating a unique narrative that goes beyond just listing skills and experiences. The interface encourages exploration and discovery, making the portfolio memorable and distinctive.
