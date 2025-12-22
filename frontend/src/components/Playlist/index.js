@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
@@ -19,6 +19,10 @@ function Playlist({ selectSong }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedSongId, setSelectedSongId] = useState(null);
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [tutorialStep, setTutorialStep] = useState(1); // 1: first item, 2: microphone icon, 3: queue icon
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
+  const firstSongRef = useRef(null);
 
   // Check if this is the hobbies playlist (only for UI labels)
   const isHobbiesPlaylist = playlistId === 'hobbies-and-interests-playlist-id';
@@ -28,6 +32,142 @@ function Playlist({ selectSong }) {
   useEffect(() => {
     fetchPlaylist();
   }, [playlistId]);
+
+  // Update tooltip position based on current step
+  const updateTooltipPosition = () => {
+    if (tutorialStep === 1 && firstSongRef.current) {
+      const rect = firstSongRef.current.getBoundingClientRect();
+      setTooltipPosition({
+        top: rect.bottom + 8,
+        left: rect.left
+      });
+    } else if (tutorialStep === 2) {
+      // Find microphone button
+      const microphoneBtn = document.querySelector('.microphone-btn');
+      if (microphoneBtn) {
+        const rect = microphoneBtn.getBoundingClientRect();
+        setTooltipPosition({
+          top: rect.top - 90, // Position higher above the button
+          left: rect.left + rect.width / 2
+        });
+      }
+    } else if (tutorialStep === 3) {
+      // Find queue button
+      const queueBtn = document.querySelector('.queue-btn');
+      if (queueBtn) {
+        const rect = queueBtn.getBoundingClientRect();
+        setTooltipPosition({
+          top: rect.top - 110, // Position higher above the button
+          left: rect.left + rect.width / 2
+        });
+      }
+    }
+  };
+
+  // Check if tutorial should be shown (first time visiting any playlist)
+  useEffect(() => {
+    const tutorialShown = localStorage.getItem('playlist-tutorial-shown');
+    if (!tutorialShown && playlist && playlist.songs.length > 0) {
+      // Small delay to ensure DOM is ready
+      setTimeout(() => {
+        setShowTutorial(true);
+        setTimeout(() => updateTooltipPosition(), 100);
+      }, 500);
+    }
+  }, [playlist]);
+
+  // Helper function to reset tutorial (for development/testing)
+  // You can call this from browser console: window.resetTutorial()
+  useEffect(() => {
+    window.resetTutorial = () => {
+      localStorage.removeItem('playlist-tutorial-shown');
+      setShowTutorial(true);
+      setTutorialStep(1);
+      setTimeout(() => updateTooltipPosition(), 100);
+    };
+    return () => {
+      delete window.resetTutorial;
+    };
+  }, []);
+
+  // Update tooltip position when tutorial is shown or window is resized/scrolled
+  useEffect(() => {
+    if (showTutorial) {
+      updateTooltipPosition();
+      const handleScroll = () => updateTooltipPosition();
+      const handleResize = () => updateTooltipPosition();
+      
+      window.addEventListener('scroll', handleScroll, true);
+      window.addEventListener('resize', handleResize);
+      
+      return () => {
+        window.removeEventListener('scroll', handleScroll, true);
+        window.removeEventListener('resize', handleResize);
+      };
+    }
+  }, [showTutorial, tutorialStep]);
+
+  // Highlight microphone button when on step 2
+  useEffect(() => {
+    if (showTutorial && tutorialStep === 2) {
+      const microphoneBtn = document.querySelector('.microphone-btn');
+      if (microphoneBtn) {
+        microphoneBtn.classList.add('tutorial-highlight');
+        updateTooltipPosition();
+        return () => {
+          microphoneBtn.classList.remove('tutorial-highlight');
+        };
+      }
+    }
+  }, [showTutorial, tutorialStep]);
+
+  // Highlight queue button when on step 3
+  useEffect(() => {
+    if (showTutorial && tutorialStep === 3) {
+      const queueBtn = document.querySelector('.queue-btn');
+      if (queueBtn) {
+        queueBtn.classList.add('tutorial-highlight');
+        updateTooltipPosition();
+        return () => {
+          queueBtn.classList.remove('tutorial-highlight');
+        };
+      }
+    }
+  }, [showTutorial, tutorialStep]);
+
+  const handleTutorialNext = () => {
+    if (tutorialStep === 1) {
+      setTutorialStep(2);
+      // Remove highlight from first item
+      if (firstSongRef.current) {
+        firstSongRef.current.classList.remove('tutorial-highlight');
+      }
+    } else if (tutorialStep === 2) {
+      setTutorialStep(3);
+      // Remove highlight from microphone button
+      const microphoneBtn = document.querySelector('.microphone-btn');
+      if (microphoneBtn) {
+        microphoneBtn.classList.remove('tutorial-highlight');
+      }
+    }
+  };
+
+  const handleTutorialDismiss = () => {
+    setShowTutorial(false);
+    localStorage.setItem('playlist-tutorial-shown', 'true');
+    // Clean up highlights
+    if (firstSongRef.current) {
+      firstSongRef.current.classList.remove('tutorial-highlight');
+    }
+    const microphoneBtn = document.querySelector('.microphone-btn');
+    if (microphoneBtn) {
+      microphoneBtn.classList.remove('tutorial-highlight');
+    }
+    const queueBtn = document.querySelector('.queue-btn');
+    if (queueBtn) {
+      queueBtn.classList.remove('tutorial-highlight');
+    }
+  };
 
   const fetchPlaylist = async () => {
     try {
@@ -145,10 +285,12 @@ function Playlist({ selectSong }) {
         {playlist.songs.map((song, index) => {
           const isPlaying = isSongPlaying(song);
           const isSelected = selectedSongId === song.id;
+          const isFirstItem = index === 0;
           return (
             <div 
               key={song.id || index} 
-              className={`song-row ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''}`}
+              ref={isFirstItem ? firstSongRef : null}
+              className={`song-row ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''} ${isFirstItem && showTutorial && tutorialStep === 1 ? 'tutorial-highlight' : ''}`}
               onClick={(e) => handleSongClick(song, index, e)}
               onDoubleClick={(e) => handleSongDoubleClick(song, index, e)}
             >
@@ -178,6 +320,39 @@ function Playlist({ selectSong }) {
       </div>
       </div>
       </div>
+      {showTutorial && (
+        <div 
+          className="tutorial-tooltip"
+          style={{
+            top: `${tooltipPosition.top}px`,
+            left: `${tooltipPosition.left}px`,
+            transform: (tutorialStep === 2 || tutorialStep === 3) ? 'translateX(-50%)' : 'none'
+          }}
+        >
+          <div className="tutorial-tooltip-content">
+            <p>
+              {tutorialStep === 1 
+                ? 'Double clicking a row will select it and play a song'
+                : tutorialStep === 2
+                ? 'Click here to see more information for the selected entry'
+                : 'Click here to view the song'}
+            </p>
+            <div className="tutorial-tooltip-actions">
+              {(tutorialStep === 1 || tutorialStep === 2) && (
+                <button className="tutorial-tooltip-next" onClick={handleTutorialNext} aria-label="Next">
+                  →
+                </button>
+              )}
+              {tutorialStep === 3 && (
+                <button className="tutorial-tooltip-close" onClick={handleTutorialDismiss} aria-label="Close">
+                  ×
+                </button>
+              )}
+            </div>
+          </div>
+          <div className={`tutorial-tooltip-arrow ${(tutorialStep === 2 || tutorialStep === 3) ? 'arrow-bottom' : ''}`}></div>
+        </div>
+      )}
     </div>
   );
 }

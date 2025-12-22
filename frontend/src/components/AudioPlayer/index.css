@@ -315,6 +315,24 @@
   background-color: #1ed760;
 }
 
+/* Tutorial highlight for microphone and queue buttons */
+.microphone-btn.tutorial-highlight,
+.queue-btn.tutorial-highlight {
+  background-color: rgba(29, 185, 84, 0.2) !important;
+  border: 2px solid #1db954 !important;
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.4) !important;
+  animation: pulseHighlight 2s ease-in-out infinite;
+}
+
+@keyframes pulseHighlight {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(29, 185, 84, 0.6);
+  }
+}
+
 .control-btn.disabled {
   opacity: 0.3;
   cursor: not-allowed;
