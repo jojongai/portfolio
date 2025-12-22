@@ -116,7 +116,7 @@
                 "imagePng": "/png/work-experience/toyota.png",
                 "backgroundAccomplishment": [
                     "#18183F",
-                    "##17173C"
+                    "#17173C"
                 ],
                 "songRelationship": "",
                 "title": "logical",
@@ -194,7 +194,7 @@
                 "category": "JavaScript, APIs",
                 "location": "Jan 2025 - Apr 2025",
                 "description": "Real-time weather data visualization with interactive charts",
-                "mp3Path": "/audio/mikrokosmos.mp3",
+                "mp3Path": "/audio/mirkokosmos.mp3",
                 "imagePng": "/png/personal-projects/seekswift.png",
                 "backgroundAccomplishment": [
                     "#9A114A",
