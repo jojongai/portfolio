@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import Playlist from './components/Playlist';
 import Accomplishments from './components/Accomplishments';
 import SongRelationship from './components/SongRelationship';
+import Profile from './components/Profile';
 import AudioPlayer from './components/AudioPlayer';
 import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
@@ -74,7 +75,7 @@ function HomePage() {
       <div className="main-content">
         <div className="top-bar">
           <h1 className="welcome-text">Good afternoon</h1>
-          <div className="profile-picture">
+          <div className="profile-picture" onClick={() => navigate('/profile')}>
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
         </div>
@@ -253,9 +254,10 @@ function App() {
         <div className="app-container">
           <Routes>
             <Route path="/" element={<HomePage />} />
-          <Route path="/playlist/:playlistId" element={<PlaylistOrHobbies />} />
-          <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
-          <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/playlist/:playlistId" element={<PlaylistOrHobbies />} />
+            <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
+            <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
           </Routes>
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}

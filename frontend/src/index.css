@@ -168,6 +168,13 @@ code {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-picture:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px rgba(29, 185, 84, 0.5);
 }
 
 .profile-img {

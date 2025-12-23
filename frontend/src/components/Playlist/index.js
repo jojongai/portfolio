@@ -272,7 +272,7 @@ function Playlist({ selectSong }) {
         <div className="top-bar">
           {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
           {!isHomePage && <div></div>}
-          <div className="profile-picture">
+          <div className="profile-picture" onClick={() => navigate('/profile')}>
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
         </div>
