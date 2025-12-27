@@ -1,5 +1,5 @@
 .profile-page {
-  padding: 24px 32px 120px 32px; /* Extra bottom padding for audio player */
+  padding: 16px 24px 120px 24px; /* Extra bottom padding for audio player */
   margin-left: 0;
   width: 100%;
   max-width: 1200px;
@@ -9,17 +9,17 @@
 .profile-header {
   display: flex;
   align-items: flex-end;
-  gap: 24px;
-  margin-bottom: 48px;
-  padding-bottom: 32px;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .profile-image-container {
   position: relative;
-  width: 200px;
-  height: 200px;
-  min-width: 200px;
+  width: 160px;
+  height: 160px;
+  min-width: 160px;
   border-radius: 50%;
   overflow: hidden;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -68,10 +68,10 @@
 }
 
 .profile-name {
-  font-size: 72px;
+  font-size: 56px;
   font-weight: 900;
   color: #ffffff;
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   line-height: 1.1;
 }
 
@@ -90,13 +90,13 @@
 .profile-content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
 }
 
 .profile-section {
   background-color: rgba(255, 255, 255, 0.03);
   border-radius: 8px;
-  padding: 24px;
+  padding: 16px;
   transition: background-color 0.2s ease;
 }
 
@@ -105,10 +105,10 @@
 }
 
 .profile-section-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #ffffff;
-  margin: 0 0 20px 0;
+  margin: 0 0 12px 0;
 }
 
 .profile-bio {
