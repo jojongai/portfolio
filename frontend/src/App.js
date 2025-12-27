@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, useCallback, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar';
@@ -162,9 +162,14 @@ function App() {
     setIsPlaying(true);
   };
 
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const handlePlayPause = useCallback((newState) => {
+    // If newState is provided (boolean), use it; otherwise toggle
+    if (typeof newState === 'boolean') {
+      setIsPlaying(newState);
+    } else {
+      setIsPlaying(prev => !prev);
+    }
+  }, []);
 
   const handlePrevious = () => {
     if (!currentPlaylist || currentSongIndex < 0) return;
@@ -239,6 +244,29 @@ function App() {
       navigate(`/playlist/${currentPlaylist.id}/song/${nextSong.id}/relationship`);
     }
   };
+
+  // Keyboard shortcut: Spacebar to play/pause when a song is selected
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Check if spacebar is pressed
+      if (e.key === ' ' || e.keyCode === 32) {
+        // Only handle if a song is selected and not typing in an input/textarea
+        const isInputFocused = document.activeElement.tagName === 'INPUT' || 
+                              document.activeElement.tagName === 'TEXTAREA' ||
+                              document.activeElement.isContentEditable;
+        
+        if (selectedSong && !isInputFocused) {
+          e.preventDefault(); // Prevent page scroll
+          handlePlayPause();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedSong, handlePlayPause]);
 
   const playerContextValue = {
     selectedSong,

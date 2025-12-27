@@ -124,21 +124,28 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
   useEffect(() => {
     if (externalIsPlaying !== undefined && externalIsPlaying !== isPlaying) {
       const audio = audioRef.current;
-      if (!audio) return;
+      if (!audio || !audioSrc) return;
       
-      if (externalIsPlaying && !audio.paused) {
-        setIsPlaying(true);
-      } else if (!externalIsPlaying && !audio.paused) {
-        audio.pause();
-        setIsPlaying(false);
-      } else if (externalIsPlaying && audio.paused) {
+      if (externalIsPlaying && audio.paused) {
+        // External state says play, but audio is paused - play it
         audio.play().catch(err => {
           console.error('[AudioPlayer] Sync play error:', err);
+          setIsPlaying(false);
         });
         setIsPlaying(true);
+      } else if (!externalIsPlaying && !audio.paused) {
+        // External state says pause, but audio is playing - pause it
+        audio.pause();
+        setIsPlaying(false);
+      } else if (externalIsPlaying && !audio.paused) {
+        // Both say playing - just sync state
+        setIsPlaying(true);
+      } else if (!externalIsPlaying && audio.paused) {
+        // Both say paused - just sync state
+        setIsPlaying(false);
       }
     }
-  }, [externalIsPlaying, isPlaying]);
+  }, [externalIsPlaying, isPlaying, audioSrc]);
 
   const handleSeek = (e) => {
     const audio = audioRef.current;
