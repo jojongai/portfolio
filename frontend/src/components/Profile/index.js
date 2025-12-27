@@ -18,7 +18,7 @@ function Profile() {
     bio: "Interested in software, data, machine learning, and AI. Building full-stack applications and exploring the intersection of technology and business.",
     proficientLanguages: [
       "TypeScript",
-      "JavaScript",
+      "JavaScript",     
       "Python",
       "Java",
       "SQL",
@@ -74,10 +74,24 @@ function Profile() {
               </div>
             </div>
             <div className="profile-header-info">
-              <p className="profile-type">Profile</p>
-              <h1 className="profile-name">{profileData.name}</h1>
-              <p className="profile-title">{profileData.title}</p>
-              <p className="profile-location">{profileData.school} • {profileData.location}</p>
+              <div className="profile-header-top">
+                <div>
+                  <p className="profile-type">Profile</p>
+                  <h1 className="profile-name">{profileData.name}</h1>
+                  <p className="profile-title">{profileData.title}</p>
+                  <p className="profile-location">{profileData.school} • {profileData.location}</p>
+                </div>
+                <a 
+                  href={profileData.resumePath} 
+                  download 
+                  className="profile-header-download"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="download" fallback="📥" />
+                  <span>Download Resume</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -108,23 +122,6 @@ function Profile() {
                   <span key={index} className="profile-tag">{tech}</span>
                 ))}
               </div>
-            </div>
-
-            <div className="profile-section">
-              <h2 className="profile-section-title">Resume</h2>
-              <p className="profile-resume-description">
-                Download my resume to learn more about my experience and qualifications.
-              </p>
-              <a 
-                href={profileData.resumePath} 
-                download 
-                className="profile-resume-download"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon name="download" fallback="📥" />
-                <span>Download Resume</span>
-              </a>
             </div>
 
             <div className="profile-section">
