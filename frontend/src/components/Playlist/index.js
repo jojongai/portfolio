@@ -47,7 +47,7 @@ function Playlist({ selectSong }) {
       if (microphoneBtn) {
         const rect = microphoneBtn.getBoundingClientRect();
         setTooltipPosition({
-          top: rect.top - 90, // Position higher above the button
+          top: rect.top - 115, // Position higher above the button
           left: rect.left + rect.width / 2
         });
       }
@@ -57,7 +57,7 @@ function Playlist({ selectSong }) {
       if (queueBtn) {
         const rect = queueBtn.getBoundingClientRect();
         setTooltipPosition({
-          top: rect.top - 110, // Position higher above the button
+          top: rect.top - 95, // Position higher above the button
           left: rect.left + rect.width / 2
         });
       }
@@ -266,7 +266,7 @@ function Playlist({ selectSong }) {
   }
 
   return (
-    <div className="app">
+    <div className={`app ${showTutorial ? 'tutorial-active' : ''}`}>
       <Sidebar />
       <div className="main-content">
         <div className="top-bar">
@@ -351,37 +351,40 @@ function Playlist({ selectSong }) {
       </div>
       </div>
       {showTutorial && (
-        <div 
-          className="tutorial-tooltip"
-          style={{
-            top: `${tooltipPosition.top}px`,
-            left: `${tooltipPosition.left}px`,
-            transform: (tutorialStep === 2 || tutorialStep === 3) ? 'translateX(-50%)' : 'none'
-          }}
-        >
-          <div className="tutorial-tooltip-content">
-            <p>
-              {tutorialStep === 1 
-                ? 'Double clicking a row will select it and play a song'
-                : tutorialStep === 2
-                ? 'Click here to see more information for the selected entry'
-                : 'Click here to view the song'}
-            </p>
-            <div className="tutorial-tooltip-actions">
-              {(tutorialStep === 1 || tutorialStep === 2) && (
-                <button className="tutorial-tooltip-next" onClick={handleTutorialNext} aria-label="Next">
-                  →
-                </button>
-              )}
-              {tutorialStep === 3 && (
-                <button className="tutorial-tooltip-close" onClick={handleTutorialDismiss} aria-label="Close">
-                  ×
-                </button>
-              )}
+        <>
+          <div className="tutorial-overlay" onClick={(e) => e.stopPropagation()} />
+          <div 
+            className="tutorial-tooltip"
+            style={{
+              top: `${tooltipPosition.top}px`,
+              left: `${tooltipPosition.left}px`,
+              transform: (tutorialStep === 2 || tutorialStep === 3) ? 'translateX(-50%)' : 'none'
+            }}
+          >
+            <div className="tutorial-tooltip-content">
+              <p>
+                {tutorialStep === 1 
+                  ? 'Double clicking a row will select it and play a song'
+                  : tutorialStep === 2
+                  ? 'Click here to see more information for the selected entry'
+                  : 'Click here to view the song'}
+              </p>
+              <div className="tutorial-tooltip-actions">
+                {(tutorialStep === 1 || tutorialStep === 2) && (
+                  <button className="tutorial-tooltip-next" onClick={handleTutorialNext} aria-label="Next">
+                    →
+                  </button>
+                )}
+                {tutorialStep === 3 && (
+                  <button className="tutorial-tooltip-close" onClick={handleTutorialDismiss} aria-label="Close">
+                    ×
+                  </button>
+                )}
+              </div>
             </div>
+            <div className={`tutorial-tooltip-arrow ${(tutorialStep === 2 || tutorialStep === 3) ? 'arrow-bottom' : ''}`}></div>
           </div>
-          <div className={`tutorial-tooltip-arrow ${(tutorialStep === 2 || tutorialStep === 3) ? 'arrow-bottom' : ''}`}></div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -491,11 +491,29 @@
 }
 
 /* Tutorial styles */
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto;
+  backdrop-filter: blur(2px);
+}
+
+/* Ensure audio player and highlighted buttons appear above overlay */
+.audio-player-container {
+  z-index: 10000 !important;
+}
+
 .tutorial-tooltip {
   position: fixed;
-  z-index: 10000;
+  z-index: 10001;
   animation: fadeIn 0.3s ease;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 @keyframes fadeIn {
@@ -510,23 +528,25 @@
 }
 
 .tutorial-tooltip-content {
-  background-color: #282828;
-  border-radius: 8px;
-  padding: 12px 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+  background-color: #181818;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
   display: flex;
   align-items: center;
   gap: 12px;
   max-width: 400px;
   pointer-events: auto;
+  border: 2px solid #1db954;
+  animation: tooltipPulse 2s ease-in-out infinite;
 }
 
 .tutorial-tooltip-content p {
   color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
   flex: 1;
 }
 
@@ -538,75 +558,112 @@
 }
 
 .tutorial-tooltip-next {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #1db954;
+  border-radius: 50%;
   color: #1db954;
   font-size: 20px;
   line-height: 1;
   cursor: pointer;
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
   font-weight: bold;
 }
 
 .tutorial-tooltip-next:hover {
+  background: rgba(29, 185, 84, 0.2);
+  transform: scale(1.1);
+  border-color: #1ed760;
   color: #1ed760;
-  transform: scale(1.2);
 }
 
 .tutorial-tooltip-close {
-  background: none;
-  border: none;
-  color: #b3b3b3;
-  font-size: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #1db954;
+  border-radius: 50%;
+  color: #1db954;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
+  font-weight: bold;
 }
 
 .tutorial-tooltip-close:hover {
-  color: #ffffff;
+  background: rgba(29, 185, 84, 0.2);
+  transform: scale(1.1);
+  border-color: #1ed760;
+  color: #1ed760;
 }
 
 .tutorial-tooltip-arrow {
   position: absolute;
-  top: -6px;
+  top: -8px;
   left: 20px;
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #282828;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #181818;
+  filter: drop-shadow(0 -2px 0 #1db954);
 }
 
 .tutorial-tooltip-arrow.arrow-bottom {
   top: auto;
-  bottom: -6px;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  border-top: 6px solid #282828;
+  border-top: 8px solid #181818;
   border-bottom: none;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  filter: drop-shadow(0 2px 0 #1db954);
+}
+
+@keyframes tooltipPulse {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    border-color: #1db954;
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.9);
+    border-color: #1ed760;
+  }
+}
+
+/* Prevent interaction with page during tutorial */
+.app.tutorial-active * {
+  pointer-events: none;
+}
+
+.app.tutorial-active .tutorial-tooltip,
+.app.tutorial-active .tutorial-tooltip * {
+  pointer-events: auto;
+}
+
+.app.tutorial-active .song-row.tutorial-highlight,
+.app.tutorial-active .microphone-btn.tutorial-highlight,
+.app.tutorial-active .queue-btn.tutorial-highlight {
+  pointer-events: auto;
 }
 
 /* Highlight the first item during tutorial */
 .song-row.tutorial-highlight {
-  background-color: rgba(29, 185, 84, 0.2) !important;
-  border: 2px solid #1db954;
-  box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+  background-color: rgba(29, 185, 84, 0.3) !important;
+  border: 3px solid #1db954;
+  box-shadow: 0 0 30px rgba(29, 185, 84, 0.6);
   animation: pulseHighlight 2s ease-in-out infinite;
   z-index: 10000;
   position: relative;
