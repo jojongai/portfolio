@@ -677,3 +677,22 @@
     box-shadow: 0 0 30px rgba(29, 185, 84, 0.6);
   }
 }
+
+/* Hobbies Playlist Layout - #, Icon, Title (with description), Category */
+.songs-header.hobbies-layout {
+  grid-template-columns: 40px 40px 1fr 200px;
+}
+
+.song-row.hobbies-layout {
+  grid-template-columns: 40px 40px 1fr 200px;
+}
+
+.song-row.hobbies-layout .song-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.song-row.hobbies-layout .song-artist-text {
+  text-align: center;
+}

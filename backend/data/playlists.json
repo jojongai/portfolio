@@ -347,35 +347,35 @@
         "imagePng": "/png/playlists/hobbies.png",
         "songs": [
             {
-                "id": "photography-hobby",
-                "name": "Photography",
+                "id": "sports-hobby",
+                "name": "Sports",
+                "category": "Physical",
+                "location": "",
+                "description": "Fitness, basketball, soccer, tennis",
+                "mp3Path": "",
+                "imagePng": "/png/sports.png",
+                "backgroundAccomplishment": [],
+                "songRelationship": "",
+                "title": "",
+                "songCover": "",
+                "artist": "",
+                "technologies": "",
+                "languages": "",
+                "accomplishments": [
+                    "Maintain a consistent fitness routine combining cardio, strength training, and flexibility exercises.",
+                    "Participate in recreational sports including basketball, soccer, and tennis for both competition and enjoyment.",
+                    "Developed discipline and goal-setting skills through regular training and athletic challenges.",
+                    "Found sports to be an essential outlet for stress relief, team building, and maintaining overall health and energy."
+                ]
+            },
+            {
+                "id": "music-hobby",
+                "name": "Music",
                 "category": "Creative",
                 "location": "",
-                "description": "Capturing moments and exploring different perspectives through the lens. Love experimenting with different lighting, compositions, and editing techniques.",
+                "description": "Creating covers, exploring genres, live shows",
                 "mp3Path": "",
-                "imagePng": "/png/photography.png",
-                "backgroundAccomplishment": [],
-                "songRelationship": "",
-                "title": "",
-                "songCover": "",
-                "artist": "",
-                "technologies": "Adobe Lightroom, Photoshop, Camera Equipment",
-                "languages": "",
-                "accomplishments": [
-                    "Developed skills in portrait, landscape, and street photography through consistent practice and experimentation.",
-                    "Mastered manual camera settings and composition techniques including rule of thirds, leading lines, and depth of field.",
-                    "Created a portfolio of edited photographs showcasing various styles and techniques.",
-                    "Explored different photography genres and continuously learning new editing workflows and post-processing techniques."
-                ]
-            },
-            {
-                "id": "reading-hobby",
-                "name": "Reading",
-                "category": "Learning",
-                "location": "",
-                "description": "Avid reader of technology books, science fiction, and personal development. Always have a book in progress.",
-                "mp3Path": "",
-                "imagePng": "/png/reading.png",
+                "imagePng": "/png/music.png",
                 "backgroundAccomplishment": [],
                 "songRelationship": "",
                 "title": "",
@@ -384,54 +384,10 @@
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
-                    "Read extensively across multiple genres including technology, science fiction, and personal development literature.",
-                    "Maintained a consistent reading habit, completing numerous books on software engineering, system design, and career growth.",
-                    "Applied insights from technical books to improve coding practices and problem-solving approaches.",
-                    "Explored diverse perspectives through fiction and non-fiction, expanding knowledge and critical thinking skills."
-                ]
-            },
-            {
-                "id": "hiking-hobby",
-                "name": "Hiking & Nature",
-                "category": "Outdoor",
-                "location": "",
-                "description": "Enjoy exploring trails and spending time outdoors. Great way to disconnect and recharge while staying active.",
-                "mp3Path": "",
-                "imagePng": "/png/hiking.png",
-                "backgroundAccomplishment": [],
-                "songRelationship": "",
-                "title": "",
-                "songCover": "",
-                "artist": "",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": [
-                    "Completed numerous hiking trails of varying difficulty levels, building endurance and appreciation for nature.",
-                    "Explored diverse landscapes including mountains, forests, and coastal trails across different regions.",
-                    "Developed navigation skills using maps, GPS, and trail markers for safe outdoor adventures.",
-                    "Found hiking to be an excellent way to maintain physical fitness while providing mental clarity and stress relief."
-                ]
-            },
-            {
-                "id": "cooking-hobby",
-                "name": "Cooking",
-                "category": "Creative",
-                "location": "",
-                "description": "Love experimenting with new recipes and cuisines. Cooking is both creative and relaxing for me.",
-                "mp3Path": "",
-                "imagePng": "/png/cooking.png",
-                "backgroundAccomplishment": [],
-                "songRelationship": "",
-                "title": "",
-                "songCover": "",
-                "artist": "",
-                "technologies": "",
-                "languages": "",
-                "accomplishments": [
-                    "Experimented with various cuisines including Italian, Asian, and Mediterranean cooking styles.",
-                    "Mastered fundamental cooking techniques including knife skills, sautéing, roasting, and baking.",
-                    "Developed the ability to modify recipes and create original dishes based on available ingredients.",
-                    "Found cooking to be a creative outlet that combines technical skills with artistic expression and provides a relaxing break from work."
+                    "Explored diverse music genres including indie, electronic, R&B, and alternative, developing an appreciation for different styles and production techniques.",
+                    "Created song covers and experimented with music production, learning about recording, mixing, and audio engineering.",
+                    "Built curated playlists for different moods and occasions, sharing music discoveries with others.",
+                    "Found music to be a constant source of inspiration, emotional expression, and creative energy in daily life."
                 ]
             },
             {
@@ -439,7 +395,7 @@
                 "name": "Gaming",
                 "category": "Entertainment",
                 "location": "",
-                "description": "Enjoy strategy games and puzzle games. Appreciate good game design and storytelling in video games.",
+                "description": "Strategy games, RPGs, puzzle games",
                 "mp3Path": "",
                 "imagePng": "/png/gaming.png",
                 "backgroundAccomplishment": [],
@@ -447,35 +403,35 @@
                 "title": "",
                 "songCover": "",
                 "artist": "",
-                "technologies": "",
+                "technologies": "PC Gaming, Nintendo Switch, PlayStation",
                 "languages": "",
                 "accomplishments": [
-                    "Played and analyzed various strategy and puzzle games, appreciating well-designed game mechanics and narratives.",
-                    "Studied game design principles and user experience patterns that translate to software development.",
-                    "Enjoyed multiplayer gaming experiences that require teamwork, communication, and strategic thinking.",
-                    "Found gaming to be an engaging way to unwind while also learning about interactive design and problem-solving."
+                    "Played and completed various acclaimed games across multiple genres, analyzing game mechanics and design patterns.",
+                    "Developed strategic thinking and problem-solving skills through complex strategy games and puzzles.",
+                    "Participated in multiplayer gaming communities, building teamwork and communication skills.",
+                    "Appreciated gaming as both entertainment and a study of interactive design, user experience, and storytelling."
                 ]
             },
             {
-                "id": "learning-tech-hobby",
-                "name": "Learning New Technologies",
-                "category": "Professional",
+                "id": "pokemon-hobby",
+                "name": "Pokemon",
+                "category": "Entertainment",
                 "location": "",
-                "description": "Passionate about staying up-to-date with the latest tech trends. Love exploring new frameworks, tools, and programming languages.",
+                "description": "Competitive battling, team building, collecting",
                 "mp3Path": "",
-                "imagePng": "/png/learning.png",
+                "imagePng": "/png/pokemon.png",
                 "backgroundAccomplishment": [],
                 "songRelationship": "",
                 "title": "",
                 "songCover": "",
                 "artist": "",
-                "technologies": "Various Frameworks, Tools, Cloud Platforms",
-                "languages": "Multiple Programming Languages",
+                "technologies": "Pokemon Games, Pokemon Showdown",
+                "languages": "",
                 "accomplishments": [
-                    "Continuously learning new programming languages, frameworks, and tools to stay current with industry trends.",
-                    "Completed online courses and tutorials on emerging technologies including cloud computing, machine learning, and modern web frameworks.",
-                    "Built side projects to practice and experiment with new technologies before applying them in professional settings.",
-                    "Maintained a growth mindset and actively seek out learning opportunities through documentation, tutorials, and hands-on experimentation."
+                    "Built and optimized competitive Pokemon teams, understanding type matchups, stats, abilities, and battle mechanics.",
+                    "Completed multiple Pokemon games across different generations, exploring various regions and gameplay features.",
+                    "Engaged with the Pokemon community through online battles, trading, and strategy discussions.",
+                    "Appreciated Pokemon as a strategic game with depth, nostalgia, and a welcoming community that spans generations."
                 ]
             }
         ]

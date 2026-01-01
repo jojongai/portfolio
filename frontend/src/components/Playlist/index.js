@@ -304,12 +304,18 @@ function Playlist({ selectSong }) {
       </div>
 
       <div className="songs-list">
-        <div className="songs-header">
+        <div className={`songs-header ${isHobbiesPlaylist ? 'hobbies-layout' : ''}`}>
           <div className="song-number">#</div>
           <div className="song-image-header"></div>
           <div className="song-title">Title</div>
-          <div className="song-duration">{isHobbiesPlaylist ? 'Category' : isPersonalProjectsPlaylist ? 'Duration' : 'Location'}</div>
-          <div className="song-artist">{isHobbiesPlaylist ? 'Description' : 'Details'}</div>
+          {isHobbiesPlaylist ? (
+            <div className="song-artist">Category</div>
+          ) : (
+            <>
+              <div className="song-duration">{isPersonalProjectsPlaylist ? 'Duration' : 'Location'}</div>
+              <div className="song-artist">Details</div>
+            </>
+          )}
         </div>
         
         {playlist.songs.map((song, index) => {
@@ -320,7 +326,7 @@ function Playlist({ selectSong }) {
             <div 
               key={song.id || index} 
               ref={isFirstItem ? firstSongRef : null}
-              className={`song-row ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''} ${isFirstItem && showTutorial && tutorialStep === 1 ? 'tutorial-highlight' : ''}`}
+              className={`song-row ${isHobbiesPlaylist ? 'hobbies-layout' : ''} ${isSelected ? 'selected' : ''} ${isPlaying ? 'playing' : ''} ${isFirstItem && showTutorial && tutorialStep === 1 ? 'tutorial-highlight' : ''}`}
               onClick={(e) => handleSongClick(song, index, e)}
               onDoubleClick={(e) => handleSongDoubleClick(song, index, e)}
             >
@@ -336,14 +342,20 @@ function Playlist({ selectSong }) {
                 </div>
                 <div className="song-description">{song.description}</div>
               </div>
-              <div className="song-duration-text">{formatLocation(song)}</div>
-              <div className="song-artist-text">
-                {isWorkExperiencePlaylist 
-                  ? (song.duration || '') 
-                  : isPersonalProjectsPlaylist 
-                    ? (song.category || '') 
-                    : (song.category || song.artist || '')}
-              </div>
+              {isHobbiesPlaylist ? (
+                <div className="song-artist-text">{song.category || ''}</div>
+              ) : (
+                <>
+                  <div className="song-duration-text">{formatLocation(song)}</div>
+                  <div className="song-artist-text">
+                    {isWorkExperiencePlaylist 
+                      ? (song.duration || '') 
+                      : isPersonalProjectsPlaylist 
+                        ? (song.category || '') 
+                        : (song.category || song.artist || '')}
+                  </div>
+                </>
+              )}
             </div>
           );
         })}
