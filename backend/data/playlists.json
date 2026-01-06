@@ -2,7 +2,7 @@
     {
         "id": "work-experience-playlist-id",
         "title": "Work Experience",
-        "description": "My professional journey through different companies",
+        "description": "My Proessional Journey",
         "imageUrl": "💼",
         "imagePng": "/png/playlists/work-experience.png",
         "songs": [
@@ -135,7 +135,7 @@
     {
         "id": "personal-projects-playlist-id",
         "title": "Personal Projects",
-        "description": "Side projects and creative coding experiments",
+        "description": "Side projects",
         "imageUrl": "🚀",
         "imagePng": "/png/playlists/personal-project.png",
         "songs": [
@@ -342,7 +342,7 @@
     {
         "id": "hobbies-and-interests-playlist-id",
         "title": "Hobbies and Interests",
-        "description": "Things I enjoy doing in my free time and activities that keep me inspired and motivated",
+        "description": "Things I do in my free time",
         "imageUrl": "🎯",
         "imagePng": "/png/playlists/hobbies.png",
         "songs": [
