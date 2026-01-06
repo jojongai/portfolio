@@ -346,14 +346,14 @@ function Playlist({ selectSong }) {
                 <div className="song-artist-text">{song.category || ''}</div>
               ) : (
                 <>
-                  <div className="song-duration-text">{formatLocation(song)}</div>
-                  <div className="song-artist-text">
-                    {isWorkExperiencePlaylist 
-                      ? (song.duration || '') 
-                      : isPersonalProjectsPlaylist 
-                        ? (song.category || '') 
-                        : (song.category || song.artist || '')}
-                  </div>
+              <div className="song-duration-text">{formatLocation(song)}</div>
+              <div className="song-artist-text">
+                {isWorkExperiencePlaylist 
+                  ? (song.duration || '') 
+                  : isPersonalProjectsPlaylist 
+                    ? (song.category || '') 
+                    : (song.category || song.artist || '')}
+              </div>
                 </>
               )}
             </div>
