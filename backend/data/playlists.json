@@ -351,7 +351,7 @@
                 "name": "Sports",
                 "category": "Physical",
                 "location": "",
-                "description": "Fitness, basketball, soccer, tennis",
+                "description": "Baseball, Softball, Hockey, Skiing, Snowboarding, Basketball",
                 "mp3Path": "",
                 "imagePng": "/png/sports.png",
                 "backgroundAccomplishment": [],
@@ -362,10 +362,9 @@
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
-                    "Maintain a consistent fitness routine combining cardio, strength training, and flexibility exercises.",
-                    "Participate in recreational sports including basketball, soccer, and tennis for both competition and enjoyment.",
-                    "Developed discipline and goal-setting skills through regular training and athletic challenges.",
-                    "Found sports to be an essential outlet for stress relief, team building, and maintaining overall health and energy."
+                    "Play baseball, softball, and basketball. Ski and snowboard during the winter.",
+                    "Diehard Leafs, Raptors, Blue Jays fan. Toronto all the way. (Bengals for football)",
+                    "I participate and never win in fantasy"
                 ]
             },
             {
@@ -373,7 +372,7 @@
                 "name": "Music",
                 "category": "Creative",
                 "location": "",
-                "description": "Creating covers, exploring genres, live shows",
+                "description": "Piano, Guitar",
                 "mp3Path": "",
                 "imagePng": "/png/music.png",
                 "backgroundAccomplishment": [],
@@ -384,10 +383,8 @@
                 "technologies": "",
                 "languages": "",
                 "accomplishments": [
-                    "Explored diverse music genres including indie, electronic, R&B, and alternative, developing an appreciation for different styles and production techniques.",
-                    "Created song covers and experimented with music production, learning about recording, mixing, and audio engineering.",
-                    "Built curated playlists for different moods and occasions, sharing music discoveries with others.",
-                    "Found music to be a constant source of inspiration, emotional expression, and creative energy in daily life."
+                    "Played piano up until grade 11, picked it up again around a year and a half ago just learning and playing songs for fun",
+                    "Picked up the guitar 4 months ago, still learning chords but we're making progress"
                 ]
             },
             {
@@ -395,7 +392,7 @@
                 "name": "Gaming",
                 "category": "Entertainment",
                 "location": "",
-                "description": "Strategy games, RPGs, puzzle games",
+                "description": "PC gamer, Supercell gamer",
                 "mp3Path": "",
                 "imagePng": "/png/gaming.png",
                 "backgroundAccomplishment": [],
@@ -406,10 +403,10 @@
                 "technologies": "PC Gaming, Nintendo Switch, PlayStation",
                 "languages": "",
                 "accomplishments": [
-                    "Played and completed various acclaimed games across multiple genres, analyzing game mechanics and design patterns.",
-                    "Developed strategic thinking and problem-solving skills through complex strategy games and puzzles.",
-                    "Participated in multiplayer gaming communities, building teamwork and communication skills.",
-                    "Appreciated gaming as both entertainment and a study of interactive design, user experience, and storytelling."
+                    "Ex-valorant tryhard (peaked ascendant 2, jett/chamber main)",
+                    "Clash Royale (hit ultimate champion)",
+                    "Brawl Stars (hit masters)",
+                    "Clash of Clans (town hall 15)"
                 ]
             },
             {
@@ -417,7 +414,7 @@
                 "name": "Pokemon",
                 "category": "Entertainment",
                 "location": "",
-                "description": "Competitive battling, team building, collecting",
+                "description": "TCG and Collecting",
                 "mp3Path": "",
                 "imagePng": "/png/pokemon.png",
                 "backgroundAccomplishment": [],
@@ -428,10 +425,8 @@
                 "technologies": "Pokemon Games, Pokemon Showdown",
                 "languages": "",
                 "accomplishments": [
-                    "Built and optimized competitive Pokemon teams, understanding type matchups, stats, abilities, and battle mechanics.",
-                    "Completed multiple Pokemon games across different generations, exploring various regions and gameplay features.",
-                    "Engaged with the Pokemon community through online battles, trading, and strategy discussions.",
-                    "Appreciated Pokemon as a strategic game with depth, nostalgia, and a welcoming community that spans generations."
+                    "Recently got into the TCG a few months ago",
+                    "Began collecting cards since 2022 (I have 2 cards worth over $5000 CAD each)"
                 ]
             }
         ]
