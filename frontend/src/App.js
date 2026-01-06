@@ -100,27 +100,29 @@ function HomePage() {
           </div>
           
           <div className="playlists-grid">
-            {playlists.map((playlist) => (
-              <div 
-                key={playlist.id} 
-                className="playlist-card"
-                onClick={() => handlePlaylistClick(playlist)}
-              >
-                <div className="playlist-image">
-                  {playlist.imagePng ? (
-                    <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="playlist-image-img" />
-                  ) : (
-                    playlist.imageUrl
-                  )}
+            {playlists
+              .filter(playlist => playlist.id !== 'skills-technologies-playlist-id')
+              .map((playlist) => (
+                <div 
+                  key={playlist.id} 
+                  className="playlist-card"
+                  onClick={() => handlePlaylistClick(playlist)}
+                >
+                  <div className="playlist-image">
+                    {playlist.imagePng ? (
+                      <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="playlist-image-img" />
+                    ) : (
+                      playlist.imageUrl
+                    )}
+                  </div>
+                  <div className="play-button-overlay">
+                    <Icon name="play" fallback="▶" alt="Play" />
+                  </div>
+                  <h3 className="playlist-title">{playlist.title}</h3>
+                  <p className="playlist-description">{playlist.description}</p>
+                  <div className="playlist-tech">{playlist.songs.length} songs</div>
                 </div>
-                <div className="play-button-overlay">
-                  <Icon name="play" fallback="▶" alt="Play" />
-                </div>
-                <h3 className="playlist-title">{playlist.title}</h3>
-                <p className="playlist-description">{playlist.description}</p>
-                <div className="playlist-tech">{playlist.songs.length} songs</div>
-              </div>
-            ))}
+              ))}
           </div>
 
           {playlists.length === 0 && (
