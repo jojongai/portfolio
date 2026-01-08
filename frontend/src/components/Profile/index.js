@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar';
-import Icon from '../Icon';
-import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
 function Profile() {
@@ -88,7 +86,6 @@ function Profile() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <Icon name="download" fallback="📥" />
                   <span>Download Resume</span>
                 </a>
               </div>
@@ -100,7 +97,6 @@ function Profile() {
               <h2 className="profile-section-title">Contact</h2>
               <div className="profile-contact">
                 <a href={`mailto:${profileData.email}`} className="profile-contact-item">
-                  <Icon name="email" fallback="✉️" />
                   <span>{profileData.email}</span>
                 </a>
               </div>
@@ -129,20 +125,18 @@ function Profile() {
               <div className="profile-social">
                 <a 
                   href={profileData.socialLinks.github} 
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer" 
                   className="profile-social-link"
                 >
-                  <Icon name="github" fallback="💻" />
                   <span>GitHub</span>
                 </a>
                 <a 
                   href={profileData.socialLinks.linkedin} 
-                  target="_blank" 
+                  target="_blank"
                   rel="noopener noreferrer" 
                   className="profile-social-link"
                 >
-                  <Icon name="linkedin" fallback="💼" />
                   <span>LinkedIn</span>
                 </a>
               </div>
