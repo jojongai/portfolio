@@ -7,7 +7,7 @@ import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
 
 function Playlist({ selectSong }) {
   const { playlistId } = useParams();
@@ -177,7 +177,7 @@ function Playlist({ selectSong }) {
       setPlaylist(response.data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch playlist. Make sure the backend server is running on port 8080.');
+      setError('Failed to fetch playlist. Make sure REACT_APP_API_URL is set correctly.');
       console.error('Error fetching playlist:', err);
     } finally {
       setLoading(false);

@@ -33,7 +33,7 @@ function Profile() {
       "Google Cloud Platform",
       "Vertex AI",
       "Hasura",
-      "Railway",
+      "Vercel",
       "Git",
       "Docker"
     ],

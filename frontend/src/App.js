@@ -11,7 +11,7 @@ import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
 
 // Player Context for global state
 export const PlayerContext = createContext();
@@ -35,7 +35,7 @@ function HomePage() {
       setPlaylists(response.data);
       setError(null);
     } catch (err) {
-      setError('Failed to fetch playlists. Make sure the backend server is running on port 8080.');
+      setError('Failed to fetch playlists. Make sure REACT_APP_API_URL is set correctly.');
       console.error('Error fetching playlists:', err);
     } finally {
       setLoading(false);

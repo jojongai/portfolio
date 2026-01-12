@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
 
 function Sidebar() {
   const navigate = useNavigate();
