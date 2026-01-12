@@ -8,8 +8,23 @@ const path = require('path');
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  'https://portfolio-live-eqgl.vercel.app',
+  'https://portfolio-live.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:3001'
+];
+
 app.use(cors({
-  origin: true, // Allow all origins in Vercel
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      // Allow all origins in development, or restrict as needed
+      callback(null, true);
+    }
+  },
   credentials: true
 }));
 app.use(bodyParser.json());
