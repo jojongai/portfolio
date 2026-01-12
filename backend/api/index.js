@@ -60,11 +60,12 @@ function savePlaylists(playlists) {
 let playlists = loadPlaylists();
 
 // Routes
-app.get('/api/playlists', (req, res) => {
+// Note: Vercel serves api/index.js at /api, so routes should start with /playlists not /api/playlists
+app.get('/playlists', (req, res) => {
   res.json(playlists);
 });
 
-app.get('/api/playlists/:id', (req, res) => {
+app.get('/playlists/:id', (req, res) => {
   console.log('[Backend] Fetching playlist:', req.params.id);
   const playlist = playlists.find(p => p.id === req.params.id);
   if (!playlist) {
@@ -75,7 +76,7 @@ app.get('/api/playlists/:id', (req, res) => {
   res.json(playlist);
 });
 
-app.post('/api/playlists', (req, res) => {
+app.post('/playlists', (req, res) => {
   const { title, description, imageUrl, songs } = req.body;
   
   if (!title || !description) {
@@ -95,7 +96,7 @@ app.post('/api/playlists', (req, res) => {
   res.status(201).json(newPlaylist);
 });
 
-app.put('/api/playlists/:id', (req, res) => {
+app.put('/playlists/:id', (req, res) => {
   const playlistIndex = playlists.findIndex(p => p.id === req.params.id);
   
   if (playlistIndex === -1) {
@@ -116,7 +117,7 @@ app.put('/api/playlists/:id', (req, res) => {
   res.json(playlists[playlistIndex]);
 });
 
-app.delete('/api/playlists/:id', (req, res) => {
+app.delete('/playlists/:id', (req, res) => {
   const playlistIndex = playlists.findIndex(p => p.id === req.params.id);
   
   if (playlistIndex === -1) {
@@ -129,7 +130,7 @@ app.delete('/api/playlists/:id', (req, res) => {
 });
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running' });
 });
 

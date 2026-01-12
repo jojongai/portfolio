@@ -7,7 +7,7 @@ import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-gamma-wpepful1p8.vercel.app';
 
 function Playlist({ selectSong }) {
   const { playlistId } = useParams();
@@ -173,7 +173,7 @@ function Playlist({ selectSong }) {
     try {
       setLoading(true);
       const id = playlistId || 'hobbies-and-interests-playlist-id';
-      const response = await axios.get(`${API_BASE_URL}/playlists/${id}`);
+      const response = await axios.get(`${API_BASE_URL}/api/playlists/${id}`);
       setPlaylist(response.data);
       setError(null);
     } catch (err) {

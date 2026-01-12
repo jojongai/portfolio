@@ -4,7 +4,7 @@ import axios from 'axios';
 import { getAssetUrl } from '../../utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-gamma-wpepful1p8.vercel.app';
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ function Sidebar() {
 
   const fetchPlaylists = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/playlists`);
+      const response = await axios.get(`${API_BASE_URL}/api/playlists`);
       setPlaylists(response.data);
     } catch (err) {
       console.error('Error fetching playlists:', err);

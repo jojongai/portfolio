@@ -6,7 +6,7 @@ import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-gamma-wpepful1p8.vercel.app';
 
 function SongRelationship() {
   const { playlistId, songId } = useParams();
@@ -56,7 +56,7 @@ function SongRelationship() {
   const fetchPlaylistAndSong = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/playlists/${playlistId}`);
+      const response = await axios.get(`${API_BASE_URL}/api/playlists/${playlistId}`);
       setPlaylist(response.data);
       const foundSong = response.data.songs.find(s => s.id === songId);
       if (foundSong) {

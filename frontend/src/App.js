@@ -11,7 +11,7 @@ import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
 import './index.css';
 
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-p2emc6nq2-jojos-projects-ee16cea8.vercel.app/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-gamma-wpepful1p8.vercel.app';
 
 // Player Context for global state
 export const PlayerContext = createContext();
@@ -31,7 +31,7 @@ function HomePage() {
   const fetchPlaylists = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/playlists`);
+      const response = await axios.get(`${API_BASE_URL}/api/playlists`);
       setPlaylists(response.data);
       setError(null);
     } catch (err) {
