@@ -125,7 +125,7 @@ function Profile() {
               <div className="profile-social">
                 <a 
                   href={profileData.socialLinks.github} 
-                  target="_blank"
+                  target="_blank" 
                   rel="noopener noreferrer" 
                   className="profile-social-link"
                 >
@@ -133,7 +133,7 @@ function Profile() {
                 </a>
                 <a 
                   href={profileData.socialLinks.linkedin} 
-                  target="_blank"
+                  target="_blank" 
                   rel="noopener noreferrer" 
                   className="profile-social-link"
                 >

@@ -38,21 +38,21 @@ function Sidebar() {
         {playlists
           .filter(playlist => playlist.id !== 'skills-technologies-playlist-id')
           .map((playlist) => (
-            <button
-              key={playlist.id}
-              onClick={() => navigate(`/playlist/${playlist.id}`)}
-              className={`nav-item ${isPlaylistActive(playlist.id) ? 'active' : ''}`}
-            >
-              <span className="nav-icon">
-                {playlist.imagePng ? (
-                  <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="nav-icon-img" />
-                ) : (
-                  playlist.imageUrl
-                )}
-              </span>
-              {playlist.title}
-            </button>
-          ))}
+          <button
+            key={playlist.id}
+            onClick={() => navigate(`/playlist/${playlist.id}`)}
+            className={`nav-item ${isPlaylistActive(playlist.id) ? 'active' : ''}`}
+          >
+            <span className="nav-icon">
+              {playlist.imagePng ? (
+                <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="nav-icon-img" />
+              ) : (
+                playlist.imageUrl
+              )}
+            </span>
+            {playlist.title}
+          </button>
+        ))}
       </nav>
     </div>
   );
