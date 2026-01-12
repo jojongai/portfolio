@@ -60,12 +60,12 @@ function savePlaylists(playlists) {
 let playlists = loadPlaylists();
 
 // Routes
-// Note: Vercel serves api/index.js at /api, so routes should start with /playlists not /api/playlists
-app.get('/playlists', (req, res) => {
+// Vercel routes /api/* to api/index.js, and Express receives the full path including /api
+app.get('/api/playlists', (req, res) => {
   res.json(playlists);
 });
 
-app.get('/playlists/:id', (req, res) => {
+app.get('/api/playlists/:id', (req, res) => {
   console.log('[Backend] Fetching playlist:', req.params.id);
   const playlist = playlists.find(p => p.id === req.params.id);
   if (!playlist) {
@@ -76,7 +76,7 @@ app.get('/playlists/:id', (req, res) => {
   res.json(playlist);
 });
 
-app.post('/playlists', (req, res) => {
+app.post('/api/playlists', (req, res) => {
   const { title, description, imageUrl, songs } = req.body;
   
   if (!title || !description) {
@@ -96,7 +96,7 @@ app.post('/playlists', (req, res) => {
   res.status(201).json(newPlaylist);
 });
 
-app.put('/playlists/:id', (req, res) => {
+app.put('/api/playlists/:id', (req, res) => {
   const playlistIndex = playlists.findIndex(p => p.id === req.params.id);
   
   if (playlistIndex === -1) {
@@ -117,7 +117,7 @@ app.put('/playlists/:id', (req, res) => {
   res.json(playlists[playlistIndex]);
 });
 
-app.delete('/playlists/:id', (req, res) => {
+app.delete('/api/playlists/:id', (req, res) => {
   const playlistIndex = playlists.findIndex(p => p.id === req.params.id);
   
   if (playlistIndex === -1) {
@@ -130,8 +130,21 @@ app.delete('/playlists/:id', (req, res) => {
 });
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Server is running' });
+});
+
+// Root endpoint for debugging
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'OK', 
+    message: 'Backend API is running',
+    availableRoutes: [
+      'GET /api/playlists',
+      'GET /api/playlists/:id',
+      'GET /api/health'
+    ]
+  });
 });
 
 // Export the Express app for Vercel
