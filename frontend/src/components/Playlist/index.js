@@ -204,9 +204,30 @@ function Playlist({ selectSong }) {
       setSelectedSongId(null);
   };
 
-  // Check if song is currently playing
+  const handleSongPlayButtonClick = (song, index, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Check if this song is currently selected
+    const isSelected = selectedSong && selectedSong.id === song.id && currentPlaylist && currentPlaylist.id === playlistId;
+    
+    if (isSelected) {
+      // Song is selected - toggle play/pause
+      if (handlePlayPause) {
+        handlePlayPause(); // Toggle without argument
+      }
+    } else {
+      // Song is not selected - select and play it
+      if (selectSong) {
+        selectSong(song, playlist, index);
+        setSelectedSongId(null);
+      }
+    }
+  };
+
+  // Check if song is currently playing (must be selected AND actually playing)
   const isSongPlaying = (song) => {
-    return selectedSong && selectedSong.id === song.id && currentPlaylist && currentPlaylist.id === playlistId;
+    return selectedSong && selectedSong.id === song.id && currentPlaylist && currentPlaylist.id === playlistId && isPlaying;
   };
 
   // Check if any song from this playlist is currently selected
@@ -330,7 +351,13 @@ function Playlist({ selectSong }) {
               onClick={(e) => handleSongClick(song, index, e)}
               onDoubleClick={(e) => handleSongDoubleClick(song, index, e)}
             >
-              <div className={`song-number ${isPlaying ? 'playing' : ''}`}>{index + 1}</div>
+              <div 
+                className={`song-number ${isPlaying ? 'playing' : ''}`}
+                onClick={(e) => handleSongPlayButtonClick(song, index, e)}
+                style={{ cursor: 'pointer' }}
+              >
+                {index + 1}
+              </div>
               <div className="song-image">
                 {song.imagePng ? (
                   <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />

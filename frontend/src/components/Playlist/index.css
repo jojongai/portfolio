@@ -249,13 +249,16 @@
   font-size: 12px;
 }
 
-/* Don't show play icon on hover for playing songs */
+/* Show pause icon on hover for playing songs */
 .song-row.playing:hover .song-number.playing {
-  color: #1db954;
+  color: transparent;
 }
 
 .song-row.playing:hover .song-number.playing::after {
-  display: none;
+  content: "‖";
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .song-image {
