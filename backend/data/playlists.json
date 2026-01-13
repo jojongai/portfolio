@@ -155,10 +155,10 @@
                 "title": "Dancing with your ghost",
                 "songCover": "/png/song-covers/dancing-with-your-ghost.png",
                 "artist": "Sasha Alex Sloan",
-                "technologies": "Railway, Vercel",
+                "technologies": "Vercel",
                 "languages": "React, Node.js",
                 "accomplishments": [
-                    "Built a portfolio website using React and Node.js, hosted on Railway and Vercel.",
+                    "Built a portfolio website using React and Node.js, hosted on Vercel",
                     "Curated the user interface to be a spotify inspired portfolio website, with a clean and modern design.",
                     "Implemented a audio player that allows the user to listen to the songs and playlists."
                 ]
