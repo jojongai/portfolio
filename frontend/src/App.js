@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './components/Sidebar';
 import Playlist from './components/Playlist';
@@ -133,11 +133,6 @@ function HomePage() {
       </div>
     </div>
   );
-}
-
-function PlaylistWithContext() {
-  const { selectSong } = useContext(PlayerContext);
-  return <Playlist selectSong={selectSong} />;
 }
 
 function PlaylistOrHobbies() {

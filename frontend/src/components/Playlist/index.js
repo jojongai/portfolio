@@ -31,6 +31,7 @@ function Playlist({ selectSong }) {
 
   useEffect(() => {
     fetchPlaylist();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlistId]);
 
   // Update tooltip position based on current step
@@ -74,6 +75,7 @@ function Playlist({ selectSong }) {
         setTimeout(() => updateTooltipPosition(), 100);
       }, 500);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlist]);
 
   // Helper function to reset tutorial (for development/testing)
@@ -88,6 +90,7 @@ function Playlist({ selectSong }) {
     return () => {
       delete window.resetTutorial;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Update tooltip position when tutorial is shown or window is resized/scrolled
@@ -105,6 +108,7 @@ function Playlist({ selectSong }) {
         window.removeEventListener('resize', handleResize);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTutorial, tutorialStep]);
 
   // Highlight microphone button when on step 2
@@ -119,6 +123,7 @@ function Playlist({ selectSong }) {
         };
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTutorial, tutorialStep]);
 
   // Highlight queue button when on step 3
@@ -133,6 +138,7 @@ function Playlist({ selectSong }) {
         };
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showTutorial, tutorialStep]);
 
   const handleTutorialNext = () => {

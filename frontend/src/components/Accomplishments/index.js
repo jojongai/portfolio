@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
-import AudioPlayer from '../AudioPlayer';
 import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
 import './index.css';
@@ -11,10 +10,8 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-ga
 
 function Accomplishments({ selectSong }) {
   const { playlistId, songId } = useParams();
-  const navigate = useNavigate();
   const location = useLocation();
   const { selectedSong } = useContext(PlayerContext);
-  const isHomePage = location.pathname === '/';
   const isWorkExperiencePlaylist = playlistId === 'work-experience-playlist-id';
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
@@ -26,6 +23,7 @@ function Accomplishments({ selectSong }) {
 
   useEffect(() => {
     fetchPlaylistAndSong();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlistId, songId]);
 
   useEffect(() => {

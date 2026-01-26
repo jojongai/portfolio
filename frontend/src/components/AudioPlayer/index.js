@@ -92,6 +92,7 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
         setIsPlaying(false);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [audioSrc]); // Only depend on audioSrc - don't reload when play state changes
 
   // Update volume when it changes (without reloading audio)
@@ -169,10 +170,6 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
 
   const toggleRepeat = () => {
     setRepeatMode((prev) => (prev + 1) % 2);
-  };
-
-  const toggleLike = () => {
-    setIsLiked(!isLiked);
   };
 
   // Sync microphone active state with current location

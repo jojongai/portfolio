@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
-import { PlayerContext } from '../../App';
 import './index.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-gamma-wpepful1p8.vercel.app';
