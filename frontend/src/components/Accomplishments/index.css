@@ -11,6 +11,19 @@
   padding-right: 240px;
 }
 
+/* Mobile overrides for accomplishments-page */
+@media (max-width: 768px) {
+  .accomplishments-page {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  .accomplishments-page .song-detail {
+    padding-right: 0;
+    width: 100%;
+  }
+}
+
 .song-detail {
   flex: 1;
   margin-left: 240px;
@@ -22,8 +35,9 @@
   padding-bottom: 90px;
   transition: margin-left 0.3s ease, margin-right 0.3s ease, background-color 0.3s ease;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .song-info-sidebar {
@@ -176,11 +190,13 @@
 .lyrics-container {
   padding: 0;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .lyrics-content {
@@ -190,6 +206,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-sizing: border-box;
 }
 
 
@@ -295,7 +312,11 @@
   .song-detail {
     margin-left: 0;
     margin-right: 0;
-    padding-bottom: 120px; /* Space for audio player only */
+    padding-bottom: 120px;
+    height: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
   
   .song-info-sidebar {
@@ -307,6 +328,7 @@
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
     padding-top: max(16px, env(safe-area-inset-top));
+    flex-shrink: 0;
   }
   
   .song-header-info {
@@ -344,27 +366,38 @@
   }
   
   .lyrics-container {
-    padding: 16px;
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
+    padding: 0;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
   }
 
   .lyrics-content {
     max-width: 100%;
+    width: 100%;
+    padding: 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    box-sizing: border-box;
   }
   
   .accomplishments-list {
     gap: 40px;
-    padding: 100px 0;
+    padding: 60px 0;
     align-items: center;
+    width: 100%;
   }
   
   .accomplishment-text {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.6;
     text-align: center;
     width: 100%;
     max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -372,7 +405,9 @@
   .song-detail {
     margin-left: 0;
     margin-right: 0;
-    padding-bottom: 110px; /* Space for smaller audio player only */
+    padding-bottom: 110px;
+    height: auto;
+    min-height: 100vh;
   }
   
   .song-info-sidebar {
@@ -381,6 +416,8 @@
 
   .song-header {
     padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
 
   .song-image-large {
@@ -406,17 +443,27 @@
   }
 
   .lyrics-container {
+    padding: 0;
+    width: 100%;
+  }
+
+  .lyrics-content {
     padding: 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
 
   .accomplishments-list {
-    gap: 35px;
-    padding: 80px 0;
+    gap: 30px;
+    padding: 50px 0;
+    width: 100%;
   }
 
   .accomplishment-text {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5;
     text-align: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 }

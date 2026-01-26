@@ -183,7 +183,7 @@
   background: none;
   border: none;
   color: #b3b3b3;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.2s ease;
   padding: 8px;
@@ -193,6 +193,16 @@
   min-width: 32px;
   min-height: 32px;
   position: relative;
+}
+
+.control-btn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn .icon svg {
+  display: block;
 }
 
 .control-btn[title]:hover::before {
@@ -353,18 +363,29 @@
   align-items: center;
   justify-content: center;
   color: #000000;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease;
   flex-shrink: 0;
   margin: 0 4px;
+  padding: 0;
+}
+
+.play-pause-btn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-pause-btn .icon svg {
+  display: block;
 }
 
 .play-pause-btn .icon-emoji {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1;
 }
 
@@ -646,20 +667,26 @@
 
 @media (max-width: 768px) {
   .audio-player-container {
-    height: 100px;
-    padding: 8px 12px;
+    height: auto;
+    min-height: 110px;
+    padding: 10px 12px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
+    align-items: flex-start;
   }
   
   .audio-player-left {
     gap: 10px;
     min-width: 0;
-    flex: 0 0 auto;
+    flex: 1 1 100%;
     width: 100%;
     order: 1;
+    display: flex;
+    align-items: center;
   }
   
   .album-art {
@@ -692,49 +719,71 @@
   }
   
   .audio-player-center {
-    flex: 0 0 auto;
-    width: 100%;
+    flex: 1 1 calc(100% - 100px);
     order: 2;
     display: flex;
-    align-items: center;
-    gap: 8px;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .player-controls {
     gap: 4px;
     margin-bottom: 0;
-    justify-content: center;
+    justify-content: flex-start;
     flex-shrink: 0;
   }
 
   .control-btn {
     padding: 4px;
-    min-width: 28px;
-    min-height: 28px;
-    font-size: 14px;
+    min-width: 30px;
+    min-height: 30px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .control-btn .icon {
-    width: 18px;
-    height: 18px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .control-btn .icon svg {
+    width: 14px;
+    height: 14px;
   }
   
   .play-pause-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
     margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .play-pause-btn .icon {
     width: 14px;
     height: 14px;
   }
+
+  .play-pause-btn .icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .play-pause-btn .icon-emoji {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   .progress-section {
     gap: 6px;
     flex: 1;
-    min-width: 0;
+    width: 100%;
   }
   
   .time-display {
@@ -747,9 +796,16 @@
   }
   
   .audio-player-right {
-    gap: 4px;
     flex: 0 0 auto;
     order: 3;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .audio-player-right-actions {
+    display: flex;
+    gap: 6px;
   }
   
   .volume-section {
@@ -763,25 +819,31 @@
 
   .queue-btn,
   .microphone-btn {
-    display: flex; /* Keep these visible on tablet */
+    display: flex !important; /* Keep these visible on tablet */
   }
 }
 
 @media (max-width: 480px) {
   .audio-player-container {
-    height: 90px;
-    padding: 6px 8px;
+    height: auto;
+    min-height: 100px;
+    padding: 8px 8px;
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
     padding-left: max(8px, env(safe-area-inset-left));
     padding-right: max(8px, env(safe-area-inset-right));
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 6px;
+    align-items: flex-start;
   }
   
   .audio-player-left {
     gap: 8px;
-    flex: 0 0 auto;
+    flex: 1 1 100%;
     width: 100%;
     order: 1;
+    display: flex;
+    align-items: center;
   }
   
   .album-art {
@@ -814,49 +876,71 @@
   }
   
   .audio-player-center {
-    flex: 0 0 auto;
-    width: 100%;
+    flex: 1 1 calc(100% - 80px);
     order: 2;
     display: flex;
-    align-items: center;
-    gap: 6px;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .player-controls {
     gap: 3px;
     margin-bottom: 0;
-    justify-content: center;
+    justify-content: flex-start;
     flex-shrink: 0;
   }
   
   .control-btn {
     padding: 3px;
-    min-width: 26px;
-    min-height: 26px;
-    font-size: 12px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .control-btn .icon {
-    width: 16px;
-    height: 16px;
+    width: 13px;
+    height: 13px;
+  }
+
+  .control-btn .icon svg {
+    width: 13px;
+    height: 13px;
   }
   
   .play-pause-btn {
-    width: 30px;
-    height: 30px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 11px;
     margin: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .play-pause-btn .icon {
     width: 12px;
     height: 12px;
   }
+
+  .play-pause-btn .icon svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .play-pause-btn .icon-emoji {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
   .progress-section {
     gap: 4px;
     flex: 1;
-    min-width: 0;
+    width: 100%;
   }
   
   .time-display {
@@ -871,7 +955,14 @@
   .audio-player-right {
     flex: 0 0 auto;
     order: 3;
-    gap: 2px;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .audio-player-right-actions {
+    display: flex;
+    gap: 4px;
   }
   
   .volume-section {
@@ -885,7 +976,7 @@
 
   .queue-btn,
   .microphone-btn {
-    display: flex; /* Keep these visible on phone */
+    display: flex !important; /* Keep these visible on phone */
   }
 
   .shuffle-btn,
