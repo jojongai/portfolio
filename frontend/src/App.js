@@ -7,6 +7,7 @@ import Accomplishments from './components/Accomplishments';
 import SongRelationship from './components/SongRelationship';
 import Profile from './components/Profile';
 import AudioPlayer from './components/AudioPlayer';
+import MobileNav from './components/MobileNav';
 import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
 import './index.css';
@@ -289,6 +290,7 @@ function App() {
             <Route path="/playlist/:playlistId/song/:songId" element={<AccomplishmentsWithContext />} />
             <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
           </Routes>
+          <MobileNav />
         <AudioPlayer 
           audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
           title={selectedSong ? (

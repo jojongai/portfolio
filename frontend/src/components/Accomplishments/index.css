@@ -293,9 +293,9 @@
 
 @media (max-width: 768px) {
   .song-detail {
-    margin-left: 70px;
+    margin-left: 0;
     margin-right: 0;
-    padding-bottom: 100px;
+    padding-bottom: 160px; /* Space for mobile player + mobile nav */
   }
   
   .song-info-sidebar {
@@ -304,6 +304,9 @@
   
   .song-header {
     padding: 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-top: max(16px, env(safe-area-inset-top));
   }
   
   .song-header-info {
@@ -342,6 +345,8 @@
   
   .lyrics-container {
     padding: 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
   }
 
   .lyrics-content {
@@ -361,9 +366,9 @@
 
 @media (max-width: 480px) {
   .song-detail {
-    margin-left: 60px;
+    margin-left: 0;
     margin-right: 0;
-    padding-bottom: 110px;
+    padding-bottom: 140px; /* Space for smaller mobile player + mobile nav */
   }
   
   .song-info-sidebar {

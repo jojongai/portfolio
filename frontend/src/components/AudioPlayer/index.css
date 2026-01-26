@@ -648,6 +648,8 @@
   .audio-player-container {
     height: 80px;
     padding: 0 12px;
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
   }
   
   .audio-player-left {
@@ -753,6 +755,8 @@
   .audio-player-container {
     height: 70px;
     padding: 0 8px;
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
     flex-wrap: wrap;
   }
   

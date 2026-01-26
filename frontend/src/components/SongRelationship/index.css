@@ -150,6 +150,14 @@
   .song-relationship {
     margin-left: 0;
     padding: 24px;
+    padding-left: max(24px, env(safe-area-inset-left));
+    padding-right: max(24px, env(safe-area-inset-right));
+    padding-bottom: 160px; /* Space for audio player + mobile nav */
+  }
+
+  .home-button {
+    top: max(24px, env(safe-area-inset-top));
+    left: max(24px, env(safe-area-inset-left));
   }
 
   .song-relationship-content {

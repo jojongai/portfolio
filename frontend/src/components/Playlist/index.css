@@ -355,6 +355,8 @@
   
   .playlist-header {
     padding: 20px 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -389,13 +391,21 @@
   }
 
   .play-button-large {
-    width: 56px;
-    height: 56px;
-    font-size: 20px;
+    width: 64px; /* Larger touch target */
+    height: 64px;
+    font-size: 24px;
+  }
+
+  .back-button {
+    min-height: 44px; /* Better touch target */
+    padding: 10px 20px;
   }
   
   .songs-list {
     padding: 0 16px 16px;
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+    padding-bottom: calc(16px + 160px); /* Extra space for audio player + mobile nav */
   }
   
   .songs-header {
@@ -405,10 +415,11 @@
   .song-row {
     grid-template-columns: 40px 36px 1fr;
     gap: 12px;
-    padding: 12px;
+    padding: 16px 12px; /* Larger touch target */
     border-radius: 8px;
     margin-bottom: 8px;
     background-color: rgba(255, 255, 255, 0.03);
+    min-height: 60px; /* Better touch target */
   }
 
   .song-number {
@@ -698,4 +709,33 @@
 
 .song-row.hobbies-layout .song-artist-text {
   text-align: center;
+}
+
+/* Mobile: hobbies use same layout as other playlists */
+@media (max-width: 768px) {
+  .songs-header.hobbies-layout {
+    display: none; /* Hide header on mobile */
+  }
+  
+  .song-row.hobbies-layout {
+    grid-template-columns: 40px 36px 1fr; /* Same as regular mobile layout */
+    gap: 12px;
+    padding: 16px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background-color: rgba(255, 255, 255, 0.03);
+    min-height: 60px;
+  }
+  
+  .song-row.hobbies-layout .song-artist-text {
+    display: none; /* Hide category column on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .song-row.hobbies-layout {
+    grid-template-columns: 32px 32px 1fr; /* Match smaller mobile layout */
+    gap: 10px;
+    padding: 10px;
+  }
 }
