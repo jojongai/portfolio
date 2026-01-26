@@ -354,7 +354,7 @@
   }
   
   .playlist-header {
-    padding: 20px 16px;
+    padding: 24px 16px 20px;
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
     flex-direction: column;
@@ -402,10 +402,9 @@
   }
   
   .songs-list {
-    padding: 0 16px 16px;
+    padding: 0 16px 120px;
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
-    padding-bottom: calc(16px + 160px); /* Extra space for audio player + mobile nav */
   }
   
   .songs-header {

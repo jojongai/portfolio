@@ -152,12 +152,15 @@
     padding: 24px;
     padding-left: max(24px, env(safe-area-inset-left));
     padding-right: max(24px, env(safe-area-inset-right));
-    padding-bottom: 160px; /* Space for audio player + mobile nav */
+    padding-bottom: 120px; /* Space for audio player only */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .home-button {
-    top: max(24px, env(safe-area-inset-top));
-    left: max(24px, env(safe-area-inset-left));
+    display: none; /* Hide home button on mobile */
   }
 
   .song-relationship-content {

@@ -247,7 +247,7 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .profile-page {
-    padding: 16px 16px 160px 16px; /* Extra bottom padding for audio player + mobile nav */
+    padding: 16px 16px 120px 16px; /* Extra bottom padding for audio player only */
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
   }

@@ -646,126 +646,20 @@
 
 @media (max-width: 768px) {
   .audio-player-container {
-    height: 80px;
-    padding: 0 12px;
+    height: 100px;
+    padding: 8px 12px;
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
+    flex-direction: column;
+    gap: 8px;
   }
   
   .audio-player-left {
     gap: 10px;
     min-width: 0;
-    flex: 0 1 auto;
-  }
-  
-  .album-art {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-  }
-  
-  .album-image {
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
-  }
-  
-  .audio-info {
-    min-width: 0;
-  }
-  
-  .audio-title-link {
-    font-size: 13px;
-  }
-  
-  .audio-artist-link {
-    font-size: 11px;
-  }
-
-  .like-btn {
-    display: none;
-  }
-  
-  .audio-player-center {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .player-controls {
-    gap: 4px;
-    margin-bottom: 6px;
-  }
-
-  .control-btn {
-    padding: 6px;
-    min-width: 28px;
-    min-height: 28px;
-    font-size: 14px;
-  }
-  
-  .play-pause-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-    margin: 0 2px;
-  }
-  
-  .progress-section {
-    gap: 6px;
-    max-width: 100%;
-    width: 100%;
-  }
-  
-  .time-display {
-    font-size: 10px;
-    min-width: 28px;
-  }
-
-  .progress-bar-container {
-    flex: 1;
-  }
-  
-  .audio-player-right {
-    gap: 4px;
     flex: 0 0 auto;
-  }
-  
-  .volume-section {
-    min-width: 70px;
-    gap: 6px;
-  }
-
-  .volume-icon-btn {
-    min-width: 28px;
-    font-size: 14px;
-  }
-  
-  .volume-slider {
-    width: 50px;
-  }
-
-  .queue-btn,
-  .device-btn,
-  .fullscreen-btn {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .audio-player-container {
-    height: 70px;
-    padding: 0 8px;
-    padding-left: max(8px, env(safe-area-inset-left));
-    padding-right: max(8px, env(safe-area-inset-right));
-    flex-wrap: wrap;
-  }
-  
-  .audio-player-left {
-    gap: 8px;
-    flex: 1 1 100%;
+    width: 100%;
     order: 1;
-    min-width: 0;
-    max-width: 100%;
   }
   
   .album-art {
@@ -784,6 +678,128 @@
     min-width: 0;
     flex: 1;
   }
+  
+  .audio-title-link {
+    font-size: 13px;
+  }
+  
+  .audio-artist-link {
+    font-size: 11px;
+  }
+
+  .like-btn {
+    display: none;
+  }
+  
+  .audio-player-center {
+    flex: 0 0 auto;
+    width: 100%;
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .player-controls {
+    gap: 4px;
+    margin-bottom: 0;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .control-btn {
+    padding: 4px;
+    min-width: 28px;
+    min-height: 28px;
+    font-size: 14px;
+  }
+
+  .control-btn .icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .play-pause-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+    margin: 0 2px;
+  }
+
+  .play-pause-btn .icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .progress-section {
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .time-display {
+    font-size: 10px;
+    min-width: 28px;
+  }
+
+  .progress-bar-container {
+    flex: 1;
+  }
+  
+  .audio-player-right {
+    gap: 4px;
+    flex: 0 0 auto;
+    order: 3;
+  }
+  
+  .volume-section {
+    display: none;
+  }
+
+  .device-btn,
+  .fullscreen-btn {
+    display: none;
+  }
+
+  .queue-btn,
+  .microphone-btn {
+    display: flex; /* Keep these visible on tablet */
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-player-container {
+    height: 90px;
+    padding: 6px 8px;
+    padding-left: max(8px, env(safe-area-inset-left));
+    padding-right: max(8px, env(safe-area-inset-right));
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .audio-player-left {
+    gap: 8px;
+    flex: 0 0 auto;
+    width: 100%;
+    order: 1;
+  }
+  
+  .album-art {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+  
+  .album-image {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .audio-info {
+    min-width: 0;
+    flex: 1;
+  }
 
   .audio-title-link {
     font-size: 12px;
@@ -798,35 +814,49 @@
   }
   
   .audio-player-center {
-    flex: 1 1 100%;
-    order: 3;
+    flex: 0 0 auto;
     width: 100%;
-    margin-top: 4px;
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
   .player-controls {
-    gap: 2px;
-    margin-bottom: 4px;
+    gap: 3px;
+    margin-bottom: 0;
+    justify-content: center;
+    flex-shrink: 0;
   }
   
   .control-btn {
-    padding: 4px;
-    min-width: 24px;
-    min-height: 24px;
+    padding: 3px;
+    min-width: 26px;
+    min-height: 26px;
     font-size: 12px;
+  }
+
+  .control-btn .icon {
+    width: 16px;
+    height: 16px;
   }
   
   .play-pause-btn {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     font-size: 12px;
-    margin: 0;
+    margin: 0 2px;
+  }
+
+  .play-pause-btn .icon {
+    width: 12px;
+    height: 12px;
   }
   
   .progress-section {
-    max-width: 100%;
     gap: 4px;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
   }
   
   .time-display {
@@ -840,7 +870,7 @@
 
   .audio-player-right {
     flex: 0 0 auto;
-    order: 2;
+    order: 3;
     gap: 2px;
   }
   
@@ -848,9 +878,18 @@
     display: none;
   }
   
-  .queue-btn,
   .device-btn,
   .fullscreen-btn {
     display: none;
+  }
+
+  .queue-btn,
+  .microphone-btn {
+    display: flex; /* Keep these visible on phone */
+  }
+
+  .shuffle-btn,
+  .repeat-btn {
+    display: none; /* Hide shuffle and repeat on small screens to save space */
   }
 }
