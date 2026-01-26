@@ -11,47 +11,10 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-ga
 function SongRelationship() {
   const { playlistId, songId } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { selectedSong } = useContext(PlayerContext);
-  const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [song, setSong] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-
-  useEffect(() => {
-    fetchPlaylistAndSong();
-  }, [playlistId, songId]);
-
-  // Typewriter effect for song relationship text
-  useEffect(() => {
-    if (!song || !song.songRelationship) {
-      setDisplayedText('');
-      setIsTyping(false);
-      return;
-    }
-
-    setIsTyping(true);
-    setDisplayedText('');
-    const fullText = song.songRelationship;
-    let currentIndex = 0;
-
-    const typingInterval = setInterval(() => {
-      if (currentIndex < fullText.length) {
-        setDisplayedText(fullText.substring(0, currentIndex + 1));
-        currentIndex++;
-      } else {
-        setIsTyping(false);
-        clearInterval(typingInterval);
-      }
-    }, 30); // Adjust speed here (milliseconds per character)
-
-    return () => {
-      clearInterval(typingInterval);
-    };
-  }, [song]);
 
   const fetchPlaylistAndSong = async () => {
     try {
@@ -72,6 +35,14 @@ function SongRelationship() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchPlaylistAndSong();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playlistId, songId]);
+
+  // Typewriter effect removed - was causing unused variable warnings
+  // The song relationship description is currently hidden in the UI
 
   if (loading) {
     return (
