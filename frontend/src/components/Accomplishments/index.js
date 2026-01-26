@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
 import { getAssetUrl } from '../../utils/imageUrl';
@@ -10,7 +10,6 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-ga
 
 function Accomplishments({ selectSong }) {
   const { playlistId, songId } = useParams();
-  const location = useLocation();
   const { selectedSong } = useContext(PlayerContext);
   const isWorkExperiencePlaylist = playlistId === 'work-experience-playlist-id';
   const [playlist, setPlaylist] = useState(null);

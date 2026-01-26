@@ -22,8 +22,6 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  
-  const { selectSong } = useContext(PlayerContext);
 
   useEffect(() => {
     fetchPlaylists();

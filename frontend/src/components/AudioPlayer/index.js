@@ -15,7 +15,6 @@ function AudioPlayer({ audioSrc, title, artist, imagePng, onPrevious, onNext, ha
   const [volume, setVolume] = useState(1);
   const [isShuffled, setIsShuffled] = useState(false);
   const [repeatMode, setRepeatMode] = useState(0); // 0: off, 1: all, 2: one
-  const [isLiked, setIsLiked] = useState(false);
   const [isMicrophoneActive, setIsMicrophoneActive] = useState(false);
   const [isQueueActive, setIsQueueActive] = useState(false);
   const [isHoveringProgress, setIsHoveringProgress] = useState(false);
