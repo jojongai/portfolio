@@ -53,6 +53,11 @@
     height: 24px;
   }
 
+  .mobile-nav-item .icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
   .mobile-nav-item.active {
     color: #1db954;
   }
@@ -82,6 +87,16 @@
 
   .mobile-nav-icon {
     font-size: 20px;
+  }
+
+  .mobile-nav-item .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-nav-item .icon svg {
+    width: 20px;
+    height: 20px;
   }
 }
 

@@ -28,7 +28,7 @@ function MobileNav() {
         className={`mobile-nav-item ${isActive('/playlist/work-experience-playlist-id') ? 'active' : ''}`}
         onClick={() => navigate('/playlist/work-experience-playlist-id')}
       >
-        <span className="mobile-nav-icon">💼</span>
+        <Icon name="work" fallback="💼" alt="Work" />
         <span>Work</span>
       </button>
 
@@ -36,7 +36,7 @@ function MobileNav() {
         className={`mobile-nav-item ${isActive('/playlist/personal-projects-playlist-id') ? 'active' : ''}`}
         onClick={() => navigate('/playlist/personal-projects-playlist-id')}
       >
-        <span className="mobile-nav-icon">🚀</span>
+        <Icon name="projects" fallback="🚀" alt="Projects" />
         <span>Projects</span>
       </button>
 
@@ -44,7 +44,7 @@ function MobileNav() {
         className={`mobile-nav-item ${isActive('/playlist/hobbies-and-interests-playlist-id') ? 'active' : ''}`}
         onClick={() => navigate('/playlist/hobbies-and-interests-playlist-id')}
       >
-        <span className="mobile-nav-icon">🎮</span>
+        <Icon name="hobbies" fallback="🎮" alt="Hobbies" />
         <span>Hobbies</span>
       </button>
 
@@ -52,7 +52,7 @@ function MobileNav() {
         className={`mobile-nav-item ${isActive('/profile') ? 'active' : ''}`}
         onClick={() => navigate('/profile')}
       >
-        <span className="mobile-nav-icon">👤</span>
+        <Icon name="profile" fallback="👤" alt="Profile" />
         <span>Profile</span>
       </button>
     </nav>

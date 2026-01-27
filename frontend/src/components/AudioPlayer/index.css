@@ -673,18 +673,18 @@
     padding-bottom: max(10px, env(safe-area-inset-bottom));
     padding-left: max(12px, env(safe-area-inset-left));
     padding-right: max(12px, env(safe-area-inset-right));
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
     gap: 8px;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .audio-player-left {
     gap: 10px;
     min-width: 0;
-    flex: 1 1 100%;
-    width: 100%;
-    order: 1;
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     align-items: center;
   }
@@ -719,18 +719,19 @@
   }
   
   .audio-player-center {
-    flex: 1 1 calc(100% - 100px);
-    order: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    grid-column: 1;
+    grid-row: 2 / 4;
+    display: contents;
   }
 
   .player-controls {
+    grid-column: 1;
+    grid-row: 2;
     gap: 4px;
     margin-bottom: 0;
-    justify-content: flex-start;
+    justify-content: center;
     flex-shrink: 0;
+    display: flex;
   }
 
   .control-btn {
@@ -781,9 +782,12 @@
   }
   
   .progress-section {
+    grid-column: 1;
+    grid-row: 3;
     gap: 6px;
-    flex: 1;
     width: 100%;
+    display: flex;
+    align-items: center;
   }
   
   .time-display {
@@ -796,16 +800,18 @@
   }
   
   .audio-player-right {
-    flex: 0 0 auto;
-    order: 3;
+    grid-column: 1;
+    grid-row: 2;
     display: flex;
-    gap: 6px;
+    gap: 8px;
     align-items: center;
+    justify-content: center;
+    margin-left: auto;
   }
 
   .audio-player-right-actions {
     display: flex;
-    gap: 6px;
+    gap: 8px;
   }
   
   .volume-section {
@@ -831,17 +837,17 @@
     padding-bottom: max(8px, env(safe-area-inset-bottom));
     padding-left: max(8px, env(safe-area-inset-left));
     padding-right: max(8px, env(safe-area-inset-right));
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
     gap: 6px;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .audio-player-left {
     gap: 8px;
-    flex: 1 1 100%;
-    width: 100%;
-    order: 1;
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     align-items: center;
   }
@@ -876,18 +882,19 @@
   }
   
   .audio-player-center {
-    flex: 1 1 calc(100% - 80px);
-    order: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    grid-column: 1;
+    grid-row: 2 / 4;
+    display: contents;
   }
 
   .player-controls {
+    grid-column: 1;
+    grid-row: 2;
     gap: 3px;
     margin-bottom: 0;
-    justify-content: flex-start;
+    justify-content: center;
     flex-shrink: 0;
+    display: flex;
   }
   
   .control-btn {
@@ -938,9 +945,12 @@
   }
   
   .progress-section {
+    grid-column: 1;
+    grid-row: 3;
     gap: 4px;
-    flex: 1;
     width: 100%;
+    display: flex;
+    align-items: center;
   }
   
   .time-display {
@@ -953,16 +963,18 @@
   }
 
   .audio-player-right {
-    flex: 0 0 auto;
-    order: 3;
+    grid-column: 1;
+    grid-row: 2;
     display: flex;
-    gap: 4px;
+    gap: 6px;
     align-items: center;
+    justify-content: center;
+    margin-left: auto;
   }
 
   .audio-player-right-actions {
     display: flex;
-    gap: 4px;
+    gap: 6px;
   }
   
   .volume-section {

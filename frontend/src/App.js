@@ -284,26 +284,24 @@ function App() {
             <Route path="/playlist/:playlistId/song/:songId/relationship" element={<SongRelationship />} />
           </Routes>
           <MobileNav />
-        <AudioPlayer 
-          audioSrc={selectedSong && selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
-          title={selectedSong ? (
-            currentPlaylist?.id === 'work-experience-playlist-id' 
-              ? (selectedSong.role || selectedSong.title)
-              : (selectedSong.name || selectedSong.title)
-          ) : null}
-          artist={selectedSong ? (
-            currentPlaylist?.id === 'work-experience-playlist-id'
-              ? (selectedSong.duration || selectedSong.artist)
-              : (selectedSong.category || selectedSong.artist)
-          ) : null}
-          imagePng={selectedSong ? selectedSong.imagePng : null}
-          onPrevious={handlePrevious}
-          onNext={handleNext}
-          hasPrevious={true}
-          hasNext={true}
-          isPlaying={isPlaying}
-            onPlayPause={handlePlayPause}
-          />
+          {selectedSong && (
+            <AudioPlayer 
+              audioSrc={selectedSong.mp3Path ? getAssetUrl(selectedSong.mp3Path) : null}
+              title={currentPlaylist?.id === 'work-experience-playlist-id' 
+                ? (selectedSong.role || selectedSong.title)
+                : (selectedSong.name || selectedSong.title)}
+              artist={currentPlaylist?.id === 'work-experience-playlist-id'
+                ? (selectedSong.duration || selectedSong.artist)
+                : (selectedSong.category || selectedSong.artist)}
+              imagePng={selectedSong.imagePng}
+              onPrevious={handlePrevious}
+              onNext={handleNext}
+              hasPrevious={true}
+              hasNext={true}
+              isPlaying={isPlaying}
+              onPlayPause={handlePlayPause}
+            />
+          )}
         </div>
     </PlayerContext.Provider>
   );
