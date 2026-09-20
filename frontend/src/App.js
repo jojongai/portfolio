@@ -17,6 +17,13 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-ga
 // Player Context for global state
 export const PlayerContext = createContext();
 
+function getGreeting() {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'Good morning';
+  if (hour < 18) return 'Good afternoon';
+  return 'Good evening';
+}
+
 function HomePage() {
   const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -73,13 +80,46 @@ function HomePage() {
 
       <div className="main-content">
         <div className="top-bar">
-          <h1 className="welcome-text">Good afternoon</h1>
+          <div className="top-bar-left">
+            <div className="nav-arrows">
+              <button className="nav-arrow-btn" onClick={() => window.history.back()} title="Go back">
+                ‹
+              </button>
+              <button className="nav-arrow-btn" onClick={() => window.history.forward()} title="Go forward">
+                ›
+              </button>
+            </div>
+            <h1 className="welcome-text">{getGreeting()}</h1>
+          </div>
           <div className="profile-picture" onClick={() => navigate('/profile')}>
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
         </div>
 
         <div className="content-area">
+          {/* Quick-access horizontal cards like Spotify */}
+          <div className="quick-access-grid">
+            {playlists
+              .filter(playlist => playlist.id !== 'skills-technologies-playlist-id')
+              .map((playlist) => (
+              <div
+                key={playlist.id}
+                className="quick-access-card"
+                onClick={() => handlePlaylistClick(playlist)}
+              >
+                {playlist.imagePng ? (
+                  <img src={getAssetUrl(playlist.imagePng)} alt={playlist.title} className="quick-access-img" />
+                ) : (
+                  <div className="quick-access-img-placeholder">{playlist.imageUrl}</div>
+                )}
+                <span className="quick-access-title">{playlist.title}</span>
+                <div className="quick-access-play">
+                  <Icon name="play" fallback="▶" alt="Play" />
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="intro-section">
             <div className="intro-background"></div>
             <h2 className="intro-headline">
@@ -97,13 +137,14 @@ function HomePage() {
               </a>
             </div>
           </div>
-          
+
+          <h2 className="section-title">Your playlists</h2>
           <div className="playlists-grid">
             {playlists
               .filter(playlist => playlist.id !== 'skills-technologies-playlist-id')
               .map((playlist) => (
-              <div 
-                key={playlist.id} 
+              <div
+                key={playlist.id}
                 className="playlist-card"
                 onClick={() => handlePlaylistClick(playlist)}
               >

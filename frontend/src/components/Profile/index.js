@@ -49,7 +49,16 @@ function Profile() {
       <Sidebar />
       <div className="main-content">
         <div className="top-bar">
-          <div></div>
+          <div className="top-bar-left">
+            <div className="nav-arrows">
+              <button className="nav-arrow-btn" onClick={() => navigate(-1)} title="Go back">
+                ‹
+              </button>
+              <button className="nav-arrow-btn" onClick={() => navigate(1)} title="Go forward">
+                ›
+              </button>
+            </div>
+          </div>
           <div className="profile-picture" onClick={() => navigate('/')}>
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
@@ -58,38 +67,37 @@ function Profile() {
         <div className="profile-page">
           <div className="profile-header">
             <div className="profile-image-container">
-              <img 
-                src="/png/profile.png" 
-                alt={profileData.name} 
+              <img
+                src="/png/profile.png"
+                alt={profileData.name}
                 className="profile-large-img"
-                onError={(e) => { 
+                onError={(e) => {
                   e.target.style.display = 'none';
                   e.target.nextSibling.style.display = 'flex';
-                }} 
+                }}
               />
               <div className="profile-placeholder" style={{ display: 'none' }}>
                 {profileData.name.charAt(0)}
               </div>
             </div>
             <div className="profile-header-info">
-              <div className="profile-header-top">
-                <div>
-                  <p className="profile-type">Profile</p>
-                  <h1 className="profile-name">{profileData.name}</h1>
-                  <p className="profile-title">{profileData.title}</p>
-                  <p className="profile-location">{profileData.school} • {profileData.location}</p>
-                </div>
-                <a 
-                  href={profileData.resumePath} 
-                  download 
-                  className="profile-header-download"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>Download Resume</span>
-                </a>
-              </div>
+              <p className="profile-type">Profile</p>
+              <h1 className="profile-name">{profileData.name}</h1>
+              <p className="profile-title">{profileData.title}</p>
+              <p className="profile-location">{profileData.school} · {profileData.location}</p>
             </div>
+          </div>
+
+          <div className="profile-actions-row">
+            <a
+              href={profileData.resumePath}
+              download
+              className="profile-header-download"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>Download Resume</span>
+            </a>
           </div>
 
           <div className="profile-content">

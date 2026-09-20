@@ -297,8 +297,16 @@ function Playlist({ selectSong }) {
       <Sidebar />
       <div className="main-content">
         <div className="top-bar">
-          {isHomePage && <h1 className="welcome-text">Good afternoon</h1>}
-          {!isHomePage && <div></div>}
+          <div className="top-bar-left">
+            <div className="nav-arrows">
+              <button className="nav-arrow-btn" onClick={() => navigate(-1)} title="Go back">
+                ‹
+              </button>
+              <button className="nav-arrow-btn" onClick={() => navigate(1)} title="Go forward">
+                ›
+              </button>
+            </div>
+          </div>
           <div className="profile-picture" onClick={() => navigate('/profile')}>
             <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
           </div>
@@ -323,11 +331,11 @@ function Playlist({ selectSong }) {
             </div>
           </div>
         </div>
-        <div className="playlist-actions">
-          <button className="play-button-large" onClick={handlePlayButtonClick}>
-            <Icon name={isPlaylistSongSelected() && isPlaying ? "pause" : "play"} fallback={isPlaylistSongSelected() && isPlaying ? "⏸" : "▶"} alt={isPlaylistSongSelected() && isPlaying ? "Pause" : "Play"} />
-          </button>
-        </div>
+      </div>
+      <div className="playlist-actions">
+        <button className="play-button-large" onClick={handlePlayButtonClick}>
+          <Icon name={isPlaylistSongSelected() && isPlaying ? "pause" : "play"} fallback={isPlaylistSongSelected() && isPlaying ? "⏸" : "▶"} alt={isPlaylistSongSelected() && isPlaying ? "Pause" : "Play"} />
+        </button>
       </div>
 
       <div className="songs-list">

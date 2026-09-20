@@ -1,19 +1,19 @@
 .playlist-detail {
   flex: 1;
   margin-left: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, #121212 100%);
+  background: #121212;
   min-height: 100vh;
   color: #ffffff;
   transition: margin-left 0.3s ease;
 }
 
 .playlist-header {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 32px;
+  background: linear-gradient(180deg, rgba(80, 56, 40, 0.8) 0%, rgba(80, 56, 40, 0.4) 50%, #121212 100%);
+  padding: 100px 32px 32px;
   display: flex;
   align-items: flex-end;
   gap: 24px;
-  min-height: 300px;
+  min-height: 340px;
   position: relative;
 }
 
@@ -23,8 +23,8 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent, rgba(18, 18, 18, 0.3), #121212);
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #121212);
   pointer-events: none;
 }
 
@@ -39,14 +39,15 @@
   width: 232px;
   height: 232px;
   background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
-  border-radius: 8px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 120px;
   color: #000000;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 60px rgba(0,0,0,0.5);
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .playlist-image-large-img {
@@ -71,12 +72,13 @@
 }
 
 .playlist-title-large {
-  font-size: 48px;
+  font-size: 64px;
   font-weight: 900;
   color: #ffffff;
   margin-bottom: 8px;
-  line-height: 1.2;
+  line-height: 1.1;
   word-wrap: break-word;
+  letter-spacing: -0.04em;
 }
 
 .playlist-description-large {
@@ -107,27 +109,33 @@
 .playlist-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
+  padding: 24px 32px 8px;
 }
 
 .play-button-large {
   background-color: #1db954;
   border: none;
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: #000000;
   font-size: 24px;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.1s ease, background-color 0.2s ease;
   box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 }
 
 .play-button-large:hover {
-  transform: scale(1.04);
+  transform: scale(1.06);
+  background-color: #1ed760;
+}
+
+.play-button-large:active {
+  transform: scale(1);
 }
 
 .back-button {
@@ -148,42 +156,45 @@
 }
 
 .songs-list {
-  padding: 0 32px 32px;
+  padding: 0 32px 120px;
+  background: linear-gradient(180deg, rgba(80, 56, 40, 0.15) 0%, transparent 20%);
 }
 
 .songs-header {
   display: grid;
   grid-template-columns: 40px 40px 1fr 150px 200px;
   gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid #282828;
-  color: #b3b3b3;
-  font-size: 14px;
-  font-weight: 500;
+  padding: 8px 16px;
+  margin: 0 -16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #a7a7a7;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.1em;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .songs-header .song-number {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #b3b3b3;
-  font-size: 14px;
-  font-weight: 500;
+  color: #a7a7a7;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.1em;
 }
 
 .songs-header .song-title {
   display: flex;
   align-items: center;
-  color: #b3b3b3;
-  font-size: 14px;
-  font-weight: 500;
+  color: #a7a7a7;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.1em;
 }
 
 .songs-header .song-duration,
@@ -192,21 +203,22 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #b3b3b3;
-  font-size: 14px;
-  font-weight: 500;
+  color: #a7a7a7;
+  font-size: 12px;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.1em;
 }
 
 .song-row {
   display: grid;
   grid-template-columns: 40px 40px 1fr 150px 200px;
   gap: 16px;
-  padding: 12px 0;
+  padding: 8px 16px;
   border-radius: 4px;
   transition: background-color 0.2s ease;
   cursor: pointer;
+  margin: 0 -16px;
 }
 
 .song-row:hover {
@@ -286,16 +298,16 @@
 
 .song-title-text {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   color: #ffffff;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   line-height: 1.3;
   word-wrap: break-word;
 }
 
 .song-description {
   font-size: 14px;
-  color: #b3b3b3;
+  color: #a7a7a7;
   line-height: 1.3;
   display: -webkit-box;
   -webkit-line-clamp: 1;
