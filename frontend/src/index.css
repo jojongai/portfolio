@@ -1,3 +1,45 @@
+/* ==========================================================================
+   Design tokens — Spotify-inspired dark palette
+   ========================================================================== */
+:root {
+  --radius: 0.75rem;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --background: oklch(0.08 0 0);
+  --foreground: oklch(0.985 0 0);
+
+  /* Layered surfaces: base panels, hover, pressed/active */
+  --surface: oklch(0.13 0 0);
+  --surface-elevated: oklch(0.17 0 0);
+  --surface-highlight: oklch(0.22 0 0);
+
+  --muted: oklch(0.2 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --border: oklch(1 0 0 / 8%);
+
+  /* Spotify green */
+  --brand: oklch(0.78 0.21 148);
+  --brand-hover: oklch(0.84 0.22 148);
+  --brand-foreground: oklch(0.12 0 0);
+
+  --destructive: oklch(0.6 0.22 25);
+
+  /* Per-section header washes */
+  --gradient-work: linear-gradient(180deg, oklch(0.4 0.13 50) 0%, transparent 100%);
+  --gradient-projects: linear-gradient(180deg, oklch(0.38 0.15 240) 0%, transparent 100%);
+  --gradient-hobbies: linear-gradient(180deg, oklch(0.32 0.02 250) 0%, transparent 100%);
+  --gradient-profile: linear-gradient(180deg, oklch(0.35 0.12 165) 0%, transparent 100%);
+  --gradient-home: linear-gradient(180deg, oklch(0.28 0.08 165) 0%, transparent 360px);
+
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.5);
+
+  --font-display: 'Figtree', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,18 +51,30 @@ html {
 }
 
 body {
-  font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: var(--background);
+  color: var(--foreground);
   overflow-x: hidden;
   /* Mobile optimizations */
   -webkit-tap-highlight-color: rgba(29, 185, 84, 0.2);
   -webkit-touch-callout: none;
   overscroll-behavior: none;
+}
+
+::selection {
+  background: var(--brand);
+  color: var(--brand-foreground);
+}
+
+/* Display face for headings and titles */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 code {
@@ -30,7 +84,12 @@ code {
 
 .app {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+/* Reserve the player's strip so the content panel's rounded bottom stays visible */
+.app-container.has-player .app {
+  height: calc(100vh - 88px);
 }
 
 .app-container {
@@ -42,8 +101,8 @@ code {
 }
 
 .sidebar {
-  width: 280px;
-  background-color: #000000;
+  width: 300px;
+  background-color: var(--background);
   padding: 8px 8px 8px 8px;
   position: fixed;
   height: 100vh;
@@ -61,22 +120,60 @@ code {
 
 /* Top nav panel */
 .sidebar-top-panel {
-  background-color: #121212;
-  border-radius: 8px;
-  padding: 12px 12px;
+  background-color: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: 20px 12px 12px;
   flex-shrink: 0;
+}
+
+.sidebar-brand {
+  display: block;
+  width: 100%;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--foreground);
+}
+
+.sidebar-brand-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.sidebar-brand-tag {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+.sidebar-primary-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 20px;
 }
 
 .sidebar-home-btn {
   display: flex;
   align-items: center;
-  gap: 20px;
-  color: #b3b3b3;
+  gap: 12px;
+  color: var(--muted-foreground);
   text-decoration: none;
-  font-size: 16px;
-  font-weight: 700;
-  padding: 8px 12px;
-  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: var(--radius-md);
   transition: color 0.2s ease;
   background: none;
   border: none;
@@ -107,8 +204,8 @@ code {
 
 /* Library panel */
 .sidebar-library-panel {
-  background-color: #121212;
-  border-radius: 8px;
+  background-color: var(--surface);
+  border-radius: var(--radius-xl);
   padding: 0;
   flex: 1;
   overflow-y: auto;
@@ -134,7 +231,7 @@ code {
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #b3b3b3;
+  color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -195,8 +292,8 @@ code {
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
-  border-radius: 8px;
-  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  padding: 8px;
   width: 100%;
   background: none;
   border: none;
@@ -208,17 +305,22 @@ code {
 
 .nav-item:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--surface-elevated);
 }
 
 .nav-item.active {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--surface-highlight);
 }
 
 .nav-item.active:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--surface-highlight);
+}
+
+/* Active playlist reads in brand green, as in the reference design */
+.nav-item.active .nav-item-title {
+  color: var(--brand);
 }
 
 .nav-icon {
@@ -234,7 +336,7 @@ code {
   width: 48px;
   height: 48px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius-md);
   opacity: 0.85;
   transition: opacity 0.2s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -262,7 +364,7 @@ code {
 
 .nav-item-subtitle {
   font-size: 11px;
-  color: #a7a7a7;
+  color: var(--muted-foreground);
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
@@ -272,20 +374,18 @@ code {
 
 .main-content {
   flex: 1;
-  margin-left: 280px;
-  background: #121212;
-  min-height: 100vh;
+  margin: 8px 8px 8px 300px;
+  background: var(--surface);
+  min-height: 0;
   transition: margin-left 0.3s ease;
-  border-radius: 8px 8px 0 0;
-  margin-top: 8px;
-  margin-right: 8px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   position: relative;
 }
 
 .top-bar {
-  background-color: transparent;
-  padding: 16px 32px;
+  height: 64px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -294,6 +394,40 @@ code {
   left: 0;
   right: 0;
   z-index: 100;
+  /* Pinned over the scrolling content, like Spotify's chrome */
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-bar-link {
+  border-radius: 9999px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.top-bar-link:hover {
+  color: var(--foreground);
+  transform: scale(1.05);
+}
+
+.top-bar-link-solid {
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.top-bar-link-solid:hover {
+  color: var(--background);
 }
 
 .nav-arrows {
@@ -343,17 +477,19 @@ code {
 }
 
 .welcome-text {
-  font-size: 32px;
-  font-weight: 700;
-  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--foreground);
   letter-spacing: -0.02em;
+  margin-bottom: 24px;
 }
 
 .profile-picture {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: #535353;
+  background-color: var(--surface-highlight);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,32 +517,50 @@ code {
 }
 
 .social-link {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  background-color: transparent;
+  color: var(--foreground);
   text-decoration: none;
+  font-family: inherit;
   font-size: 14px;
   font-weight: 700;
-  border-radius: 50px;
-  padding: 12px 32px;
+  border-radius: 9999px;
+  padding: 12px 24px;
   transition: all 0.2s ease;
-  display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  cursor: pointer;
 }
 
 .social-link:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  transform: scale(1.04);
-  border-color: #ffffff;
+  background-color: var(--surface-elevated);
+  transform: scale(1.05);
+}
+
+/* Primary call to action */
+.social-link-brand {
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  border-color: transparent;
+}
+
+.social-link-brand:hover {
+  background-color: var(--brand-hover);
+  color: var(--brand-foreground);
 }
 
 .content-area {
-  padding: 80px 32px 120px;
-  min-height: 100vh;
+  padding: 80px 32px 48px;
+  height: 100%;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-  background: linear-gradient(180deg, rgba(50, 50, 50, 0.5) 0%, #121212 30%);
+  scrollbar-color: var(--surface-highlight) transparent;
+  background-color: var(--surface);
+  background-image: var(--gradient-home);
+  background-repeat: no-repeat;
 }
 
 .content-area::-webkit-scrollbar {
@@ -430,24 +584,24 @@ code {
 .quick-access-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 32px;
+  gap: 12px;
+  margin-bottom: 48px;
 }
 
 .quick-access-card {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.07);
-  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
   overflow: hidden;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  height: 64px;
+  height: 80px;
   position: relative;
 }
 
 .quick-access-card:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .quick-access-card:hover .quick-access-play {
@@ -455,16 +609,16 @@ code {
 }
 
 .quick-access-img {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   flex-shrink: 0;
 }
 
 .quick-access-img-placeholder {
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -474,9 +628,11 @@ code {
 
 .quick-access-title {
   padding: 0 16px;
-  font-size: 14px;
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -485,15 +641,15 @@ code {
 
 .quick-access-play {
   position: absolute;
-  right: 12px;
-  width: 40px;
-  height: 40px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background-color: #1db954;
+  background-color: var(--brand);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: var(--brand-foreground);
   font-size: 16px;
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.1s ease;
@@ -502,34 +658,44 @@ code {
 
 .quick-access-play:hover {
   transform: scale(1.06);
-  background-color: #1ed760;
+  background-color: var(--brand-hover);
 }
 
 .section-title {
+  font-family: var(--font-display);
   font-size: 24px;
-  font-weight: 700;
-  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
   margin-bottom: 20px;
   text-align: left;
 }
 
 .intro-section {
-  margin: 0 0 32px 0;
+  margin: 0 0 56px 0;
   padding: 0;
   width: 100%;
+  max-width: 768px;
   text-align: left;
   position: relative;
 }
 
-.intro-background {
-  display: none;
+.intro-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--brand);
+  margin-bottom: 12px;
 }
 
 .intro-headline {
-  font-size: 28px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 36px;
+  line-height: 1.2;
+  color: var(--foreground);
+  font-weight: 800;
+  letter-spacing: -0.02em;
   margin: 0 0 28px 0;
   position: relative;
   z-index: 1;
@@ -539,9 +705,9 @@ code {
 }
 
 .intro-subline {
-  font-size: 18px;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
   font-weight: 400;
   margin: 0 0 20px 0;
   position: relative;
@@ -577,15 +743,15 @@ code {
 
 .playlists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   margin-bottom: 40px;
   width: 100%;
 }
 
 .playlist-card {
-  background-color: rgba(255, 255, 255, 0.04);
-  border-radius: 8px;
+  background-color: oklch(0.17 0 0 / 60%);
+  border-radius: var(--radius-lg);
   padding: 16px;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -594,8 +760,8 @@ code {
 }
 
 .playlist-card:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  background-color: var(--surface-highlight);
+  box-shadow: var(--shadow-elevated);
 }
 
 .playlist-card:hover .play-button-overlay {
@@ -606,14 +772,14 @@ code {
 .playlist-image {
   width: 100%;
   aspect-ratio: 1;
-  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
-  border-radius: 8px;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-hover) 100%);
+  border-radius: var(--radius-md);
   margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 48px;
-  color: #000000;
+  color: var(--brand-foreground);
   position: relative;
   overflow: hidden;
   transition: box-shadow 0.3s ease;
@@ -628,7 +794,7 @@ code {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
 }
 
 .playlist-image::before {
@@ -639,7 +805,7 @@ code {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  background-color: #1db954;
+  background-color: var(--brand);
   border: none;
   border-radius: 50%;
   width: 48px;
@@ -647,7 +813,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #000000;
+  color: var(--brand-foreground);
   font-size: 20px;
   opacity: 0;
   transform: translateY(8px);
@@ -657,21 +823,22 @@ code {
 
 .play-button-overlay:hover {
   transform: translateY(0) scale(1.06);
-  background-color: #1ed760;
+  background-color: var(--brand-hover);
 }
 
 .playlist-title {
+  font-family: var(--font-display);
   font-size: 16px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--foreground);
   margin-bottom: 6px;
   line-height: 1.3;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .playlist-description {
   font-size: 14px;
-  color: #a7a7a7;
+  color: var(--muted-foreground);
   line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -683,9 +850,9 @@ code {
 
 .playlist-tech {
   font-size: 12px;
-  color: #a7a7a7;
+  color: var(--brand);
   margin-top: 8px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .loading {
@@ -694,11 +861,11 @@ code {
   justify-content: center;
   height: 200px;
   font-size: 16px;
-  color: #b3b3b3;
+  color: var(--muted-foreground);
 }
 
 .error {
-  background-color: #e22134;
+  background-color: var(--destructive);
   color: #ffffff;
   padding: 16px;
   border-radius: 8px;
@@ -709,11 +876,11 @@ code {
 /* Medium screens - slightly narrower sidebar */
 @media (max-width: 1200px) {
   .sidebar {
-    width: 240px;
+    width: 260px;
   }
 
   .main-content {
-    margin-left: 240px;
+    margin-left: 260px;
   }
 
   .nav-item {
@@ -738,6 +905,10 @@ code {
   .quick-access-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .playlists-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* Smaller tablets - even narrower */
@@ -753,6 +924,15 @@ code {
 
   .sidebar-top-panel {
     padding: 8px;
+  }
+
+  /* Collapsed rail: brand wordmark has no room, icons only */
+  .sidebar-brand {
+    display: none;
+  }
+
+  .sidebar-primary-nav {
+    margin-top: 0;
   }
 
   .sidebar-home-btn {
@@ -815,16 +995,27 @@ code {
     padding-bottom: 110px; /* Space for audio player when present */
   }
 
+  /* Fit inside the container's chrome so the panel doesn't overflow and clip */
+  .app {
+    height: calc(100vh - 80px);
+  }
+
+  .app-container:has(.audio-player-container) .app {
+    height: calc(100vh - 170px);
+  }
+
   .sidebar {
     display: none; /* Hide sidebar on mobile, use top nav instead */
   }
 
   .main-content {
-    margin-left: 0; /* Full width on mobile */
+    margin: 0; /* Full width on mobile */
     padding-top: 0; /* No extra padding needed */
     border-radius: 0;
-    margin-top: 0;
-    margin-right: 0;
+  }
+
+  .playlists-grid {
+    grid-template-columns: 1fr;
   }
 
   .top-bar {

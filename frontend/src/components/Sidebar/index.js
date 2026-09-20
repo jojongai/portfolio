@@ -30,14 +30,25 @@ function Sidebar() {
   };
 
   const isHome = location.pathname === '/';
+  const isProfile = location.pathname === '/profile';
 
   return (
     <div className="sidebar">
       <div className="sidebar-top-panel">
-        <button className={`sidebar-home-btn ${isHome ? 'active' : ''}`} onClick={() => navigate('/')}>
-          <Icon name="home" fallback="🏠" alt="Home" />
-          Home
+        <button className="sidebar-brand" onClick={() => navigate('/')}>
+          <span className="sidebar-brand-name">Jojo Ngai</span>
+          <span className="sidebar-brand-tag">Portfolio</span>
         </button>
+        <nav className="sidebar-primary-nav">
+          <button className={`sidebar-home-btn ${isHome ? 'active' : ''}`} onClick={() => navigate('/')}>
+            <Icon name="home" fallback="🏠" alt="Home" />
+            Home
+          </button>
+          <button className={`sidebar-home-btn ${isProfile ? 'active' : ''}`} onClick={() => navigate('/profile')}>
+            <Icon name="profile" fallback="👤" alt="Profile" />
+            Profile
+          </button>
+        </nav>
       </div>
       <div className="sidebar-library-panel">
         <div className="sidebar-library-header">
@@ -64,7 +75,9 @@ function Sidebar() {
               </span>
               <span className="nav-item-text">
                 <span className="nav-item-title">{playlist.title}</span>
-                <span className="nav-item-subtitle">Playlist · Jojo Ngai</span>
+                <span className="nav-item-subtitle">
+                  Playlist · {playlist.songs?.length ?? 0} entries
+                </span>
               </span>
             </button>
           ))}

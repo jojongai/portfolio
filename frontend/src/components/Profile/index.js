@@ -1,11 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar';
+import TopBar from '../TopBar';
 import './index.css';
 
 function Profile() {
-  const navigate = useNavigate();
-
   // Profile data - you can move this to a JSON file or API later
   const profileData = {
     name: "Jojo Ngai",
@@ -48,21 +46,7 @@ function Profile() {
     <div className="app">
       <Sidebar />
       <div className="main-content">
-        <div className="top-bar">
-          <div className="top-bar-left">
-            <div className="nav-arrows">
-              <button className="nav-arrow-btn" onClick={() => navigate(-1)} title="Go back">
-                ‹
-              </button>
-              <button className="nav-arrow-btn" onClick={() => navigate(1)} title="Go forward">
-                ›
-              </button>
-            </div>
-          </div>
-          <div className="profile-picture" onClick={() => navigate('/')}>
-            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
-          </div>
-        </div>
+        <TopBar />
 
         <div className="profile-page">
           <div className="profile-header">
@@ -86,9 +70,6 @@ function Profile() {
               <p className="profile-title">{profileData.title}</p>
               <p className="profile-location">{profileData.school} · {profileData.location}</p>
             </div>
-          </div>
-
-          <div className="profile-actions-row">
             <a
               href={profileData.resumePath}
               download

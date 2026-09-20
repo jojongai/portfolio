@@ -8,6 +8,7 @@ import SongRelationship from './components/SongRelationship';
 import Profile from './components/Profile';
 import AudioPlayer from './components/AudioPlayer';
 import MobileNav from './components/MobileNav';
+import TopBar from './components/TopBar';
 import Icon from './components/Icon';
 import { getAssetUrl } from './utils/imageUrl';
 import './index.css';
@@ -79,24 +80,11 @@ function HomePage() {
       <Sidebar />
 
       <div className="main-content">
-        <div className="top-bar">
-          <div className="top-bar-left">
-            <div className="nav-arrows">
-              <button className="nav-arrow-btn" onClick={() => window.history.back()} title="Go back">
-                ‹
-              </button>
-              <button className="nav-arrow-btn" onClick={() => window.history.forward()} title="Go forward">
-                ›
-              </button>
-            </div>
-            <h1 className="welcome-text">{getGreeting()}</h1>
-          </div>
-          <div className="profile-picture" onClick={() => navigate('/profile')}>
-            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
-          </div>
-        </div>
+        <TopBar />
 
         <div className="content-area">
+          <h1 className="welcome-text">{getGreeting()}</h1>
+
           {/* Quick-access horizontal cards like Spotify */}
           <div className="quick-access-grid">
             {playlists
@@ -121,7 +109,7 @@ function HomePage() {
           </div>
 
           <div className="intro-section">
-            <div className="intro-background"></div>
+            <p className="intro-eyebrow">About the artist</p>
             <h2 className="intro-headline">
               Hi, I'm Jojo — a 5th-year Management Engineering student at Waterloo with interests in software, data, machine learning, and AI.
             </h2>
@@ -129,16 +117,19 @@ function HomePage() {
               This site is a little about myself, my experiences, and from the theme of the site, my music taste.
             </p>
             <div className="social-links">
-              <a href="https://github.com/jojongai" target="_blank" rel="noopener noreferrer" className="social-link">
+              <a href="https://github.com/jojongai" target="_blank" rel="noopener noreferrer" className="social-link social-link-brand">
                 GitHub
               </a>
               <a href="https://www.linkedin.com/in/joseph-ngai-46a0a3175/" target="_blank" rel="noopener noreferrer" className="social-link">
                 LinkedIn
               </a>
+              <button className="social-link" onClick={() => navigate('/profile')}>
+                View Profile
+              </button>
             </div>
           </div>
 
-          <h2 className="section-title">Your playlists</h2>
+          <h2 className="section-title">Made for Jojo</h2>
           <div className="playlists-grid">
             {playlists
               .filter(playlist => playlist.id !== 'skills-technologies-playlist-id')
@@ -316,7 +307,7 @@ function App() {
 
   return (
     <PlayerContext.Provider value={playerContextValue}>
-        <div className="app-container">
+        <div className={`app-container${selectedSong ? ' has-player' : ''}`}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/profile" element={<Profile />} />

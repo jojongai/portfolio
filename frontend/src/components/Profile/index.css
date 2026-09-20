@@ -1,7 +1,13 @@
 .profile-page {
-  padding: 0 0 120px 0;
+  padding: 0 0 48px 0;
   margin-left: 0;
   width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-highlight) transparent;
 }
 
 /* ── Header ── */
@@ -10,24 +16,26 @@
   align-items: flex-end;
   gap: 32px;
   margin-bottom: 0;
-  padding: 120px 32px 40px;
+  padding: 100px 32px 32px;
   border-bottom: none;
-  background: linear-gradient(180deg, rgba(80, 56, 160, 0.55) 0%, rgba(80, 56, 160, 0.2) 60%, #121212 100%);
+  background-color: var(--surface);
+  background-image: var(--gradient-profile);
   border-radius: 0;
 }
 
 .profile-image-container {
   position: relative;
-  width: 220px;
-  height: 220px;
-  min-width: 220px;
+  width: 224px;
+  height: 224px;
+  min-width: 224px;
   border-radius: 50%;
   overflow: hidden;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-color: var(--surface-highlight);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--shadow-elevated);
+  border: 4px solid rgba(0, 0, 0, 0.4);
 }
 
 .profile-large-img {
@@ -60,8 +68,8 @@
 }
 
 .profile-type {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -69,59 +77,50 @@
 }
 
 .profile-name {
-  font-size: 80px;
-  font-weight: 900;
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 800;
   color: #ffffff;
-  margin: 0 0 12px 0;
+  margin: 0 0 16px 0;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
 }
 
 .profile-title {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 4px 0;
-  font-weight: 400;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 8px 0;
+  font-weight: 500;
 }
 
 .profile-location {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--muted-foreground);
   margin: 0;
   font-weight: 400;
-}
-
-/* ── Actions row (below header, like Spotify's play/follow bar) ── */
-.profile-actions-row {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 24px 32px 0;
-  background: linear-gradient(180deg, rgba(80, 56, 160, 0.08) 0%, transparent 100%);
 }
 
 .profile-header-download {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: transparent;
-  color: #ffffff;
-  padding: 7px 32px;
-  border-radius: 50px;
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  padding: 12px 24px;
+  border-radius: 9999px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 700;
   transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: none;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .profile-header-download:hover {
-  border-color: #ffffff;
-  transform: scale(1.04);
-  background-color: transparent;
+  background-color: var(--brand-hover);
+  transform: scale(1.05);
 }
 
 .profile-header-download:active {
@@ -140,27 +139,29 @@
 .profile-content {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 24px;
   padding: 40px 32px 0;
   max-width: 900px;
 }
 
+/* Each section reads as an elevated card, per the reference design */
 .profile-section {
-  background-color: transparent;
-  border-radius: 0;
-  padding: 0;
+  background-color: oklch(0.17 0 0 / 40%);
+  border-radius: var(--radius-xl);
+  padding: 24px;
   transition: none;
 }
 
 .profile-section:hover {
-  background-color: transparent;
+  background-color: oklch(0.17 0 0 / 40%);
 }
 
 .profile-section-title {
+  font-family: var(--font-display);
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 800;
   color: #ffffff;
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
   letter-spacing: -0.02em;
 }
 
@@ -195,7 +196,7 @@
 }
 
 .profile-contact-item:hover {
-  color: #ffffff;
+  color: var(--brand);
 }
 
 .profile-contact-item .icon {
@@ -214,10 +215,10 @@
 }
 
 .profile-tag {
-  background-color: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.85);
+  background-color: var(--surface-highlight);
+  color: var(--foreground);
   padding: 8px 16px;
-  border-radius: 50px;
+  border-radius: 9999px;
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
@@ -226,7 +227,7 @@
 }
 
 .profile-tag:hover {
-  background-color: rgba(255, 255, 255, 0.12);
+  background-color: var(--surface-elevated);
   color: #ffffff;
   transform: none;
   border-color: transparent;
@@ -291,13 +292,6 @@
     padding-left: max(16px, env(safe-area-inset-left));
     padding-right: max(16px, env(safe-area-inset-right));
     gap: 32px;
-  }
-
-  .profile-actions-row {
-    padding: 16px 16px 0;
-    justify-content: center;
-    padding-left: max(16px, env(safe-area-inset-left));
-    padding-right: max(16px, env(safe-area-inset-right));
   }
 
   .profile-header-top {

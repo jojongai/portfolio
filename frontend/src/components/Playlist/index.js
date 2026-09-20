@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar';
+import TopBar from '../TopBar';
 import Icon from '../Icon';
 import { getAssetUrl } from '../../utils/imageUrl';
 import { PlayerContext } from '../../App';
@@ -11,10 +12,7 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://portfolio-five-ga
 
 function Playlist({ selectSong }) {
   const { playlistId } = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
   const { selectedSong, currentPlaylist, isPlaying, handlePlayPause } = useContext(PlayerContext);
-  const isHomePage = location.pathname === '/';
   const [playlist, setPlaylist] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,6 +26,13 @@ function Playlist({ selectSong }) {
   const isHobbiesPlaylist = playlistId === 'hobbies-and-interests-playlist-id';
   const isPersonalProjectsPlaylist = playlistId === 'personal-projects-playlist-id';
   const isWorkExperiencePlaylist = playlistId === 'work-experience-playlist-id';
+
+  // Each playlist gets its own header wash, as in the reference design
+  const gradientVariant = isWorkExperiencePlaylist
+    ? 'work'
+    : isPersonalProjectsPlaylist
+      ? 'projects'
+      : 'hobbies';
 
   useEffect(() => {
     fetchPlaylist();
@@ -296,23 +301,9 @@ function Playlist({ selectSong }) {
     <div className={`app ${showTutorial ? 'tutorial-active' : ''}`}>
       <Sidebar />
       <div className="main-content">
-        <div className="top-bar">
-          <div className="top-bar-left">
-            <div className="nav-arrows">
-              <button className="nav-arrow-btn" onClick={() => navigate(-1)} title="Go back">
-                ‹
-              </button>
-              <button className="nav-arrow-btn" onClick={() => navigate(1)} title="Go forward">
-                ›
-              </button>
-            </div>
-          </div>
-          <div className="profile-picture" onClick={() => navigate('/profile')}>
-            <img src="/png/profile.png" alt="Profile" className="profile-img" onError={(e) => { e.target.style.display = 'none'; }} />
-          </div>
-        </div>
+        <TopBar />
       <div className="playlist-detail">
-      <div className="playlist-header">
+      <div className={`playlist-header playlist-header-${gradientVariant}`}>
         <div className="playlist-info">
           <div className="playlist-image-large">
             {playlist.imagePng ? (
@@ -341,7 +332,6 @@ function Playlist({ selectSong }) {
       <div className="songs-list">
         <div className={`songs-header ${isHobbiesPlaylist ? 'hobbies-layout' : ''}`}>
           <div className="song-number">#</div>
-          <div className="song-image-header"></div>
           <div className="song-title">Title</div>
           {isHobbiesPlaylist ? (
             <div className="song-artist">Category</div>
@@ -372,16 +362,18 @@ function Playlist({ selectSong }) {
               >
                 {index + 1}
               </div>
-              <div className="song-image">
-                {song.imagePng ? (
-                  <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
-                ) : null}
-              </div>
-              <div className="song-info">
-                <div className={`song-title-text ${isPlaying ? 'playing' : ''}`}>
-                  {isWorkExperiencePlaylist ? (song.role || song.title) : (song.name || song.title)}
+              <div className="song-cell-title">
+                <div className="song-image">
+                  {song.imagePng ? (
+                    <img src={getAssetUrl(song.imagePng)} alt={song.title} className="song-image-img" />
+                  ) : null}
                 </div>
-                <div className="song-description">{song.description}</div>
+                <div className="song-info">
+                  <div className={`song-title-text ${isPlaying ? 'playing' : ''}`}>
+                    {isWorkExperiencePlaylist ? (song.role || song.title) : (song.name || song.title)}
+                  </div>
+                  <div className="song-description">{song.description}</div>
+                </div>
               </div>
               {isHobbiesPlaylist ? (
                 <div className="song-artist-text">{song.category || ''}</div>
